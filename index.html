@@ -204,6 +204,16 @@
             font-size: inherit;
         }
 
+        /* ===== 图片样式（新增） ===== */
+        .rp-doc img {
+            max-width: 100%;
+            border-radius: var(--radius);
+            margin: 1rem 0 1.5rem 0;
+            display: block;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--divider-light);
+        }
+
         /* ===== 提示框 ===== */
         .rp-callout {
             border-radius: var(--radius);
@@ -490,7 +500,7 @@
             </div>
         </aside>
 
-        <!-- 文档正文（完全保持不变） -->
+        <!-- 文档正文 -->
         <main class="rp-doc-layout__doc">
             <div class="rp-doc">
 
@@ -549,10 +559,13 @@
                         <p>先安装 <code>dotnet-runtime</code>，然后双击 <code>MaaPvz.exe</code> 即可看到配置页面。</p>
                     </li>
                 </ol>
+
+                <!-- ===== 主界面说明（插入图片） ===== -->
                 <div class="rp-callout rp-callout--info">
                     <div class="rp-callout__title">ℹ️ 主界面说明</div>
                     <div class="rp-callout__content">
                         <p>所有拥有导航的任务在执行完毕后和执行前都会优先导航一次主界面。有些限时或特殊活动未做导航，需要用户自行配置。</p>
+                        <img src="index_iamges/主界面说明.png" alt="MaaPvz 主界面示意图" />
                     </div>
                 </div>
 
@@ -572,19 +585,21 @@
                     <li><strong>领取广告钻石</strong>：需要免广告卡（模拟器可能无法观看广告）。</li>
                 </ul>
 
-                <!-- 植物探险 -->
+                <!-- 植物探险（插入图片） -->
                 <h3 id="植物探险">
                     <a href="#植物探险" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     植物探险
                 </h3>
-                <p>选择对应的植物（一般选4个即可），自动进行探险，如果你选择了多个选项，探险次数用完或者正在探险的植物会自动跳过，然后去探险多余选择的植物</p>
+                <p>选择对应的植物（一般选4个即可），自动进行探险，如果你选择了多个选项，探险次数用完或者正在探险的植物会自动跳过，然后去探险多余选择的植物。</p>
+                <img src="index_iamges/植物探险.png" alt="植物探险配置界面" />
 
-                <!-- 碎片挑战 -->
+                <!-- 碎片挑战（插入图片） -->
                 <h3 id="碎片挑战">
                     <a href="#碎片挑战" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     碎片挑战
                 </h3>
                 <p>植物配置是你需要的最低要求植物。目前不支持雪人危机。支持选择多个植物，优先级：紫卡 > 蓝卡 > 绿卡 > 白卡。</p>
+                <img src="index_iamges/碎片挑战.png" alt="碎片挑战配置界面" />
 
                 <!-- 潘妮秘宝 -->
                 <h3 id="潘妮秘宝">
@@ -593,7 +608,7 @@
                 </h3>
                 <p>进入游戏后直接开启任务即可自动完成。</p>
 
-                <!-- 双人对决 -->
+                <!-- 双人对决（插入图片） -->
                 <h3 id="双人对决">
                     <a href="#双人对决" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     双人对决
@@ -603,15 +618,17 @@
                     <li><strong>近战植物配置</strong>：热辣海藻类植物会往后摆一格。</li>
                     <li><strong>远程植物配置</strong>：热辣海藻类植物会往前摆一格（避免仙人掌缩头）。</li>
                 </ul>
+                <img src="index_iamges/双人对决.png" alt="双人对决配置界面" />
 
-                <!-- 日志清理 -->
+                <!-- 日志清理（插入图片） -->
                 <h3 id="日志清理">
                     <a href="#日志清理" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     日志清理
                 </h3>
                 <p>清理多余日志，防止日志文件过多导致存储溢出。</p>
+                <img src="index_iamges/日志清理.png" alt="日志清理功能界面" />
 
-                <!-- ===== 无尽挑战入口（正文章节） ===== -->
+                <!-- ===== 无尽挑战入口 ===== -->
                 <h3 id="无尽挑战入口">
                     <a href="#无尽挑战入口" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     🏰 无尽挑战（专项页面）
@@ -636,7 +653,7 @@
                 </ul>
                 <p>建议手动帮忙领取阳光（有蓓蕾3000左右，电藤五千左右），或使用月卡自动收集。阳光蓓蕾期望100+关，电藤200+关。</p>
 
-                <!-- ===== 无尽测定向序列 ===== -->
+                <!-- ===== 无尽测定向序列（插入图片） ===== -->
                 <h3 id="无尽测定向序列">
                     <a href="#无尽测定向序列" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     无尽测定向序列
@@ -647,6 +664,7 @@
                     <li>确认摆放无误后点击“开始任务”。</li>
                     <li>若存在其他无尽训练进度，系统会强制停止，需手动清除干扰进度。</li>
                 </ol>
+                <img src="index_iamges/定向测序列.png" alt="无尽测定向序列配置示意图" />
 
                 <!-- ===== 进阶设置 ===== -->
                 <h3 id="进阶设置">
