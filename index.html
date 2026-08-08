@@ -2,51 +2,29 @@
 <html lang="zh-CN">
 <head>
     <!-- ============================================================
-    ═══════════════════════════════════════════════════════════════════
     📝 可修改区域 1：文档头部信息
-    修改说明：替换下面的 title、description 和 keywords 等内容
-    ═══════════════════════════════════════════════════════════════════
     ============================================================ -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- ① 修改标题：页面标题，显示在浏览器标签栏 -->
     <title>MaaPvz 用户手册</title>
-    <!-- ② 修改描述：页面描述，用于SEO和分享摘要 -->
     <meta name="description" content="MaaPvz 使用教程 — 从安装到高级功能全解析" />
-    <!-- ③ 修改关键词：页面关键词，用于SEO -->
     <meta name="keywords" content="MaaPvz,植物大战僵尸,挂机脚本,无尽模式,双人对决,教程" />
-    <!-- ④ 修改作者 -->
     <meta name="author" content="MaaPvz 文档团队" />
 
     <!-- ============================================================
-    ═══════════════════════════════════════════════════════════════════
     📝 可修改区域 2：样式与图标
-    修改说明：可替换 favicon 图标，或引入自定义样式表
-    ═══════════════════════════════════════════════════════════════════
     ============================================================ -->
-    <!-- ⑤ 替换图标：将 href 指向你的 favicon 文件路径 -->
     <link rel="icon" href="https://daoyanxiaoz.github.io/Endless_Visualization_Configuration/images/PVZAA_small.png" />
-    <!-- ⑥ 引入自定义样式：如需覆盖默认样式，可在此引入额外CSS文件 -->
-    <!-- <link rel="stylesheet" href="./assets/custom.css" /> -->
 
-    <!-- ============================================================
-    ═══════════════════════════════════════════════════════════════════
-    📝 可修改区域 3：内联样式（已修改为主色调：模糊潜绿色）
-    修改说明：此处为页面基础样式，品牌色已替换为柔和的潜绿色系
-    ═══════════════════════════════════════════════════════════════════
-    ============================================================ -->
     <style>
         /* =============================================================
-               🎨 基础变量 —— 已修改为“模糊潜绿色”主题
+               主题变量（模糊潜绿色）
                ============================================================= */
         :root {
-            /* ⑦ 品牌色：修改为柔和的潜绿色（雾霾蓝/绿） */
             --brand-color: #6B8E8B;
             --brand-color-light: #8EABA8;
             --brand-color-dark: #4F6F6C;
             --brand-color-tint: rgba(107, 142, 139, 0.16);
-
-            /* ⑧ 背景色与文字色（微调背景以呼应主色调） */
             --bg-color: #ffffff;
             --bg-color-soft: #f4f7f6;
             --bg-color-mute: #e8eeec;
@@ -54,19 +32,13 @@
             --text-color-1: #242424;
             --text-color-2: rgba(0, 0, 0, 0.7);
             --text-color-3: rgba(60, 60, 60, 0.33);
-
-            /* ⑨ 分割线与边框色 */
             --divider-color: rgba(0, 0, 0, 0.25);
             --divider-light: rgba(0, 0, 0, 0.12);
-
-            /* ⑩ 字体与圆角 */
             --font-family-base: "Inter var experimental", "Inter var", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             --font-family-mono: Menlo, Monaco, Consolas, "Courier New", monospace;
             --radius: 1rem;
             --radius-small: 0.5rem;
             --radius-large: 1.5rem;
-
-            /* ⑪ 布局尺寸 */
             --nav-height: 64px;
             --sidebar-width: 280px;
             --content-max-width: 1000px;
@@ -74,18 +46,6 @@
             --content-padding-y: 48px;
         }
 
-        /* ⑫ 暗色模式变量（可选） */
-        /* @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #121212;
-                --text-color-1: #f0f0f0;
-                ...
-            }
-        } */
-
-        /* =============================================================
-               🧩 基础重置与布局 —— 一般无需修改
-               ============================================================= */
         *,
         *::before,
         *::after {
@@ -112,9 +72,6 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* =============================================================
-               🔗 链接样式（继承品牌色）
-               ============================================================= */
         a {
             color: var(--brand-color-dark);
             text-decoration: none;
@@ -125,9 +82,6 @@
             border-bottom: 1px solid var(--brand-color);
         }
 
-        /* =============================================================
-               📦 容器布局
-               ============================================================= */
         .rp-doc-layout__container {
             display: flex;
             flex-direction: row;
@@ -147,9 +101,6 @@
             padding: var(--content-padding-y) var(--content-padding-x);
         }
 
-        /* =============================================================
-               📑 侧边栏
-               ============================================================= */
         .rp-doc-layout__sidebar {
             width: var(--sidebar-width);
             min-width: var(--sidebar-width);
@@ -166,9 +117,6 @@
             flex-shrink: 0;
         }
 
-        /* =============================================================
-               🧭 导航栏
-               ============================================================= */
         .rp-nav {
             height: var(--nav-height);
             border-bottom: 1px solid var(--divider-light);
@@ -196,43 +144,35 @@
             gap: 24px;
         }
 
-        /* =============================================================
-               📖 文档内容样式
-               ============================================================= */
         .rp-doc h1 {
             font-size: 2rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
             margin-top: 0;
         }
-
         .rp-doc h2 {
             font-size: 1.75rem;
             font-weight: 600;
             margin-top: 3rem;
             margin-bottom: 1.25rem;
         }
-
         .rp-doc h3 {
             font-size: 1.5rem;
             font-weight: 600;
             margin-top: 2rem;
             margin-bottom: 1rem;
         }
-
         .rp-doc h4 {
             font-size: 1.25rem;
             font-weight: 600;
             margin-top: 1.5rem;
             margin-bottom: 0.75rem;
         }
-
         .rp-doc p {
             margin-top: 1.25rem;
             margin-bottom: 1.25rem;
             line-height: 1.75rem;
         }
-
         .rp-doc ul,
         .rp-doc ol {
             margin-top: 1rem;
@@ -240,19 +180,16 @@
             padding-left: 1.5rem;
             line-height: 1.75rem;
         }
-
         .rp-doc ul li,
         .rp-doc ol li {
             margin-top: 0.4rem;
         }
-
         .rp-doc blockquote {
             border-left: 2px solid var(--divider-color);
             color: var(--text-color-2);
             padding-left: 1rem;
             margin: 1.5rem 0;
         }
-
         .rp-doc code:not(pre code) {
             font-size: 0.875em;
             font-family: var(--font-family-mono);
@@ -261,7 +198,6 @@
             padding: 0.15rem 0.4rem;
             border: 1px solid var(--divider-light);
         }
-
         .rp-doc pre {
             background: var(--bg-color-soft);
             border-radius: var(--radius);
@@ -272,7 +208,6 @@
             font-size: 0.875rem;
             line-height: 1.7;
         }
-
         .rp-doc pre code {
             font-family: var(--font-family-mono);
             background: transparent;
@@ -281,16 +216,12 @@
             font-size: inherit;
         }
 
-        /* =============================================================
-               💬 提示框 (Callout) —— 已适配潜绿色主题
-               ============================================================= */
         .rp-callout {
             border-radius: var(--radius);
             border: 1px solid transparent;
             margin: 24px 0;
             padding: 20px 24px 12px;
         }
-
         .rp-callout__title {
             font-weight: 600;
             font-size: 16px;
@@ -299,7 +230,6 @@
             align-items: center;
             gap: 8px;
         }
-
         .rp-callout--tip {
             border-color: rgba(107, 142, 139, 0.3);
             background: rgba(107, 142, 139, 0.08);
@@ -307,7 +237,6 @@
         .rp-callout--tip .rp-callout__title {
             color: #4F6F6C;
         }
-
         .rp-callout--info {
             border-color: rgba(107, 142, 139, 0.25);
             background: rgba(107, 142, 139, 0.05);
@@ -315,7 +244,6 @@
         .rp-callout--info .rp-callout__title {
             color: #4F6F6C;
         }
-
         .rp-callout--warning {
             border-color: rgba(255, 197, 23, 0.4);
             background: rgba(255, 197, 23, 0.10);
@@ -323,7 +251,6 @@
         .rp-callout--warning .rp-callout__title {
             color: #887233;
         }
-
         .rp-callout--danger {
             border-color: rgba(237, 60, 80, 0.2);
             background: rgba(237, 60, 80, 0.08);
@@ -332,9 +259,6 @@
             color: #ab2131;
         }
 
-        /* =============================================================
-               📋 任务列表 (Checklist)
-               ============================================================= */
         .contains-task-list {
             list-style: none;
             padding-left: 0;
@@ -353,9 +277,6 @@
             cursor: default;
         }
 
-        /* =============================================================
-               📚 目录 (TOC)
-               ============================================================= */
         .rp-toc-container {
             margin: 1.5rem 0;
             padding: 1rem 1.5rem;
@@ -383,9 +304,6 @@
             color: var(--brand-color);
         }
 
-        /* =============================================================
-               🦶 页脚
-               ============================================================= */
         .rp-doc-footer {
             margin-top: 48px;
             padding-top: 24px;
@@ -431,9 +349,6 @@
             align-items: flex-end;
         }
 
-        /* =============================================================
-               📱 响应式
-               ============================================================= */
         @media (max-width: 1024px) {
             .rp-doc-layout__sidebar {
                 display: none;
@@ -442,7 +357,6 @@
                 padding: 32px 24px;
             }
         }
-
         @media (max-width: 640px) {
             .rp-doc-layout__doc {
                 padding: 24px 16px;
@@ -463,23 +377,17 @@
 <body>
 
     <!-- ============================================================
-    ═══════════════════════════════════════════════════════════════════
-    📝 可修改区域 4：导航栏内容
-    修改说明：修改品牌名称、logo 路径、导航菜单项等
-    ═══════════════════════════════════════════════════════════════════
+    📝 可修改区域 4：导航栏
     ============================================================ -->
     <header class="rp-nav">
         <div class="rp-nav__left">
             <div class="rp-nav__title">
                 <a href="#" class="rp-nav__title__link">
-                    <!-- ⑬ 替换 Logo：修改 src 指向你的 logo 图片 -->
-                    <!-- <img src="./assets/logo-light.png" alt="Logo" style="height:32px;" /> -->
                     <span style="font-size:1.2rem;">🌱 MaaPvz 文档</span>
                 </a>
             </div>
         </div>
         <div class="rp-nav__right">
-            <!-- ⑭ 导航菜单项：修改 href 和文本 -->
             <a href="#" style="font-weight:500; color:var(--text-color-1);">首页</a>
             <a href="#" style="font-weight:500; color:var(--text-color-1);">用户手册</a>
             <a href="#" style="font-weight:500; color:var(--text-color-1);">开发文档</a>
@@ -488,23 +396,15 @@
     </header>
 
     <!-- ============================================================
-    ═══════════════════════════════════════════════════════════════════
-    📝 可修改区域 5：主体布局（侧边栏 + 文档内容）
-    侧边栏菜单项和文档正文均在此区域
-    ═══════════════════════════════════════════════════════════════════
+    📝 可修改区域 5：主体布局
     ============================================================ -->
     <div class="rp-doc-layout__container">
 
-        <!-- ==========================================================
-        📂 侧边栏 —— ⑮ 修改菜单项
-        ========================================================== -->
+        <!-- ===== 侧边栏 ===== -->
         <aside class="rp-doc-layout__sidebar">
-            <!-- 侧边栏品牌标识（可选） -->
             <div style="font-weight:700; font-size:1.1rem; padding:0 4px 16px 4px; border-bottom:1px solid var(--divider-light); margin-bottom:16px;">
                 📖 目录导航
             </div>
-
-            <!-- ⑯ 侧边栏菜单项：修改 href 和文本，缩进表示层级 -->
             <nav style="display:flex; flex-direction:column; gap:4px;">
                 <a href="#" style="display:block; padding:6px 12px; border-radius:8px; font-weight:600; color:var(--brand-color); background:var(--brand-color-tint);">新手上路</a>
                 <a href="#" style="display:block; padding:6px 12px; border-radius:8px; color:var(--text-color-2); transition:background 0.15s;" onmouseenter="this.style.background='var(--bg-color-soft)'" onmouseleave="this.style.background='transparent'">常见问题</a>
@@ -514,21 +414,15 @@
                     <a href="#" style="display:block; padding:4px 12px; border-radius:6px; font-size:0.9rem; color:var(--text-color-2); transition:background 0.15s;" onmouseenter="this.style.background='var(--bg-color-soft)'" onmouseleave="this.style.background='transparent'">└ 子菜单项 2</a>
                 </div>
             </nav>
-
             <div style="margin-top:32px; padding-top:16px; border-top:1px solid var(--divider-light); font-size:0.85rem; color:var(--text-color-3);">
                 v2.0.10
             </div>
         </aside>
 
-        <!-- ==========================================================
-        📄 文档正文区域
-        ========================================================== -->
+        <!-- ===== 文档正文 ===== -->
         <main class="rp-doc-layout__doc">
             <div class="rp-doc">
 
-                <!-- ==========================================================
-                📝 可修改区域 6：文档标题与元信息
-                ========================================================== -->
                 <h1 id="新手上路">
                     <a href="#新手上路" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     新手上路
@@ -537,9 +431,7 @@
                     📖 预计阅读时间: 15 分钟
                 </span>
 
-                <!-- ==========================================================
-                📚 可修改区域 7：目录 (Table of Contents)
-                ========================================================== -->
+                <!-- ===== 目录 ===== -->
                 <h2 id="table-of-contents">
                     <a href="#table-of-contents" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     Table of Contents
@@ -556,11 +448,7 @@
                                 <li><a href="#潘妮秘宝">潘妮秘宝</a></li>
                                 <li><a href="#双人对决">双人对决</a></li>
                                 <li><a href="#日志清理">日志清理</a></li>
-                                <h3 id="无尽模式">
-    <a href="#无尽模式" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-    <a href="无尽挑战.html" style="color:var(--brand-color); border-bottom:none;">🏰 无尽挑战（点击进入专项页面）</a>
-</h3>
-<p>无尽模式包含桑葚挂机、心塔无尽、通用框架、时空秘境、定向序列等多种玩法，<a href="无尽/无尽挑战.html">点击查看完整指南 →</a></p>
+                                <li><a href="#无尽模式">无尽模式</a></li>
                                 <li><a href="#时空秘境">时空秘境</a></li>
                                 <li><a href="#无尽测定向序列">无尽测定向序列</a></li>
                                 <li><a href="#戴夫杯">戴夫杯</a></li>
@@ -572,23 +460,17 @@
                     </ul>
                 </div>
 
-                <!-- ==========================================================
-                📝 可修改区域 8：正文内容
-                ========================================================== -->
-
                 <!-- ===== 快速开始 ===== -->
                 <h2 id="快速开始">
                     <a href="#快速开始" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     快速开始
                 </h2>
-
                 <div class="rp-callout rp-callout--tip">
                     <div class="rp-callout__title">💡 前置条件</div>
                     <div class="rp-callout__content">
                         <p>如果你没有安装过环境配置，需要去群文件或者 <a href="https://dotnet.microsoft.com/en-us/download/dotnet/10.0" target="_blank">下载 .NET 10.0</a>。</p>
                     </div>
                 </div>
-
                 <ol>
                     <li>
                         <p><strong>下载安装脚本</strong>：可以在 <a href="#" target="_blank">GitHub Releases</a> 或群文件下载最新日期 <code>maapvz</code> 包，解压并打开。</p>
@@ -597,7 +479,6 @@
                         <p>先安装 <code>dotnet-runtime</code>，然后双击 <code>MaaPvz.exe</code> 即可看到配置页面。</p>
                     </li>
                 </ol>
-
                 <div class="rp-callout rp-callout--info">
                     <div class="rp-callout__title">ℹ️ 主界面说明</div>
                     <div class="rp-callout__content">
@@ -660,48 +541,13 @@
                 </h3>
                 <p>清理多余日志，防止日志文件过多导致存储溢出。</p>
 
-                <!-- ---- 无尽模式 ---- -->
+                <!-- ---- 无尽模式（添加跳转链接） ---- -->
                 <h3 id="无尽模式">
                     <a href="#无尽模式" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-                    无尽模式
+                    🏰 无尽挑战
                 </h3>
-
-                <h4>1. 原大桑葚无尽挂机脚本</h4>
-                <p><strong>功能说明：</strong></p>
-                <ul>
-                    <li><strong>普通关抛花（可选）</strong>：每小关自动抛2朵能量花，位置固定 (9-1)、(9-2)。</li>
-                    <li><strong>Boss关喂豆（可选）</strong>：一直喂豆直到结算，位置 (5-3)（建议放输出/控制植物）。</li>
-                    <li><strong>选卡逻辑</strong>：优先选桑葚、毒藤、大哥，其余全选橙色植物。若无大哥则替换为泡泡姬珊瑚。</li>
-                </ul>
-                <p><strong>使用前准备：</strong></p>
-                <ul>
-                    <li>固定卡槽顺序，确保对应植物在正确卡槽。</li>
-                    <li>抛花位置 (9-1)、(9-2) 必须空余或可丢弃能量花。</li>
-                    <li>Boss关喂豆位置 (5-3) 的植物为卡槽第7个，可自行替换。</li>
-                </ul>
-
-                <h4>2. 心塔无尽全自动脚本</h4>
-                <p><strong>使用步骤：</strong></p>
-                <ol>
-                    <li>手动进入心塔无尽关内（选卡界面）。</li>
-                    <li>在选卡界面直接运行脚本，根据当前关卡数选择对应的脚本（前两关为布阵）。</li>
-                </ol>
-                <div class="rp-callout rp-callout--warning">
-                    <div class="rp-callout__title">⚠️ 重要</div>
-                    <div class="rp-callout__content"><p>仅适用于简单无尽模式，若出怪较差（冰河、摇滚、天空）可能导致失败。需月卡。</p></div>
-                </div>
-
-                <h4>3. 无尽挂机框架（通用）</h4>
-                <p><strong>功能配置：</strong></p>
-                <ul>
-                    <li><strong>小关喂豆</strong>：是否喂豆球果（开局直接喂所选位置后点波）。</li>
-                    <li><strong>喂豆位置/间隔</strong>：循环喂能量豆的位置和间隔。</li>
-                    <li><strong>抛花</strong>：能量花必须位于卡槽1，位置可选 (9-1/9-2)。</li>
-                    <li><strong>Boss关喂豆</strong>：位置和间隔可独立设置。</li>
-                    <li><strong>补植物</strong>：开局补种上一关损失的植物。</li>
-                    <li><strong>加速</strong>：分别控制小关和Boss关是否加速。</li>
-                    <li><strong>魔甘收尾</strong>：开启后大部分功能失效，慎用。</li>
-                </ul>
+                <p>无尽模式包含桑葚挂机、心塔无尽、通用框架、时空秘境、定向序列等多种玩法，<strong><a href="无尽/无尽挑战.html" style="color:var(--brand-color);">点击查看完整指南 →</a></strong></p>
+                <!-- 这里仅保留简要介绍，详细内容已移至独立页面 -->
 
                 <!-- ---- 时空秘境 ---- -->
                 <h3 id="时空秘境">
@@ -780,16 +626,12 @@ helloMaaPvz();</code></pre>
                 </h3>
                 <ul>
                     <li>聊天群： 669689256</li>
-                    
                     <li>开发群： 1092806752</li>
                 </ul>
 
             </div>
-            <!-- ===== 文档页脚 ===== -->
 
-            <!-- ==========================================================
-            📝 可修改区域 9：页脚信息
-            ========================================================== -->
+            <!-- ===== 页脚 ===== -->
             <footer class="rp-doc-footer">
                 <div class="rp-doc-footer__edit">
                     <div class="rp-last-updated">
