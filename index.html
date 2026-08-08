@@ -10,13 +10,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- ① 修改标题：页面标题，显示在浏览器标签栏 -->
-    <title>Maapvz-新手上路</title>
+    <title>MaaPvz 用户手册</title>
     <!-- ② 修改描述：页面描述，用于SEO和分享摘要 -->
-    <meta name="description" content="这次你一定要跑通" />
+    <meta name="description" content="MaaPvz 使用教程 — 从安装到高级功能全解析" />
     <!-- ③ 修改关键词：页面关键词，用于SEO -->
-    <meta name="keywords" content="文档模板,用户手册,开发者指南,Maapvz" />
+    <meta name="keywords" content="MaaPvz,植物大战僵尸,挂机脚本,无尽模式,双人对决,教程" />
     <!-- ④ 修改作者 -->
-    <meta name="author" content="文档维护团队" />
+    <meta name="author" content="MaaPvz 文档团队" />
 
     <!-- ============================================================
     ═══════════════════════════════════════════════════════════════════
@@ -300,7 +300,6 @@
             gap: 8px;
         }
 
-        /* Tip 提示框 - 潜绿色调 */
         .rp-callout--tip {
             border-color: rgba(107, 142, 139, 0.3);
             background: rgba(107, 142, 139, 0.08);
@@ -309,7 +308,6 @@
             color: #4F6F6C;
         }
 
-        /* Info 提示框 - 潜蓝色调 */
         .rp-callout--info {
             border-color: rgba(107, 142, 139, 0.25);
             background: rgba(107, 142, 139, 0.05);
@@ -318,7 +316,6 @@
             color: #4F6F6C;
         }
 
-        /* Warning 提示框 - 保持原有暖色警示风格，微调适配 */
         .rp-callout--warning {
             border-color: rgba(255, 197, 23, 0.4);
             background: rgba(255, 197, 23, 0.10);
@@ -327,7 +324,6 @@
             color: #887233;
         }
 
-        /* Danger 提示框 - 保持原有警示风格 */
         .rp-callout--danger {
             border-color: rgba(237, 60, 80, 0.2);
             background: rgba(237, 60, 80, 0.08);
@@ -478,7 +474,7 @@
                 <a href="#" class="rp-nav__title__link">
                     <!-- ⑬ 替换 Logo：修改 src 指向你的 logo 图片 -->
                     <!-- <img src="./assets/logo-light.png" alt="Logo" style="height:32px;" /> -->
-                    <span style="font-size:1.2rem;">文档中心</span>
+                    <span style="font-size:1.2rem;">🌱 MaaPvz 文档</span>
                 </a>
             </div>
         </div>
@@ -510,298 +506,320 @@
 
             <!-- ⑯ 侧边栏菜单项：修改 href 和文本，缩进表示层级 -->
             <nav style="display:flex; flex-direction:column; gap:4px;">
-                <!-- 一级菜单（当前激活） -->
-                <a href="#"
-                style="display:block; padding:6px 12px; border-radius:8px; font-weight:600; color:var(--brand-color); background:var(--brand-color-tint);">
-                新手上路
-            </a>
-            <!-- 一级菜单 -->
-            <a href="#"
-            style="display:block; padding:6px 12px; border-radius:8px; color:var(--text-color-2); transition:background 0.15s;"
-            onmouseenter="this.style.background='var(--bg-color-soft)'"
-            onmouseleave="this.style.background='transparent'">
-            常见问题
-        </a>
-        <!-- 一级菜单 -->
-        <a href="#"
-        style="display:block; padding:6px 12px; border-radius:8px; color:var(--text-color-2); transition:background 0.15s;"
-        onmouseenter="this.style.background='var(--bg-color-soft)'"
-        onmouseleave="this.style.background='transparent'">
-        问题反馈
-    </a>
-    <!-- 二级菜单示例（缩进） -->
-    <div style="padding-left:20px; display:flex; flex-direction:column; gap:2px; margin-top:2px;">
-        <a href="#"
-        style="display:block; padding:4px 12px; border-radius:6px; font-size:0.9rem; color:var(--text-color-2); transition:background 0.15s;"
-        onmouseenter="this.style.background='var(--bg-color-soft)'"
-        onmouseleave="this.style.background='transparent'">
-        └ 子菜单项 1
-    </a>
-    <a href="#"
-    style="display:block; padding:4px 12px; border-radius:6px; font-size:0.9rem; color:var(--text-color-2); transition:background 0.15s;"
-    onmouseenter="this.style.background='var(--bg-color-soft)'"
-    onmouseleave="this.style.background='transparent'">
-    └ 子菜单项 2
-</a>
-</div>
-</nav>
+                <a href="#" style="display:block; padding:6px 12px; border-radius:8px; font-weight:600; color:var(--brand-color); background:var(--brand-color-tint);">新手上路</a>
+                <a href="#" style="display:block; padding:6px 12px; border-radius:8px; color:var(--text-color-2); transition:background 0.15s;" onmouseenter="this.style.background='var(--bg-color-soft)'" onmouseleave="this.style.background='transparent'">常见问题</a>
+                <a href="#" style="display:block; padding:6px 12px; border-radius:8px; color:var(--text-color-2); transition:background 0.15s;" onmouseenter="this.style.background='var(--bg-color-soft)'" onmouseleave="this.style.background='transparent'">问题反馈</a>
+                <div style="padding-left:20px; display:flex; flex-direction:column; gap:2px; margin-top:2px;">
+                    <a href="#" style="display:block; padding:4px 12px; border-radius:6px; font-size:0.9rem; color:var(--text-color-2); transition:background 0.15s;" onmouseenter="this.style.background='var(--bg-color-soft)'" onmouseleave="this.style.background='transparent'">└ 子菜单项 1</a>
+                    <a href="#" style="display:block; padding:4px 12px; border-radius:6px; font-size:0.9rem; color:var(--text-color-2); transition:background 0.15s;" onmouseenter="this.style.background='var(--bg-color-soft)'" onmouseleave="this.style.background='transparent'">└ 子菜单项 2</a>
+                </div>
+            </nav>
 
-<!-- 侧边栏底部（可选） -->
-<div style="margin-top:32px; padding-top:16px; border-top:1px solid var(--divider-light); font-size:0.85rem; color:var(--text-color-3);">
-    v2.0.10
-</div>
-</aside>
-
-<!-- ==========================================================
-📄 文档正文区域
-========================================================== -->
-<main class="rp-doc-layout__doc">
-    <div class="rp-doc">
+            <div style="margin-top:32px; padding-top:16px; border-top:1px solid var(--divider-light); font-size:0.85rem; color:var(--text-color-3);">
+                v2.0.10
+            </div>
+        </aside>
 
         <!-- ==========================================================
-        📝 可修改区域 6：文档标题与元信息
+        📄 文档正文区域
         ========================================================== -->
-        <!-- ⑰ 主标题 -->
-        <h1 id="新手上路">
-            <a href="#新手上路" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-            新手上路
-        </h1>
+        <main class="rp-doc-layout__doc">
+            <div class="rp-doc">
 
-        <!-- ⑱ 阅读时间（可修改或删除） -->
-        <span style="font-size:0.95rem; color:var(--text-color-3); font-style:italic; display:block; margin-top:-0.5rem; margin-bottom:1.5rem;">
-            📖 预计阅读时间: 4 分钟
-        </span>
+                <!-- ==========================================================
+                📝 可修改区域 6：文档标题与元信息
+                ========================================================== -->
+                <h1 id="新手上路">
+                    <a href="#新手上路" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    新手上路
+                </h1>
+                <span style="font-size:0.95rem; color:var(--text-color-3); font-style:italic; display:block; margin-top:-0.5rem; margin-bottom:1.5rem;">
+                    📖 预计阅读时间: 15 分钟
+                </span>
 
-        <!-- ==========================================================
-        📚 可修改区域 7：目录 (Table of Contents)
-        修改说明：添加或删除目录项，保持与正文标题一致
-        ========================================================== -->
-        <h2 id="table-of-contents">
-            <a href="#table-of-contents" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-            Table of Contents
-        </h2>
-        <!-- ⑲ 目录列表 -->
-        <div class="rp-toc-container">
-            <ul>
-                <li><a href="#快速开始">快速开始</a></li>
-                <li>
-                    <a href="#主要功能">主要功能</a>
+                <!-- ==========================================================
+                📚 可修改区域 7：目录 (Table of Contents)
+                ========================================================== -->
+                <h2 id="table-of-contents">
+                    <a href="#table-of-contents" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    Table of Contents
+                </h2>
+                <div class="rp-toc-container">
                     <ul>
-                        <!-- 已替换为 xx类 占位符 -->
-                        <li><a href="#xx类1">xx类 1</a></li>
-                        <li><a href="#xx类2">xx类 2</a></li>
-                        <li><a href="#xx类3">xx类 3</a></li>
-                        <li><a href="#xx类4">xx类 4</a></li>
-                        <li><a href="#xx类5">xx类 5</a></li>
+                        <li><a href="#快速开始">快速开始</a></li>
+                        <li>
+                            <a href="#主要功能">主要功能</a>
+                            <ul>
+                                <li><a href="#签到">签到</a></li>
+                                <li><a href="#植物探险">植物探险</a></li>
+                                <li><a href="#碎片挑战">碎片挑战</a></li>
+                                <li><a href="#潘妮秘宝">潘妮秘宝</a></li>
+                                <li><a href="#双人对决">双人对决</a></li>
+                                <li><a href="#日志清理">日志清理</a></li>
+                                <li><a href="#无尽模式">无尽模式</a></li>
+                                <li><a href="#时空秘境">时空秘境</a></li>
+                                <li><a href="#无尽测定向序列">无尽测定向序列</a></li>
+                                <li><a href="#戴夫杯">戴夫杯</a></li>
+                                <li><a href="#进阶设置">进阶设置</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#如何参与开发">如何参与开发</a></li>
+                        <li><a href="#鸣谢">鸣谢</a></li>
                     </ul>
-                </li>
-                <li><a href="#如何参与开发">如何参与开发</a></li>
-                <li><a href="#鸣谢">鸣谢</a></li>
-            </ul>
-        </div>
+                </div>
 
-        <!-- ==========================================================
-        📝 可修改区域 8：正文内容
-        修改说明：以下为文档正文，可自由增删改
-        ========================================================== -->
+                <!-- ==========================================================
+                📝 可修改区域 8：正文内容
+                ========================================================== -->
 
-        <!-- ===== 快速开始 ===== -->
-        <h2 id="快速开始">
-            <a href="#快速开始" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-            快速开始
-        </h2>
+                <!-- ===== 快速开始 ===== -->
+                <h2 id="快速开始">
+                    <a href="#快速开始" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    快速开始
+                </h2>
 
-        <!-- ⑳ 提示框 (Tip) -->
-        <div class="rp-callout rp-callout--tip">
-            <div class="rp-callout__title">💡 TIP</div>
-            <div class="rp-callout__content">
-                <p>已经购买了 <a href="#" target="_blank">Mirror 酱</a> 服务？试试 <a href="#">高速下载</a>！</p>
+                <div class="rp-callout rp-callout--tip">
+                    <div class="rp-callout__title">💡 前置条件</div>
+                    <div class="rp-callout__content">
+                        <p>如果你没有安装过环境配置，需要去群文件或者 <a href="https://dotnet.microsoft.com/en-us/download/dotnet/10.0" target="_blank">下载 .NET 10.0</a>。</p>
+                    </div>
+                </div>
+
+                <ol>
+                    <li>
+                        <p><strong>下载安装脚本</strong>：可以在 <a href="#" target="_blank">GitHub Releases</a> 或群文件下载最新日期 <code>maapvz</code> 包，解压并打开。</p>
+                    </li>
+                    <li>
+                        <p>先安装 <code>dotnet-runtime</code>，然后双击 <code>MaaPvz.exe</code> 即可看到配置页面。</p>
+                    </li>
+                </ol>
+
+                <div class="rp-callout rp-callout--info">
+                    <div class="rp-callout__title">ℹ️ 主界面说明</div>
+                    <div class="rp-callout__content">
+                        <p>所有拥有导航的任务在执行完毕后和执行前都会优先导航一次主界面。有些限时或特殊活动未做导航，需要用户自行配置。</p>
+                    </div>
+                </div>
+
+                <!-- ===== 主要功能 ===== -->
+                <h2 id="主要功能">
+                    <a href="#主要功能" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    主要功能
+                </h2>
+
+                <!-- ---- 签到 ---- -->
+                <h3 id="签到">
+                    <a href="#签到" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    签到
+                </h3>
+                <ul>
+                    <li><strong>每日签到</strong>：自动完成游戏内签到。</li>
+                    <li><strong>领取广告钻石</strong>：需要免广告卡（模拟器可能无法观看广告）。</li>
+                </ul>
+
+                <!-- ---- 植物探险 ---- -->
+                <h3 id="植物探险">
+                    <a href="#植物探险" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    植物探险
+                </h3>
+                <p>选择对应的植物（选4个即可），自动进行探险。</p>
+
+                <!-- ---- 碎片挑战 ---- -->
+                <h3 id="碎片挑战">
+                    <a href="#碎片挑战" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    碎片挑战
+                </h3>
+                <p>植物配置是你需要的最低要求植物。目前不支持雪人危机。支持选择多个植物，优先级：紫卡 > 蓝卡 > 绿卡 > 白卡。</p>
+
+                <!-- ---- 潘妮秘宝 ---- -->
+                <h3 id="潘妮秘宝">
+                    <a href="#潘妮秘宝" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    潘妮秘宝
+                </h3>
+                <p>进入游戏后直接开启任务即可自动完成。</p>
+
+                <!-- ---- 双人对决 ---- -->
+                <h3 id="双人对决">
+                    <a href="#双人对决" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    双人对决
+                </h3>
+                <p>默认为自选模式。如果不熟悉配置，建议先开启“帮选模式”观察，再参照配置植物。</p>
+                <ul>
+                    <li><strong>近战植物配置</strong>：热辣海藻类植物会往后摆一格。</li>
+                    <li><strong>远程植物配置</strong>：热辣海藻类植物会往前摆一格（避免仙人掌缩头）。</li>
+                </ul>
+
+                <!-- ---- 日志清理 ---- -->
+                <h3 id="日志清理">
+                    <a href="#日志清理" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    日志清理
+                </h3>
+                <p>清理多余日志，防止日志文件过多导致存储溢出。</p>
+
+                <!-- ---- 无尽模式 ---- -->
+                <h3 id="无尽模式">
+                    <a href="#无尽模式" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    无尽模式
+                </h3>
+
+                <h4>1. 原大桑葚无尽挂机脚本</h4>
+                <p><strong>功能说明：</strong></p>
+                <ul>
+                    <li><strong>普通关抛花（可选）</strong>：每小关自动抛2朵能量花，位置固定 (9-1)、(9-2)。</li>
+                    <li><strong>Boss关喂豆（可选）</strong>：一直喂豆直到结算，位置 (5-3)（建议放输出/控制植物）。</li>
+                    <li><strong>选卡逻辑</strong>：优先选桑葚、毒藤、大哥，其余全选橙色植物。若无大哥则替换为泡泡姬珊瑚。</li>
+                </ul>
+                <p><strong>使用前准备：</strong></p>
+                <ul>
+                    <li>固定卡槽顺序，确保对应植物在正确卡槽。</li>
+                    <li>抛花位置 (9-1)、(9-2) 必须空余或可丢弃能量花。</li>
+                    <li>Boss关喂豆位置 (5-3) 的植物为卡槽第7个，可自行替换。</li>
+                </ul>
+
+                <h4>2. 心塔无尽全自动脚本</h4>
+                <p><strong>使用步骤：</strong></p>
+                <ol>
+                    <li>手动进入心塔无尽关内（选卡界面）。</li>
+                    <li>在选卡界面直接运行脚本，根据当前关卡数选择对应的脚本（前两关为布阵）。</li>
+                </ol>
+                <div class="rp-callout rp-callout--warning">
+                    <div class="rp-callout__title">⚠️ 重要</div>
+                    <div class="rp-callout__content"><p>仅适用于简单无尽模式，若出怪较差（冰河、摇滚、天空）可能导致失败。需月卡。</p></div>
+                </div>
+
+                <h4>3. 无尽挂机框架（通用）</h4>
+                <p><strong>功能配置：</strong></p>
+                <ul>
+                    <li><strong>小关喂豆</strong>：是否喂豆球果（开局直接喂所选位置后点波）。</li>
+                    <li><strong>喂豆位置/间隔</strong>：循环喂能量豆的位置和间隔。</li>
+                    <li><strong>抛花</strong>：能量花必须位于卡槽1，位置可选 (9-1/9-2)。</li>
+                    <li><strong>Boss关喂豆</strong>：位置和间隔可独立设置。</li>
+                    <li><strong>补植物</strong>：开局补种上一关损失的植物。</li>
+                    <li><strong>加速</strong>：分别控制小关和Boss关是否加速。</li>
+                    <li><strong>魔甘收尾</strong>：开启后大部分功能失效，慎用。</li>
+                </ul>
+
+                <!-- ---- 时空秘境 ---- -->
+                <h3 id="时空秘境">
+                    <a href="#时空秘境" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    时空秘境
+                </h3>
+                <h4>地宫1无尽</h4>
+                <ul>
+                    <li><strong>自动配置</strong>：主界面直接开启（需在商店买满初始阳光）。</li>
+                    <li><strong>手动配置</strong>：先手打几关，保证有一列双发，然后在选卡界面开启手动配置，期望刷取100+关。</li>
+                </ul>
+                <h4>地宫2无尽</h4>
+                <ul>
+                    <li><strong>自动代理</strong>：主界面直接开启。</li>
+                    <li><strong>手动代理</strong>：进入地宫2，手动推几关，摆放双发至指定位置后，在下一关开启脚本。</li>
+                </ul>
+                <p>建议手动帮忙领取阳光（有蓓蕾3000左右，电藤五千左右），或使用月卡自动收集。阳光蓓蕾期望100+关，电藤200+关。</p>
+
+                <!-- ---- 无尽测定向序列 ---- -->
+                <h3 id="无尽测定向序列">
+                    <a href="#无尽测定向序列" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    无尽测定向序列
+                </h3>
+                <p><strong>使用步骤：</strong></p>
+                <ol>
+                    <li>在游戏内进入 <strong>植物 → 编队</strong>，将想要进化的植物放入 <strong>编队 6</strong>（必须编满）。</li>
+                    <li>确认摆放无误后点击“开始任务”。</li>
+                    <li>若存在其他无尽训练进度，系统会强制停止，需手动清除干扰进度。</li>
+                </ol>
+
+                <!-- ---- 戴夫杯 ---- -->
+                <h3 id="戴夫杯">
+                    <a href="#戴夫杯" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    戴夫杯
+                </h3>
+                <p>更新至最新版本，在匹配界面直接开始即可。</p>
+
+                <!-- ---- 进阶设置 ---- -->
+                <h3 id="进阶设置">
+                    <a href="#进阶设置" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    进阶设置
+                </h3>
+                <ul>
+                    <li><strong>单独运行</strong>：右键单个任务的齿轮，选择“单独运行”来启动该任务。</li>
+                    <li><strong>定时执行</strong>：点击设置 → 定时执行，可设置全自动植物探险等定时任务。</li>
+                    <li><strong>导出日志</strong>：出现bug时，导出日志用于反馈。</li>
+                    <li><strong>碎片挑战多植物选择</strong>：通过添加任务 → 碎片挑战，然后长按拖动排序，在设置里更改不同植物即可（优先级自动按品质排列）。</li>
+                </ul>
+
+                <!-- ===== 如何参与开发 ===== -->
+                <h2 id="如何参与开发">
+                    <a href="#如何参与开发" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    如何参与开发
+                </h2>
+                <p>请阅读 <a href="#">开发文档</a> 了解如何贡献代码、提交 Issue 或参与讨论。</p>
+                <pre><code>// 示例代码块
+function helloMaaPvz() {
+    console.log("欢迎参与 MaaPvz 开发！");
+}
+helloMaaPvz();</code></pre>
+
+                <!-- ===== 鸣谢 ===== -->
+                <h2 id="鸣谢">
+                    <a href="#鸣谢" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    鸣谢
+                </h2>
+                <p>本项目由 <strong><a href="#" target="_blank">MaaFramework</a></strong> 强力驱动！</p>
+                <p>感谢所有贡献者：</p>
+                <p style="background:var(--bg-color-soft); padding:20px; border-radius:var(--radius); text-align:center; color:var(--text-color-3);">
+                    [ 贡献者头像列表占位 ]
+                </p>
+
+                <h3 id="join-us">
+                    <a href="#join-us" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    Join us
+                </h3>
+                <ul>
+                    <li>聊天群： 724500650</li>
+                    <li>内测群： 801637524</li>
+                    <li>开发群： 984076079</li>
+                </ul>
+
             </div>
-        </div>
+            <!-- ===== 文档页脚 ===== -->
 
-        <!-- 有序列表 -->
-        <ol>
-            <li>
-                <p>在 <a href="#" target="_blank">release 页面</a> 下载最新版本。</p>
-            </li>
-            <li>
-                <p>在模拟器设置里将分辨率调整为 <strong>1920×1080</strong> 并 <strong>锁定屏幕旋转</strong> 为横屏。</p>
-            </li>
-            <li>
-                <p>调整软件配置，然后点击 <code>开始任务</code>。</p>
-            </li>
-        </ol>
-
-        <!-- 另一个提示框 -->
-        <div class="rp-callout rp-callout--info">
-            <div class="rp-callout__title">ℹ️ INFO</div>
-            <div class="rp-callout__content">
-                <p>如果遇到问题，请先仔细阅读 <a href="#">常见问题解决方案</a>。</p>
-            </div>
-        </div>
-
-        <!-- ===== 主要功能 ===== -->
-        <h2 id="主要功能">
-            <a href="#主要功能" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-            主要功能
-        </h2>
-
-        <!-- ---- xx类 1（原日常） ---- -->
-        <h3 id="xx类1">
-            <a href="#xx类1" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-            xx类 1
-        </h3>
-
-        <!-- ⑳ 任务列表 (Checklist) -->
-        <ul class="contains-task-list">
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 启动游戏</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 每日签到</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 每日招财</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 排行榜点赞</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 送体力</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 每日分享</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 组织祈福</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 积分赛</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 修行之路</li>
-            <!-- 可继续添加更多项 -->
-        </ul>
-
-        <!-- ---- xx类 2（原战斗类） ---- -->
-        <h3 id="xx类2">
-            <a href="#xx类2" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-            xx类 2
-        </h3>
-        <ul class="contains-task-list">
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 冒险模式推关</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 精英副本推关</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 修罗副本推关</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 刷周胜</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 秘境探险</li>
-        </ul>
-
-        <!-- ---- xx类 3（原商店类） ---- -->
-        <h3 id="xx类3">
-            <a href="#xx类3" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-            xx类 3
-        </h3>
-        <ul class="contains-task-list">
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 商店兑换 (测试中)</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 黑市商人</li>
-        </ul>
-
-        <!-- ---- xx类 4（原功能类） ---- -->
-        <h3 id="xx类4">
-            <a href="#xx类4" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-            xx类 4
-        </h3>
-        <ul class="contains-task-list">
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 切换账号</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 日志清理</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 关闭火影</li>
-        </ul>
-
-        <!-- ---- xx类 5（原活动类） ---- -->
-        <h3 id="xx类5">
-            <a href="#xx类5" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-            xx类 5
-        </h3>
-        <ul class="contains-task-list">
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 轻松助手</li>
-            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 轻松季</li>
-        </ul>
-
-        <!-- ===== 如何参与开发 ===== -->
-        <h2 id="如何参与开发">
-            <a href="#如何参与开发" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-            如何参与开发
-        </h2>
-        <p>请阅读 <a href="#">开发文档</a> 了解如何贡献代码、提交 Issue 或参与讨论。</p>
-
-        <!-- 代码块示例 -->
-        <pre><code>// 示例代码块
-            function helloWorld() {
-            console.log("欢迎参与开发！");
-            }
-        helloWorld();</code></pre>
-
-        <!-- ===== 鸣谢 ===== -->
-        <h2 id="鸣谢">
-            <a href="#鸣谢" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-            鸣谢
-        </h2>
-        <p>本项目由 <strong><a href="#" target="_blank">MaaFramework</a></strong> 强力驱动！</p>
-        <p>感谢以下开发者对本项目作出的贡献：</p>
-        <!-- ⑳ 图片占位（可替换为贡献者列表） -->
-        <p style="background:var(--bg-color-soft); padding:20px; border-radius:var(--radius); text-align:center; color:var(--text-color-3);">
-            [ 贡献者头像列表占位 ]
-        </p>
-
-        <!-- ---- Join us ---- -->
-        <h3 id="join-us">
-            <a href="#join-us" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-            Join us
-        </h3>
-        <ul>
-            <li>聊天群： 724500650</li>
-            <li>内测群： 801637524</li>
-            <li>开发群： 984076079</li>
-        </ul>
-
+            <!-- ==========================================================
+            📝 可修改区域 9：页脚信息
+            ========================================================== -->
+            <footer class="rp-doc-footer">
+                <div class="rp-doc-footer__edit">
+                    <div class="rp-last-updated">
+                        <p>最后更新： <span>2026-08-08 18:00</span></p>
+                    </div>
+                    <a href="#" style="color:var(--brand-color); font-weight:500; font-size:0.9rem;">
+                        ✎ 编辑此页
+                    </a>
+                </div>
+                <div class="rp-prev-next-page">
+                    <div class="rp-prev-next-page__item" style="align-items:flex-start;">
+                        <span class="rp-prev-next-page__item__desc">上一页</span>
+                        <span class="rp-prev-next-page__item__title">
+                            <svg width="1em" height="1em" viewBox="0 0 32 32" style="transform:rotate(180deg);"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"/></svg>
+                            返回首页
+                        </span>
+                    </div>
+                    <a href="#" class="rp-prev-next-page__item rp-prev-next-page__next" style="border-bottom:none;">
+                        <span class="rp-prev-next-page__item__desc">下一页</span>
+                        <span class="rp-prev-next-page__item__title">
+                            常见问题
+                            <svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"/></svg>
+                        </span>
+                    </a>
+                </div>
+            </footer>
+        </main>
     </div>
-    <!-- ===== 文档页脚 ===== -->
 
-    <!-- ==========================================================
-    📝 可修改区域 9：页脚信息
-    修改说明：更新最后更新时间、编辑链接、上下页导航等
-    ========================================================== -->
-    <footer class="rp-doc-footer">
-        <div class="rp-doc-footer__edit">
-            <!-- ⑳ 最后更新时间 -->
-            <div class="rp-last-updated">
-                <p>最后更新： <span>2026-08-08 14:30</span></p>
-            </div>
-            <!-- ⑳ 编辑链接（可指向 GitHub 编辑页） -->
-            <a href="#" style="color:var(--brand-color); font-weight:500; font-size:0.9rem;">
-                ✎ 编辑此页
-            </a>
-        </div>
-
-        <!-- 上下页导航 -->
-        <div class="rp-prev-next-page">
-            <!-- 上一页（占位） -->
-            <div class="rp-prev-next-page__item" style="align-items:flex-start;">
-                <span class="rp-prev-next-page__item__desc">上一页</span>
-                <span class="rp-prev-next-page__item__title">
-                    <svg width="1em" height="1em" viewBox="0 0 32 32" style="transform:rotate(180deg);"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"/></svg>
-                    返回首页
-                </span>
-            </div>
-            <!-- 下一页 -->
-            <a href="#" class="rp-prev-next-page__item rp-prev-next-page__next" style="border-bottom:none;">
-                <span class="rp-prev-next-page__item__desc">下一页</span>
-                <span class="rp-prev-next-page__item__title">
-                    常见问题
-                    <svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"/></svg>
-                </span>
-            </a>
-        </div>
-    </footer>
-
-</main>
-</div>
-
-<!-- ============================================================
-📝 可修改区域 10：底部脚本
-修改说明：可在此添加统计代码、第三方脚本等
-============================================================ -->
-<!-- ⑳ 例如：Google Analytics、Plausible 等 -->
-<!-- <script defer src="https://your-analytics.com/script.js"></script> -->
-
-<!-- ⑳ 页面加载完成后执行的自定义脚本（可选） -->
-<script>
-    // 示例：控制台输出提示
-    console.log('📘 文档模板已加载 — 欢迎编辑！');
-</script>
-
+    <!-- ============================================================
+    📝 可修改区域 10：底部脚本
+    ============================================================ -->
+    <script>
+        console.log('🌱 MaaPvz 文档已加载 — 欢迎使用！');
+    </script>
 </body>
 </html>
