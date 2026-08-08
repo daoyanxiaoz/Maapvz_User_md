@@ -425,26 +425,6 @@
             background: var(--brand-color-tint);
             font-weight: 600;
         }
-        /* 底部独立入口特殊样式（无尽挑战） */
-        .sidebar-divider {
-            border-top: 1px solid var(--divider-light);
-            margin: 12px 0 10px 0;
-        }
-        .sidebar-link-emphasized {
-            display: block;
-            padding: 6px 12px;
-            border-radius: 8px;
-            color: var(--brand-color);
-            background: var(--brand-color-tint);
-            transition: background 0.15s, color 0.15s;
-            font-weight: 600;
-            border: 1px solid var(--brand-color-light);
-        }
-        .sidebar-link-emphasized:hover {
-            background: var(--brand-color);
-            color: #fff;
-            border-color: var(--brand-color);
-        }
     </style>
 </head>
 
@@ -471,7 +451,7 @@
     <div class="rp-doc-layout__container">
 
         <!-- ==========================================================
-        📂 侧边栏 —— “新手上路”折叠菜单 + 底部独立“无尽挑战入口”
+        📂 侧边栏 —— “新手上路”折叠菜单 + 下方普通链接
         ========================================================== -->
         <aside class="rp-doc-layout__sidebar">
             <div style="font-weight:700; font-size:1.1rem; padding:0 4px 16px 4px; border-bottom:1px solid var(--divider-light); margin-bottom:16px;">
@@ -479,12 +459,12 @@
             </div>
             <nav style="display:flex; flex-direction:column; gap:3px;">
 
-                <!-- ===== 可折叠父级：新手上路（不含无尽挑战入口） ===== -->
+                <!-- ===== 可折叠父级：新手上路 ===== -->
                 <div class="sidebar-folder" id="folder-newbie" onclick="toggleFolder('folder-newbie')">
                     <span>新手上路</span>
                     <span class="arrow" id="arrow-newbie">▶</span>
                 </div>
-                <!-- 子菜单（共9项：不含无尽挑战入口） -->
+                <!-- 子菜单（共9项） -->
                 <div class="sidebar-children" id="children-newbie">
                     <a href="#签到">签到</a>
                     <a href="#植物探险">植物探险</a>
@@ -497,13 +477,12 @@
                     <a href="#进阶设置">进阶设置</a>
                 </div>
 
+                <!-- ===== 无尽挑战入口（放在新手上路下方，普通样式） ===== -->
+                <a href="#无尽挑战入口" class="sidebar-link">🏰 无尽挑战（入口）</a>
+
                 <!-- ===== 其他独立菜单项 ===== -->
                 <a href="#如何参与开发" class="sidebar-link">如何参与开发</a>
                 <a href="#鸣谢" class="sidebar-link">鸣谢</a>
-
-                <!-- ===== 分割线 + 独立“无尽挑战入口”（最底部） ===== -->
-                <div class="sidebar-divider"></div>
-                <a href="#无尽挑战入口" class="sidebar-link-emphasized">🏰 无尽挑战（入口）</a>
 
             </nav>
             <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--divider-light); font-size:0.85rem; color:var(--text-color-3);">
