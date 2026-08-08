@@ -950,23 +950,35 @@ helloMaaPvz();</code></pre>
         });
 
         // ============================================================
-        // 🆕 访问计数器（使用第三方API，按天计数）
+        // 🆕 访问计数器（按天、每设备只计一次）
         // ============================================================
         (function() {
             const counterEl = document.getElementById('visit-counter');
             if (!counterEl) return;
 
-            // 获取今日日期字符串 YYYY-MM-DD
             const today = new Date().toISOString().slice(0, 10);
             const namespace = 'maapvz';
             const key = 'visits-' + today;
 
-            // 显示加载提示
+            // 本地存储键名
+            const lsDateKey = 'maapvz_visit_date';
+            const lsCountedKey = 'maapvz_visit_counted';
+
             counterEl.innerHTML = '📊 正在统计...';
 
-            // 尝试使用第三方计数服务 (countapi.xyz)
-            // 使用 hit 方法会自动创建键并自增，每天不同 key 从0开始
-            const apiUrl = 'https://api.countapi.xyz/hit/' + namespace + '/' + key;
+            // 先检查今天是否已经计过数
+            const storedDate = localStorage.getItem(lsDateKey);
+            const alreadyCounted = (storedDate === today) && (localStorage.getItem(lsCountedKey) === 'true');
+
+            // 决定调用的API端点
+            let apiUrl;
+            if (alreadyCounted) {
+                // 今天已计过，只获取当前值，不增加
+                apiUrl = 'https://api.countapi.xyz/get/' + namespace + '/' + key;
+            } else {
+                // 今天未计过，调用 hit 增加计数
+                apiUrl = 'https://api.countapi.xyz/hit/' + namespace + '/' + key;
+            }
 
             fetch(apiUrl, { method: 'GET', mode: 'cors' })
                 .then(response => {
@@ -975,6 +987,11 @@ helloMaaPvz();</code></pre>
                 })
                 .then(data => {
                     const count = data.value || 0;
+                    // 如果今天未计过，现在已计，记录本地状态
+                    if (!alreadyCounted) {
+                        localStorage.setItem(lsDateKey, today);
+                        localStorage.setItem(lsCountedKey, 'true');
+                    }
                     displayCount(count);
                 })
                 .catch(() => {
@@ -984,7 +1001,7 @@ helloMaaPvz();</code></pre>
 
             function displayCount(count) {
                 counterEl.innerHTML =
-                    '<span class="emoji">🌟</span> 你是今天第 <strong>' + count + '</strong> 次打开用户文档的人！自己查阅文档的样子真的很棒！ <span class="emoji">✨</span>';
+                    '<span class="emoji">🌟</span> 你是今天第 <strong>' + count + '</strong> 个打开用户文档的人！自己查阅文档的样子真的很棒！ <span class="emoji">✨</span>';
             }
 
             function fallbackLocalStorage() {
@@ -994,13 +1011,22 @@ helloMaaPvz();</code></pre>
                 let count = 1;
 
                 if (storedDate === today) {
-                    // 今天已有记录，增加计数
-                    const prev = parseInt(localStorage.getItem(lsCountKey) || '0', 10);
-                    count = prev + 1;
+                    // 今天已有记录，但只增加一次（检查是否已计过）
+                    const counted = localStorage.getItem(lsCountedKey) === 'true';
+                    if (!counted) {
+                        const prev = parseInt(localStorage.getItem(lsCountKey) || '0', 10);
+                        count = prev + 1;
+                        localStorage.setItem(lsCountKey, String(count));
+                        localStorage.setItem(lsCountedKey, 'true');
+                    } else {
+                        count = parseInt(localStorage.getItem(lsCountKey) || '1', 10);
+                    }
+                } else {
+                    // 新的一天，重置计数
+                    localStorage.setItem(lsKey, today);
+                    localStorage.setItem(lsCountKey, '1');
+                    localStorage.setItem(lsCountedKey, 'true');
                 }
-                // 否则重置为1（日期变化或首次访问）
-                localStorage.setItem(lsKey, today);
-                localStorage.setItem(lsCountKey, String(count));
 
                 displayCount(count);
                 // 添加本地提示（可选）
