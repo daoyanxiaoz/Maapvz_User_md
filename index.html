@@ -204,7 +204,7 @@
             font-size: inherit;
         }
 
-        /* ===== 图片样式（新增） ===== */
+        /* ===== 图片样式 ===== */
         .rp-doc img {
             max-width: 100%;
             border-radius: var(--radius);
@@ -474,9 +474,10 @@
                     <span>新手上路</span>
                     <span class="arrow" id="arrow-newbie">▶</span>
                 </div>
-                <!-- 子菜单（共9项） -->
+                <!-- 子菜单（共10项，新增“免广告卡”） -->
                 <div class="sidebar-children" id="children-newbie">
                     <a href="#签到">签到</a>
+                    <a href="#免广告卡">免广告卡</a>
                     <a href="#植物探险">植物探险</a>
                     <a href="#碎片挑战">碎片挑战</a>
                     <a href="#潘妮秘宝">潘妮秘宝</a>
@@ -524,6 +525,7 @@
                             <a href="#主要功能">主要功能</a>
                             <ul>
                                 <li><a href="#签到">签到</a></li>
+                                <li><a href="#免广告卡">免广告卡</a></li>
                                 <li><a href="#植物探险">植物探险</a></li>
                                 <li><a href="#碎片挑战">碎片挑战</a></li>
                                 <li><a href="#潘妮秘宝">潘妮秘宝</a></li>
@@ -575,14 +577,25 @@
                     主要功能
                 </h2>
 
-                <!-- 签到 -->
+                <!-- 签到（已移除“领取广告钻石”项） -->
                 <h3 id="签到">
                     <a href="#签到" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     签到
                 </h3>
                 <ul>
                     <li><strong>每日签到</strong>：自动完成游戏内签到。</li>
-                    <li><strong>领取广告钻石</strong>：需要免广告卡（模拟器可能无法观看广告）。</li>
+                </ul>
+
+                <!-- ===== 免广告卡（新增独立章节） ===== -->
+                <h3 id="免广告卡">
+                    <a href="#免广告卡" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    免广告卡
+                </h3>
+                <p>免广告卡功能，可以自行开关，包含以下三项功能：</p>
+                <ul>
+                    <li><strong>免费50钻</strong>：自动领取每日免费50钻石（需拥有免广告卡）。</li>
+                    <li><strong>潘妮秘宝</strong>：自动完成潘妮秘宝相关操作。</li>
+                    <li><strong>超Z钥匙</strong>：自动领取超Z联赛钥匙奖励。</li>
                 </ul>
 
                 <!-- 植物探险（插入图片） -->
