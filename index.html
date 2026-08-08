@@ -385,7 +385,7 @@
             margin-top: 2px;
         }
         .sidebar-children.open {
-            max-height: 800px; /* 足够容纳所有子项 */
+            max-height: 800px;
             opacity: 1;
         }
         .sidebar-children a {
@@ -408,7 +408,6 @@
             border-left-color: var(--brand-color);
             font-weight: 500;
         }
-        /* 侧边栏其他普通菜单项（如“如何参与开发”、“鸣谢”）保持原样 */
         .sidebar-link {
             display: block;
             padding: 6px 12px;
@@ -425,6 +424,26 @@
             color: var(--brand-color);
             background: var(--brand-color-tint);
             font-weight: 600;
+        }
+        /* 底部独立入口特殊样式（无尽挑战） */
+        .sidebar-divider {
+            border-top: 1px solid var(--divider-light);
+            margin: 12px 0 10px 0;
+        }
+        .sidebar-link-emphasized {
+            display: block;
+            padding: 6px 12px;
+            border-radius: 8px;
+            color: var(--brand-color);
+            background: var(--brand-color-tint);
+            transition: background 0.15s, color 0.15s;
+            font-weight: 600;
+            border: 1px solid var(--brand-color-light);
+        }
+        .sidebar-link-emphasized:hover {
+            background: var(--brand-color);
+            color: #fff;
+            border-color: var(--brand-color);
         }
     </style>
 </head>
@@ -452,7 +471,7 @@
     <div class="rp-doc-layout__container">
 
         <!-- ==========================================================
-        📂 侧边栏 —— 新增折叠菜单“新手上路”
+        📂 侧边栏 —— “新手上路”折叠菜单 + 底部独立“无尽挑战入口”
         ========================================================== -->
         <aside class="rp-doc-layout__sidebar">
             <div style="font-weight:700; font-size:1.1rem; padding:0 4px 16px 4px; border-bottom:1px solid var(--divider-light); margin-bottom:16px;">
@@ -460,12 +479,12 @@
             </div>
             <nav style="display:flex; flex-direction:column; gap:3px;">
 
-                <!-- ===== 可折叠父级：新手上路 ===== -->
+                <!-- ===== 可折叠父级：新手上路（不含无尽挑战入口） ===== -->
                 <div class="sidebar-folder" id="folder-newbie" onclick="toggleFolder('folder-newbie')">
                     <span>新手上路</span>
                     <span class="arrow" id="arrow-newbie">▶</span>
                 </div>
-                <!-- 子菜单容器（默认折叠） -->
+                <!-- 子菜单（共9项：不含无尽挑战入口） -->
                 <div class="sidebar-children" id="children-newbie">
                     <a href="#签到">签到</a>
                     <a href="#植物探险">植物探险</a>
@@ -473,7 +492,6 @@
                     <a href="#潘妮秘宝">潘妮秘宝</a>
                     <a href="#双人对决">双人对决</a>
                     <a href="#日志清理">日志清理</a>
-                    <a href="#无尽挑战入口">🏰 无尽挑战（入口）</a>
                     <a href="#时空秘境">时空秘境</a>
                     <a href="#无尽测定向序列">无尽测定向序列</a>
                     <a href="#进阶设置">进阶设置</a>
@@ -483,8 +501,12 @@
                 <a href="#如何参与开发" class="sidebar-link">如何参与开发</a>
                 <a href="#鸣谢" class="sidebar-link">鸣谢</a>
 
+                <!-- ===== 分割线 + 独立“无尽挑战入口”（最底部） ===== -->
+                <div class="sidebar-divider"></div>
+                <a href="#无尽挑战入口" class="sidebar-link-emphasized">🏰 无尽挑战（入口）</a>
+
             </nav>
-            <div style="margin-top:32px; padding-top:16px; border-top:1px solid var(--divider-light); font-size:0.85rem; color:var(--text-color-3);">
+            <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--divider-light); font-size:0.85rem; color:var(--text-color-3);">
                 v2.0.10
             </div>
         </aside>
@@ -610,7 +632,7 @@
                 </h3>
                 <p>清理多余日志，防止日志文件过多导致存储溢出。</p>
 
-                <!-- ===== 无尽挑战入口（仅链接） ===== -->
+                <!-- ===== 无尽挑战入口（正文章节） ===== -->
                 <h3 id="无尽挑战入口">
                     <a href="#无尽挑战入口" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     🏰 无尽挑战（专项页面）
@@ -728,23 +750,19 @@ helloMaaPvz();</code></pre>
     ============================================================ -->
     <script>
         function toggleFolder(folderId) {
-            // 获取父级元素和箭头
             const folder = document.getElementById(folderId);
             const children = document.getElementById('children-' + folderId.replace('folder-', ''));
             const arrow = document.getElementById('arrow-' + folderId.replace('folder-', ''));
 
             if (!children || !arrow) return;
 
-            // 切换展开状态
             const isOpen = children.classList.toggle('open');
             arrow.classList.toggle('open', isOpen);
             arrow.textContent = isOpen ? '▼' : '▶';
         }
 
-        // 初始化：默认展开新手上路（可选）
         document.addEventListener('DOMContentLoaded', function() {
             // 默认展开“新手上路”
-            const defaultFolder = 'folder-newbie';
             const defaultChildren = document.getElementById('children-newbie');
             const defaultArrow = document.getElementById('arrow-newbie');
             if (defaultChildren && defaultArrow) {
