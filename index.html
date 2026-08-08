@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- ============================================================
+    ═══════════════════════════════════════════════════════════════════
+    📝 可修改区域 1：文档头部信息
+    修改说明：替换下面的 title、description 和 keywords 等内容
+    ═══════════════════════════════════════════════════════════════════
+    ============================================================ -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ① 修改标题：页面标题，显示在浏览器标签栏 -->
+    <title>Maapvz-新手上路</title>
+    <!-- ② 修改描述：页面描述，用于SEO和分享摘要 -->
+    <meta name="description" content="这次你一定要跑通" />
+    <!-- ③ 修改关键词：页面关键词，用于SEO -->
+    <meta name="keywords" content="文档模板,用户手册,开发者指南,Maapvz" />
+    <!-- ④ 修改作者 -->
+    <meta name="author" content="文档维护团队" />
+
+    <!-- ============================================================
+    ═══════════════════════════════════════════════════════════════════
+    📝 可修改区域 2：样式与图标
+    修改说明：可替换 favicon 图标，或引入自定义样式表
+    ═══════════════════════════════════════════════════════════════════
+    ============================================================ -->
+    <!-- ⑤ 替换图标：将 href 指向你的 favicon 文件路径 -->
+    <link rel="icon" href="https://daoyanxiaoz.github.io/Endless_Visualization_Configuration/images/PVZAA_small.png" />
+    <!-- ⑥ 引入自定义样式：如需覆盖默认样式，可在此引入额外CSS文件 -->
+    <!-- <link rel="stylesheet" href="./assets/custom.css" /> -->
+
+    <!-- ============================================================
+    ═══════════════════════════════════════════════════════════════════
+    📝 可修改区域 3：内联样式（已修改为主色调：模糊潜绿色）
+    修改说明：此处为页面基础样式，品牌色已替换为柔和的潜绿色系
+    ═══════════════════════════════════════════════════════════════════
+    ============================================================ -->
+    <style>
+        /* =============================================================
+               🎨 基础变量 —— 已修改为“模糊潜绿色”主题
+               ============================================================= */
+        :root {
+            /* ⑦ 品牌色：修改为柔和的潜绿色（雾霾蓝/绿） */
+            --brand-color: #6B8E8B;
+            --brand-color-light: #8EABA8;
+            --brand-color-dark: #4F6F6C;
+            --brand-color-tint: rgba(107, 142, 139, 0.16);
+
+            /* ⑧ 背景色与文字色（微调背景以呼应主色调） */
+            --bg-color: #ffffff;
+            --bg-color-soft: #f4f7f6;
+            --bg-color-mute: #e8eeec;
+            --text-color-0: #000000;
+            --text-color-1: #242424;
+            --text-color-2: rgba(0, 0, 0, 0.7);
+            --text-color-3: rgba(60, 60, 60, 0.33);
+
+            /* ⑨ 分割线与边框色 */
+            --divider-color: rgba(0, 0, 0, 0.25);
+            --divider-light: rgba(0, 0, 0, 0.12);
+
+            /* ⑩ 字体与圆角 */
+            --font-family-base: "Inter var experimental", "Inter var", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            --font-family-mono: Menlo, Monaco, Consolas, "Courier New", monospace;
+            --radius: 1rem;
+            --radius-small: 0.5rem;
+            --radius-large: 1.5rem;
+
+            /* ⑪ 布局尺寸 */
+            --nav-height: 64px;
+            --sidebar-width: 280px;
+            --content-max-width: 1000px;
+            --content-padding-x: 80px;
+            --content-padding-y: 48px;
+        }
+
+        /* ⑫ 暗色模式变量（可选） */
+        /* @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color-1: #f0f0f0;
+                ...
+            }
+        } */
+
+        /* =============================================================
+               🧩 基础重置与布局 —— 一般无需修改
+               ============================================================= */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border-style: solid;
+            border-width: 0;
+        }
+
+        html {
+            font-size: 16px;
+            line-height: 1.7;
+            scroll-padding-top: calc(var(--nav-height) + 20px);
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            color: var(--text-color-1);
+            background-color: var(--bg-color);
+            width: 100%;
+            min-width: 320px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* =============================================================
+               🔗 链接样式（继承品牌色）
+               ============================================================= */
+        a {
+            color: var(--brand-color-dark);
+            text-decoration: none;
+            transition: color 0.25s;
+        }
+        a:hover {
+            color: var(--brand-color);
+            border-bottom: 1px solid var(--brand-color);
+        }
+
+        /* =============================================================
+               📦 容器布局
+               ============================================================= */
+        .rp-doc-layout__container {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            width: 100%;
+            position: relative;
+        }
+
+        .rp-doc-layout__doc {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            position: relative;
+            overflow-x: auto;
+            max-width: min(100%, var(--content-max-width));
+            flex: 1;
+            padding: var(--content-padding-y) var(--content-padding-x);
+        }
+
+        /* =============================================================
+               📑 侧边栏
+               ============================================================= */
+        .rp-doc-layout__sidebar {
+            width: var(--sidebar-width);
+            min-width: var(--sidebar-width);
+            height: calc(100vh - var(--nav-height));
+            max-height: calc(100vh - var(--nav-height));
+            padding: 20px 16px;
+            border-right: 1px solid var(--divider-light);
+            background: var(--bg-color);
+            position: sticky;
+            top: var(--nav-height);
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        /* =============================================================
+               🧭 导航栏
+               ============================================================= */
+        .rp-nav {
+            height: var(--nav-height);
+            border-bottom: 1px solid var(--divider-light);
+            background: var(--bg-color);
+            padding: 0 20px;
+            position: sticky;
+            top: 0;
+            z-index: 60;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .rp-nav__title__link {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            gap: 8px;
+        }
+
+        .rp-nav__right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        /* =============================================================
+               📖 文档内容样式
+               ============================================================= */
+        .rp-doc h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            margin-top: 0;
+        }
+
+        .rp-doc h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-top: 3rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .rp-doc h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .rp-doc h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .rp-doc p {
+            margin-top: 1.25rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.75rem;
+        }
+
+        .rp-doc ul,
+        .rp-doc ol {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            line-height: 1.75rem;
+        }
+
+        .rp-doc ul li,
+        .rp-doc ol li {
+            margin-top: 0.4rem;
+        }
+
+        .rp-doc blockquote {
+            border-left: 2px solid var(--divider-color);
+            color: var(--text-color-2);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .rp-doc code:not(pre code) {
+            font-size: 0.875em;
+            font-family: var(--font-family-mono);
+            background: var(--bg-color-soft);
+            border-radius: var(--radius-small);
+            padding: 0.15rem 0.4rem;
+            border: 1px solid var(--divider-light);
+        }
+
+        .rp-doc pre {
+            background: var(--bg-color-soft);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid var(--divider-light);
+            font-size: 0.875rem;
+            line-height: 1.7;
+        }
+
+        .rp-doc pre code {
+            font-family: var(--font-family-mono);
+            background: transparent;
+            border: none;
+            padding: 0;
+            font-size: inherit;
+        }
+
+        /* =============================================================
+               💬 提示框 (Callout) —— 已适配潜绿色主题
+               ============================================================= */
+        .rp-callout {
+            border-radius: var(--radius);
+            border: 1px solid transparent;
+            margin: 24px 0;
+            padding: 20px 24px 12px;
+        }
+
+        .rp-callout__title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Tip 提示框 - 潜绿色调 */
+        .rp-callout--tip {
+            border-color: rgba(107, 142, 139, 0.3);
+            background: rgba(107, 142, 139, 0.08);
+        }
+        .rp-callout--tip .rp-callout__title {
+            color: #4F6F6C;
+        }
+
+        /* Info 提示框 - 潜蓝色调 */
+        .rp-callout--info {
+            border-color: rgba(107, 142, 139, 0.25);
+            background: rgba(107, 142, 139, 0.05);
+        }
+        .rp-callout--info .rp-callout__title {
+            color: #4F6F6C;
+        }
+
+        /* Warning 提示框 - 保持原有暖色警示风格，微调适配 */
+        .rp-callout--warning {
+            border-color: rgba(255, 197, 23, 0.4);
+            background: rgba(255, 197, 23, 0.10);
+        }
+        .rp-callout--warning .rp-callout__title {
+            color: #887233;
+        }
+
+        /* Danger 提示框 - 保持原有警示风格 */
+        .rp-callout--danger {
+            border-color: rgba(237, 60, 80, 0.2);
+            background: rgba(237, 60, 80, 0.08);
+        }
+        .rp-callout--danger .rp-callout__title {
+            color: #ab2131;
+        }
+
+        /* =============================================================
+               📋 任务列表 (Checklist)
+               ============================================================= */
+        .contains-task-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .contains-task-list .task-list-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .contains-task-list .task-list-item input[type="checkbox"] {
+            margin-top: 0.3rem;
+            width: 1.1rem;
+            height: 1.1rem;
+            flex-shrink: 0;
+            accent-color: var(--brand-color);
+            cursor: default;
+        }
+
+        /* =============================================================
+               📚 目录 (TOC)
+               ============================================================= */
+        .rp-toc-container {
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            background: var(--bg-color-soft);
+            border-radius: var(--radius);
+            border: 1px solid var(--divider-light);
+        }
+        .rp-toc-container ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        .rp-toc-container ul ul {
+            padding-left: 1.5rem;
+        }
+        .rp-toc-container li {
+            margin-top: 0.3rem;
+        }
+        .rp-toc-container a {
+            color: var(--text-color-2);
+            font-weight: 500;
+            border-bottom: none !important;
+        }
+        .rp-toc-container a:hover {
+            color: var(--brand-color);
+        }
+
+        /* =============================================================
+               🦶 页脚
+               ============================================================= */
+        .rp-doc-footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--divider-light);
+        }
+        .rp-doc-footer__edit {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .rp-last-updated {
+            color: var(--text-color-3);
+            font-size: 14px;
+        }
+        .rp-prev-next-page {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+        }
+        .rp-prev-next-page__item {
+            display: flex;
+            flex-direction: column;
+            padding: 8px 16px;
+            border-radius: var(--radius-small);
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+        .rp-prev-next-page__item:hover {
+            background: var(--bg-color-soft);
+        }
+        .rp-prev-next-page__item__desc {
+            font-size: 0.75rem;
+            color: var(--text-color-3);
+        }
+        .rp-prev-next-page__item__title {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+        .rp-prev-next-page__next {
+            align-items: flex-end;
+        }
+
+        /* =============================================================
+               📱 响应式
+               ============================================================= */
+        @media (max-width: 1024px) {
+            .rp-doc-layout__sidebar {
+                display: none;
+            }
+            .rp-doc-layout__doc {
+                padding: 32px 24px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .rp-doc-layout__doc {
+                padding: 24px 16px;
+            }
+            .rp-doc h1 {
+                font-size: 1.75rem;
+            }
+            .rp-doc h2 {
+                font-size: 1.5rem;
+            }
+            .rp-doc h3 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+    ═══════════════════════════════════════════════════════════════════
+    📝 可修改区域 4：导航栏内容
+    修改说明：修改品牌名称、logo 路径、导航菜单项等
+    ═══════════════════════════════════════════════════════════════════
+    ============================================================ -->
+    <header class="rp-nav">
+        <div class="rp-nav__left">
+            <div class="rp-nav__title">
+                <a href="#" class="rp-nav__title__link">
+                    <!-- ⑬ 替换 Logo：修改 src 指向你的 logo 图片 -->
+                    <!-- <img src="./assets/logo-light.png" alt="Logo" style="height:32px;" /> -->
+                    <span style="font-size:1.2rem;">文档中心</span>
+                </a>
+            </div>
+        </div>
+        <div class="rp-nav__right">
+            <!-- ⑭ 导航菜单项：修改 href 和文本 -->
+            <a href="#" style="font-weight:500; color:var(--text-color-1);">首页</a>
+            <a href="#" style="font-weight:500; color:var(--text-color-1);">用户手册</a>
+            <a href="#" style="font-weight:500; color:var(--text-color-1);">开发文档</a>
+            <a href="#" style="font-weight:500; color:var(--text-color-1);" target="_blank">GitHub ↗</a>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    ═══════════════════════════════════════════════════════════════════
+    📝 可修改区域 5：主体布局（侧边栏 + 文档内容）
+    侧边栏菜单项和文档正文均在此区域
+    ═══════════════════════════════════════════════════════════════════
+    ============================================================ -->
+    <div class="rp-doc-layout__container">
+
+        <!-- ==========================================================
+        📂 侧边栏 —— ⑮ 修改菜单项
+        ========================================================== -->
+        <aside class="rp-doc-layout__sidebar">
+            <!-- 侧边栏品牌标识（可选） -->
+            <div style="font-weight:700; font-size:1.1rem; padding:0 4px 16px 4px; border-bottom:1px solid var(--divider-light); margin-bottom:16px;">
+                📖 目录导航
+            </div>
+
+            <!-- ⑯ 侧边栏菜单项：修改 href 和文本，缩进表示层级 -->
+            <nav style="display:flex; flex-direction:column; gap:4px;">
+                <!-- 一级菜单（当前激活） -->
+                <a href="#"
+                style="display:block; padding:6px 12px; border-radius:8px; font-weight:600; color:var(--brand-color); background:var(--brand-color-tint);">
+                新手上路
+            </a>
+            <!-- 一级菜单 -->
+            <a href="#"
+            style="display:block; padding:6px 12px; border-radius:8px; color:var(--text-color-2); transition:background 0.15s;"
+            onmouseenter="this.style.background='var(--bg-color-soft)'"
+            onmouseleave="this.style.background='transparent'">
+            常见问题
+        </a>
+        <!-- 一级菜单 -->
+        <a href="#"
+        style="display:block; padding:6px 12px; border-radius:8px; color:var(--text-color-2); transition:background 0.15s;"
+        onmouseenter="this.style.background='var(--bg-color-soft)'"
+        onmouseleave="this.style.background='transparent'">
+        问题反馈
+    </a>
+    <!-- 二级菜单示例（缩进） -->
+    <div style="padding-left:20px; display:flex; flex-direction:column; gap:2px; margin-top:2px;">
+        <a href="#"
+        style="display:block; padding:4px 12px; border-radius:6px; font-size:0.9rem; color:var(--text-color-2); transition:background 0.15s;"
+        onmouseenter="this.style.background='var(--bg-color-soft)'"
+        onmouseleave="this.style.background='transparent'">
+        └ 子菜单项 1
+    </a>
+    <a href="#"
+    style="display:block; padding:4px 12px; border-radius:6px; font-size:0.9rem; color:var(--text-color-2); transition:background 0.15s;"
+    onmouseenter="this.style.background='var(--bg-color-soft)'"
+    onmouseleave="this.style.background='transparent'">
+    └ 子菜单项 2
+</a>
+</div>
+</nav>
+
+<!-- 侧边栏底部（可选） -->
+<div style="margin-top:32px; padding-top:16px; border-top:1px solid var(--divider-light); font-size:0.85rem; color:var(--text-color-3);">
+    v2.0.10
+</div>
+</aside>
+
+<!-- ==========================================================
+📄 文档正文区域
+========================================================== -->
+<main class="rp-doc-layout__doc">
+    <div class="rp-doc">
+
+        <!-- ==========================================================
+        📝 可修改区域 6：文档标题与元信息
+        ========================================================== -->
+        <!-- ⑰ 主标题 -->
+        <h1 id="新手上路">
+            <a href="#新手上路" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+            新手上路
+        </h1>
+
+        <!-- ⑱ 阅读时间（可修改或删除） -->
+        <span style="font-size:0.95rem; color:var(--text-color-3); font-style:italic; display:block; margin-top:-0.5rem; margin-bottom:1.5rem;">
+            📖 预计阅读时间: 4 分钟
+        </span>
+
+        <!-- ==========================================================
+        📚 可修改区域 7：目录 (Table of Contents)
+        修改说明：添加或删除目录项，保持与正文标题一致
+        ========================================================== -->
+        <h2 id="table-of-contents">
+            <a href="#table-of-contents" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+            Table of Contents
+        </h2>
+        <!-- ⑲ 目录列表 -->
+        <div class="rp-toc-container">
+            <ul>
+                <li><a href="#快速开始">快速开始</a></li>
+                <li>
+                    <a href="#主要功能">主要功能</a>
+                    <ul>
+                        <!-- 已替换为 xx类 占位符 -->
+                        <li><a href="#xx类1">xx类 1</a></li>
+                        <li><a href="#xx类2">xx类 2</a></li>
+                        <li><a href="#xx类3">xx类 3</a></li>
+                        <li><a href="#xx类4">xx类 4</a></li>
+                        <li><a href="#xx类5">xx类 5</a></li>
+                    </ul>
+                </li>
+                <li><a href="#如何参与开发">如何参与开发</a></li>
+                <li><a href="#鸣谢">鸣谢</a></li>
+            </ul>
+        </div>
+
+        <!-- ==========================================================
+        📝 可修改区域 8：正文内容
+        修改说明：以下为文档正文，可自由增删改
+        ========================================================== -->
+
+        <!-- ===== 快速开始 ===== -->
+        <h2 id="快速开始">
+            <a href="#快速开始" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+            快速开始
+        </h2>
+
+        <!-- ⑳ 提示框 (Tip) -->
+        <div class="rp-callout rp-callout--tip">
+            <div class="rp-callout__title">💡 TIP</div>
+            <div class="rp-callout__content">
+                <p>已经购买了 <a href="#" target="_blank">Mirror 酱</a> 服务？试试 <a href="#">高速下载</a>！</p>
+            </div>
+        </div>
+
+        <!-- 有序列表 -->
+        <ol>
+            <li>
+                <p>在 <a href="#" target="_blank">release 页面</a> 下载最新版本。</p>
+            </li>
+            <li>
+                <p>在模拟器设置里将分辨率调整为 <strong>1920×1080</strong> 并 <strong>锁定屏幕旋转</strong> 为横屏。</p>
+            </li>
+            <li>
+                <p>调整软件配置，然后点击 <code>开始任务</code>。</p>
+            </li>
+        </ol>
+
+        <!-- 另一个提示框 -->
+        <div class="rp-callout rp-callout--info">
+            <div class="rp-callout__title">ℹ️ INFO</div>
+            <div class="rp-callout__content">
+                <p>如果遇到问题，请先仔细阅读 <a href="#">常见问题解决方案</a>。</p>
+            </div>
+        </div>
+
+        <!-- ===== 主要功能 ===== -->
+        <h2 id="主要功能">
+            <a href="#主要功能" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+            主要功能
+        </h2>
+
+        <!-- ---- xx类 1（原日常） ---- -->
+        <h3 id="xx类1">
+            <a href="#xx类1" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+            xx类 1
+        </h3>
+
+        <!-- ⑳ 任务列表 (Checklist) -->
+        <ul class="contains-task-list">
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 启动游戏</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 每日签到</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 每日招财</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 排行榜点赞</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 送体力</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 每日分享</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 组织祈福</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 积分赛</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 修行之路</li>
+            <!-- 可继续添加更多项 -->
+        </ul>
+
+        <!-- ---- xx类 2（原战斗类） ---- -->
+        <h3 id="xx类2">
+            <a href="#xx类2" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+            xx类 2
+        </h3>
+        <ul class="contains-task-list">
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 冒险模式推关</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 精英副本推关</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 修罗副本推关</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 刷周胜</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 秘境探险</li>
+        </ul>
+
+        <!-- ---- xx类 3（原商店类） ---- -->
+        <h3 id="xx类3">
+            <a href="#xx类3" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+            xx类 3
+        </h3>
+        <ul class="contains-task-list">
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 商店兑换 (测试中)</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 黑市商人</li>
+        </ul>
+
+        <!-- ---- xx类 4（原功能类） ---- -->
+        <h3 id="xx类4">
+            <a href="#xx类4" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+            xx类 4
+        </h3>
+        <ul class="contains-task-list">
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 切换账号</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 日志清理</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 关闭火影</li>
+        </ul>
+
+        <!-- ---- xx类 5（原活动类） ---- -->
+        <h3 id="xx类5">
+            <a href="#xx类5" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+            xx类 5
+        </h3>
+        <ul class="contains-task-list">
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 轻松助手</li>
+            <li class="task-list-item"><input disabled="" type="checkbox" checked="" /> 轻松季</li>
+        </ul>
+
+        <!-- ===== 如何参与开发 ===== -->
+        <h2 id="如何参与开发">
+            <a href="#如何参与开发" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+            如何参与开发
+        </h2>
+        <p>请阅读 <a href="#">开发文档</a> 了解如何贡献代码、提交 Issue 或参与讨论。</p>
+
+        <!-- 代码块示例 -->
+        <pre><code>// 示例代码块
+            function helloWorld() {
+            console.log("欢迎参与开发！");
+            }
+        helloWorld();</code></pre>
+
+        <!-- ===== 鸣谢 ===== -->
+        <h2 id="鸣谢">
+            <a href="#鸣谢" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+            鸣谢
+        </h2>
+        <p>本项目由 <strong><a href="#" target="_blank">MaaFramework</a></strong> 强力驱动！</p>
+        <p>感谢以下开发者对本项目作出的贡献：</p>
+        <!-- ⑳ 图片占位（可替换为贡献者列表） -->
+        <p style="background:var(--bg-color-soft); padding:20px; border-radius:var(--radius); text-align:center; color:var(--text-color-3);">
+            [ 贡献者头像列表占位 ]
+        </p>
+
+        <!-- ---- Join us ---- -->
+        <h3 id="join-us">
+            <a href="#join-us" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+            Join us
+        </h3>
+        <ul>
+            <li>聊天群： 724500650</li>
+            <li>内测群： 801637524</li>
+            <li>开发群： 984076079</li>
+        </ul>
+
+    </div>
+    <!-- ===== 文档页脚 ===== -->
+
+    <!-- ==========================================================
+    📝 可修改区域 9：页脚信息
+    修改说明：更新最后更新时间、编辑链接、上下页导航等
+    ========================================================== -->
+    <footer class="rp-doc-footer">
+        <div class="rp-doc-footer__edit">
+            <!-- ⑳ 最后更新时间 -->
+            <div class="rp-last-updated">
+                <p>最后更新： <span>2026-08-08 14:30</span></p>
+            </div>
+            <!-- ⑳ 编辑链接（可指向 GitHub 编辑页） -->
+            <a href="#" style="color:var(--brand-color); font-weight:500; font-size:0.9rem;">
+                ✎ 编辑此页
+            </a>
+        </div>
+
+        <!-- 上下页导航 -->
+        <div class="rp-prev-next-page">
+            <!-- 上一页（占位） -->
+            <div class="rp-prev-next-page__item" style="align-items:flex-start;">
+                <span class="rp-prev-next-page__item__desc">上一页</span>
+                <span class="rp-prev-next-page__item__title">
+                    <svg width="1em" height="1em" viewBox="0 0 32 32" style="transform:rotate(180deg);"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"/></svg>
+                    返回首页
+                </span>
+            </div>
+            <!-- 下一页 -->
+            <a href="#" class="rp-prev-next-page__item rp-prev-next-page__next" style="border-bottom:none;">
+                <span class="rp-prev-next-page__item__desc">下一页</span>
+                <span class="rp-prev-next-page__item__title">
+                    常见问题
+                    <svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"/></svg>
+                </span>
+            </a>
+        </div>
+    </footer>
+
+</main>
+</div>
+
+<!-- ============================================================
+📝 可修改区域 10：底部脚本
+修改说明：可在此添加统计代码、第三方脚本等
+============================================================ -->
+<!-- ⑳ 例如：Google Analytics、Plausible 等 -->
+<!-- <script defer src="https://your-analytics.com/script.js"></script> -->
+
+<!-- ⑳ 页面加载完成后执行的自定义脚本（可选） -->
+<script>
+    // 示例：控制台输出提示
+    console.log('📘 文档模板已加载 — 欢迎编辑！');
+</script>
+
+</body>
+</html>
