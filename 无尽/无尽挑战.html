@@ -4,13 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>无尽挑战 — MaaPvz</title>
-    <meta name="description" content="MaaPvz 无尽模式详细攻略：原大桑葚挂机、心塔无尽、塔焦挂机" />
-    <meta name="keywords" content="无尽挑战,桑葚挂机,心塔无尽,塔焦,通用框架,MaaPvz" />
-    <meta name="author" content="MaaPvz 文档团队" />
+    <meta name="description" content="MaaPvz 无尽模式详细攻略：预设模式 + 通用框架（前期布阵/后期布阵）" />
     <link rel="icon" href="https://daoyanxiaoz.github.io/Endless_Visualization_Configuration/images/PVZAA_small.png" />
 
     <style>
-        /* ===== 主题变量（模糊潜绿色）===== */
+        /* ===== 主题变量（与主页一致） ===== */
         :root {
             --brand-color: #6B8E8B;
             --brand-color-light: #8EABA8;
@@ -19,11 +17,9 @@
             --bg-color: #ffffff;
             --bg-color-soft: #f4f7f6;
             --bg-color-mute: #e8eeec;
-            --text-color-0: #000000;
             --text-color-1: #242424;
             --text-color-2: rgba(0, 0, 0, 0.7);
             --text-color-3: rgba(60, 60, 60, 0.33);
-            --divider-color: rgba(0, 0, 0, 0.25);
             --divider-light: rgba(0, 0, 0, 0.12);
             --font-family-base: "Inter var experimental", "Inter var", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             --font-family-mono: Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -59,7 +55,6 @@
             width: 100%;
             min-width: 320px;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
         a {
             color: var(--brand-color-dark);
@@ -173,7 +168,7 @@
             margin-top: 0.4rem;
         }
         .rp-doc blockquote {
-            border-left: 2px solid var(--divider-color);
+            border-left: 2px solid var(--divider-light);
             color: var(--text-color-2);
             padding-left: 1rem;
             margin: 1.5rem 0;
@@ -203,8 +198,6 @@
             padding: 0;
             font-size: inherit;
         }
-
-        /* ===== 图片样式 ===== */
         .rp-doc img {
             max-width: 100%;
             border-radius: var(--radius);
@@ -213,8 +206,6 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             border: 1px solid var(--divider-light);
         }
-
-        /* ===== 表格样式 ===== */
         .rp-doc table {
             width: 100%;
             border-collapse: collapse;
@@ -350,7 +341,7 @@
             }
         }
 
-        /* ===== 侧边栏折叠菜单样式 ===== */
+        /* ===== 侧边栏折叠菜单 ===== */
         .sidebar-folder {
             cursor: pointer;
             user-select: none;
@@ -427,6 +418,100 @@
             background: var(--brand-color-tint);
             font-weight: 600;
         }
+
+        /* ===== 配置表格增强 ===== */
+        .config-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 24px;
+            margin: 12px 0;
+            padding: 8px 12px;
+            background: var(--bg-color-soft);
+            border-radius: var(--radius-small);
+        }
+        .config-grid .item {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            font-size: 0.9rem;
+            padding: 2px 0;
+        }
+        .config-grid .item .key {
+            font-weight: 600;
+            color: var(--brand-color-dark);
+            min-width: 80px;
+        }
+        .config-grid .item .value {
+            color: var(--text-color-2);
+        }
+        .config-grid .item .value code {
+            background: var(--bg-color);
+            padding: 0 4px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        /* ===== 可视化工具推荐卡片 ===== */
+        .visual-tool-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: linear-gradient(135deg, #f0f7f4 0%, #e4eee8 100%);
+            border: 2px solid var(--brand-color-light);
+            border-radius: var(--radius);
+            padding: 16px 24px;
+            margin: 16px 0;
+            transition: box-shadow 0.3s;
+        }
+        .visual-tool-card:hover {
+            box-shadow: 0 4px 16px rgba(107, 142, 139, 0.25);
+        }
+        .visual-tool-card .icon {
+            font-size: 2.4rem;
+            flex-shrink: 0;
+        }
+        .visual-tool-card .content {
+            flex: 1;
+        }
+        .visual-tool-card .content .title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--brand-color-dark);
+        }
+        .visual-tool-card .content .desc {
+            font-size: 0.95rem;
+            color: var(--text-color-2);
+            margin: 2px 0 0 0;
+        }
+        .visual-tool-card .content .desc a {
+            color: var(--brand-color);
+            font-weight: 600;
+            border-bottom: none;
+        }
+        .visual-tool-card .content .desc a:hover {
+            border-bottom: 1px solid var(--brand-color);
+        }
+        .visual-tool-card .badge {
+            background: var(--brand-color);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 640px) {
+            .config-grid {
+                grid-template-columns: 1fr;
+            }
+            .visual-tool-card {
+                flex-wrap: wrap;
+            }
+            .visual-tool-card .badge {
+                margin-left: auto;
+            }
+        }
     </style>
 </head>
 
@@ -451,14 +536,14 @@
     <!-- ===== 主体 ===== -->
     <div class="rp-doc-layout__container">
 
-        <!-- ===== 侧边栏 ===== -->
+        <!-- ===== 侧边栏（按前期/后期分类） ===== -->
         <aside class="rp-doc-layout__sidebar">
             <div style="font-weight:700; font-size:1.1rem; padding:0 4px 16px 4px; border-bottom:1px solid var(--divider-light); margin-bottom:16px;">
                 🏰 无尽挑战
             </div>
             <nav style="display:flex; flex-direction:column; gap:3px;">
 
-                <!-- 可折叠父级：预设模式 -->
+                <!-- 预设模式（折叠） -->
                 <div class="sidebar-folder" id="folder-preset" onclick="toggleFolder('folder-preset')">
                     <span>📋 预设模式</span>
                     <span class="arrow" id="arrow-preset">▶</span>
@@ -469,26 +554,54 @@
                     <a href="#塔焦无尽">塔焦无尽</a>
                 </div>
 
-                <!-- 可折叠父级：通用框架 -->
+                <!-- 通用框架（折叠，默认展开） -->
                 <div class="sidebar-folder" id="folder-framework" onclick="toggleFolder('folder-framework')">
                     <span>⚙️ 通用框架</span>
-                    <span class="arrow" id="arrow-framework">▶</span>
+                    <span class="arrow" id="arrow-framework">▼</span>
                 </div>
-                <div class="sidebar-children" id="children-framework">
-                    <a href="#框架-喂豆">喂豆配置</a>
-                    <a href="#框架-抛花">抛花配置</a>
-                    <a href="#框架-补植物">补植物配置</a>
-                    <a href="#框架-魔甘">魔甘收尾</a>
-                    <a href="#框架-加速">加速配置</a>
-                    <a href="#框架-自定义">自定义布阵</a>
+                <div class="sidebar-children open" id="children-framework">
+
+                    <!-- 前期布阵（custom） -->
+                    <div class="sidebar-folder" id="folder-custom" onclick="toggleFolder('folder-custom')" style="background:transparent; color:var(--text-color-2); font-weight:500; padding:4px 12px;">
+                        <span>🌱 前期布阵（custom）</span>
+                        <span class="arrow" id="arrow-custom">▶</span>
+                    </div>
+                    <div class="sidebar-children" id="children-custom" style="padding-left:4px;">
+                        <a href="#前期-卡槽种植">卡槽种植（卡1~8）</a>
+                        <a href="#前期-守卫菇">守卫菇</a>
+                        <a href="#前期-铲子">铲子（前/后）</a>
+                        <a href="#前期-喂豆">喂豆（小关/Boss）</a>
+                    </div>
+
+                    <!-- 后期布阵（fw） -->
+                    <div class="sidebar-folder" id="folder-fw" onclick="toggleFolder('folder-fw')" style="background:transparent; color:var(--text-color-2); font-weight:500; padding:4px 12px;">
+                        <span>🌿 后期布阵（fw）</span>
+                        <span class="arrow" id="arrow-fw">▶</span>
+                    </div>
+                    <div class="sidebar-children" id="children-fw" style="padding-left:4px;">
+                        <a href="#后期-补植物">补植物</a>
+                        <a href="#后期-铲除">铲除</a>
+                        <a href="#后期-喂豆">喂豆（小关/Boss）</a>
+                        <a href="#后期-喂豆球果">喂豆球果</a>
+                        <a href="#后期-抛花">抛花（小关/Boss）</a>
+                        <a href="#后期-魔甘">魔甘收尾</a>
+                    </div>
+
+                    <!-- 辅助开关（独立） -->
+                    <a href="#通用开关" class="sidebar-link" style="margin-top:4px; padding-left:12px;">🔘 通用开关</a>
                 </div>
 
                 <!-- 独立链接 -->
                 <a href="#全自动循环" class="sidebar-link">🔄 全自动循环</a>
 
+                <!-- 可视化工具入口 -->
+                <a href="https://daoyanxiaoz.github.io/Endless_Visualization_Configuration/" target="_blank" class="sidebar-link" style="color:var(--brand-color); font-weight:600; border:1px solid var(--brand-color-light); border-radius:8px; margin-top:4px; text-align:center; background:var(--brand-color-tint);">
+                    🧩 可视化配置工具 →
+                </a>
+
             </nav>
             <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--divider-light); font-size:0.85rem; color:var(--text-color-3);">
-                v2.0.10
+                v2.0.10 · 框架版
             </div>
         </aside>
 
@@ -501,7 +614,7 @@
                     🏰 无尽挑战 — 完全指南
                 </h1>
                 <span style="font-size:0.95rem; color:var(--text-color-3); font-style:italic; display:block; margin-top:-0.5rem; margin-bottom:1.5rem;">
-                    涵盖原大桑葚挂机、心塔无尽、塔焦无尽、通用框架
+                    预设模式 + 通用框架（前期布阵 / 后期布阵）
                 </span>
 
                 <!-- ===== 目录 ===== -->
@@ -515,264 +628,360 @@
                         <li><a href="#心塔无尽">心塔无尽全自动脚本</a></li>
                         <li><a href="#塔焦无尽">塔焦无尽挂机脚本</a></li>
                         <li>
-                            <a href="#通用框架">无尽挂机框架（通用）</a>
+                            <a href="#通用框架">⚙️ 通用框架</a>
                             <ul>
-                                <li><a href="#框架-喂豆">喂豆配置</a></li>
-                                <li><a href="#框架-抛花">抛花配置</a></li>
-                                <li><a href="#框架-补植物">补植物配置</a></li>
-                                <li><a href="#框架-魔甘">魔甘收尾</a></li>
-                                <li><a href="#框架-加速">加速配置</a></li>
-                                <li><a href="#框架-自定义">自定义布阵</a></li>
+                                <li><a href="#前期布阵">🌱 前期布阵（custom）</a>
+                                    <ul>
+                                        <li><a href="#前期-卡槽种植">卡槽种植（卡1~8）</a></li>
+                                        <li><a href="#前期-守卫菇">守卫菇</a></li>
+                                        <li><a href="#前期-铲子">铲子（前/后）</a></li>
+                                        <li><a href="#前期-喂豆">喂豆（小关/Boss）</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#后期布阵">🌿 后期布阵（fw）</a>
+                                    <ul>
+                                        <li><a href="#后期-补植物">补植物</a></li>
+                                        <li><a href="#后期-铲除">铲除</a></li>
+                                        <li><a href="#后期-喂豆">喂豆（小关/Boss）</a></li>
+                                        <li><a href="#后期-喂豆球果">喂豆球果</a></li>
+                                        <li><a href="#后期-抛花">抛花（小关/Boss）</a></li>
+                                        <li><a href="#后期-魔甘">魔甘收尾</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#通用开关">🔘 通用开关</a></li>
                             </ul>
                         </li>
-                        <li><a href="#全自动循环">无尽全自动循环</a></li>
+                        <li><a href="#全自动循环">🔄 全自动循环</a></li>
+                        <li><a href="#可视化工具">🧩 可视化配置工具</a></li>
                     </ul>
                 </div>
 
                 <!-- ==========================================================
-                📝 1. 原大桑葚无尽
+                📝 预设模式（保留，精简展示）
                 ========================================================== -->
+
                 <h2 id="原大桑葚">
                     <a href="#原大桑葚" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     原大桑葚无尽挂机脚本
                 </h2>
-                <p>专为无尽模式挂机设计，自动完成抛花、Boss关喂豆、补种植物等关键操作，解放双手。</p>
-
-                <h3>核心功能</h3>
-                <table>
-                    <thead>
-                        <tr><th>功能</th><th>说明</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><strong>普通关抛花（可选）</strong></td><td>每小关自动抛 <strong>2 朵</strong> 能量花，位置固定：<strong>9-1</strong>、<strong>9-2</strong></td></tr>
-                        <tr><td><strong>Boss关喂豆（可选）</strong></td><td>Boss关 <strong>一直喂豆直到结算</strong>，位置固定：<strong>(5-3)</strong></td></tr>
-                        <tr><td><strong>选卡逻辑</strong></td><td>优先选择 <strong>桑葚、毒藤、大哥</strong>，其余全选橙色植物</td></tr>
-                        <tr><td><strong>卡槽容错</strong></td><td>若没有“大哥”，自动替换为 <strong>泡泡姬珊瑚</strong></td></tr>
-                    </tbody>
-                </table>
-
-                <h3>使用前准备</h3>
-
-                <h4>1. 卡槽配置</h4>
-                <img src="images/原大_卡槽.png" alt="原大桑葚卡槽配置图" />
-                <p>脚本依赖 <strong>固定卡槽顺序</strong>，请确保植物位于对应卡槽（后两个植物随意）。</p>
-
-                <h4>2. 抛花前提</h4>
+                <p>专为无尽模式挂机设计，自动完成抛花、Boss关喂豆、补种植物等关键操作。</p>
                 <ul>
-                    <li>普通关抛花位置：<strong>(9-1)</strong>（右上角第一格）、<strong>(9-2)</strong>（右上角第二格）</li>
-                    <li>请确保这两个格子 <strong>空余或可丢弃能量花</strong>，否则抛花可能失败。</li>
+                    <li><strong>普通关抛花</strong>：每小关抛 2 朵能量花，位置 <code>9-1</code>、<code>9-2</code>。</li>
+                    <li><strong>Boss关喂豆</strong>：一直喂豆直到结算，位置 <code>(5-3)</code>。</li>
+                    <li><strong>选卡逻辑</strong>：优先桑葚、毒藤、大哥，其余全选橙色植物。</li>
                 </ul>
+                <img src="images/原大_卡槽.png" alt="原大卡槽" style="max-width:600px;">
 
-                <h4>3. Boss关喂豆前提</h4>
-                <ul>
-                    <li>喂豆位置固定：<strong>(5-3)</strong></li>
-                    <li>5-3 种的植物为卡槽第7个，可自行替换（建议放输出或控制类植物）</li>
-                    <li>脚本会一直喂豆直到Boss关结算。</li>
-                </ul>
-
-                <h4>4. 选卡规则（自动执行）</h4>
-                <table>
-                    <thead>
-                        <tr><th>优先级</th><th>植物选择</th><th>备注</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>1</td><td>桑葚、毒藤、大哥</td><td>优先选这三个，缺一不可</td></tr>
-                        <tr><td>2</td><td>其他全选橙色植物</td><td>尽量选橙色品质</td></tr>
-                        <tr><td>容错</td><td>无大哥 → 替换为泡泡姬珊瑚</td><td>脚本自动处理</td></tr>
-                    </tbody>
-                </table>
-
-                <!-- ==========================================================
-                📝 2. 心塔无尽
-                ========================================================== -->
                 <h2 id="心塔无尽">
                     <a href="#心塔无尽" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     心塔无尽全自动脚本
                 </h2>
+                <p>仅适用于简单无尽，需在选卡界面启动。</p>
+                <img src="images/心塔_卡槽1.png" alt="心塔卡槽1" style="max-width:300px; display:inline-block;">
+                <img src="images/心塔_卡槽2.png" alt="心塔卡槽2" style="max-width:300px; display:inline-block;">
+                <img src="images/心塔阵容1.png" alt="心塔阵容1" style="max-width:300px;">
+                <img src="images/心塔阵容2.png" alt="心塔阵容2" style="max-width:300px;">
 
-                <h3>卡槽阵容配置</h3>
-
-                <h4>卡槽1</h4>
-                <img src="images/心塔_卡槽1.png" alt="心塔无尽卡槽1配置图" />
-
-                <h4>卡槽2</h4>
-                <img src="images/心塔_卡槽2.png" alt="心塔无尽卡槽2配置图" />
-
-                <h4>阵容1</h4>
-                <img src="images/心塔阵容1.png" alt="心塔无尽阵容1" />
-
-                <h4>阵容2（推荐）</h4>
-                <img src="images/心塔阵容2.png" alt="心塔无尽阵容2（推荐）" />
-
-                <h3>使用说明</h3>
-                <div class="rp-callout rp-callout--warning">
-                    <div class="rp-callout__title">⚠️ 使用前先选择阵容</div>
-                    <div class="rp-callout__content">
-                        <p>在启动脚本前，请先在配置中选好要使用的阵容（阵容1或阵容2）。</p>
-                    </div>
-                </div>
-                <ol>
-                    <li><strong>进入关卡</strong>：先手动进入心塔无尽关内（选卡界面）。</li>
-                    <li><strong>启动脚本</strong>：在 <strong>选卡界面</strong> 直接运行脚本。</li>
-                    <li><strong>选择启动</strong>：根据当前关卡数选择对应的脚本执行（前两关为布阵）。</li>
-                </ol>
-
-                <div class="rp-callout rp-callout--info">
-                    <div class="rp-callout__title">ℹ️ 重要提示</div>
-                    <div class="rp-callout__content">
-                        <ul>
-                            <li>本脚本 <strong>仅适用于简单无尽</strong> 模式。</li>
-                            <li>若出怪较差（冰河、摇滚、天空），可能导致脚本失败，属于正常现象。</li>
-                            <li>请勿在非选卡界面启动脚本，否则无法正常识别。</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- ==========================================================
-                📝 3. 塔焦无尽
-                ========================================================== -->
                 <h2 id="塔焦无尽">
                     <a href="#塔焦无尽" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     塔焦无尽挂机脚本
                 </h2>
-                <p>专为无尽模式设计，自动完成战斗循环，助您轻松挂机刷取奖励。</p>
-
                 <div class="rp-callout rp-callout--danger">
                     <div class="rp-callout__title">🚨 特别重要</div>
                     <div class="rp-callout__content">
-                        <p><strong>香蕉和瓷砖一定不要带任何装扮！</strong> 否则脚本将无法识别运行条件，导致运行失败。</p>
+                        <p><strong>香蕉和瓷砖一定不要带任何装扮！</strong> 否则脚本无法识别运行条件。</p>
+                    </div>
+                </div>
+                <img src="images/塔焦卡槽.png" alt="塔焦卡槽" style="max-width:600px;">
+
+                <!-- ==========================================================
+                📝 通用框架
+                ========================================================== -->
+
+                <h2 id="通用框架">
+                    <a href="#通用框架" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    ⚙️ 通用框架
+                </h2>
+                <p>通用框架是 MaaPvz 无尽模式的核心辅助系统，分为<strong>前期布阵（custom）</strong>和<strong>后期布阵（fw）</strong>两大模块，分别对应布阵阶段和挂机阶段的配置。下面按模块逐一说明。</p>
+
+                <!-- ==========================================================
+                🌱 前期布阵（custom）
+                ========================================================== -->
+
+                <h3 id="前期布阵">
+                    <a href="#前期布阵" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    🌱 前期布阵（custom）
+                </h3>
+                <p>前期布阵用于在无尽前期（通常为1~4关）自动布置阵型，包含卡槽种植、守卫菇、铲子、喂豆等操作。所有配置均对应 JSON 中 <code>option</code> 下以 <code>frame_wj_custom_</code> 开头的选项。</p>
+                <div class="rp-callout rp-callout--info">
+                    <div class="rp-callout__title">ℹ️ 触发条件</div>
+                    <div class="rp-callout__content">
+                        <p>前期布阵在 <strong>自定义布阵</strong> 开关开启时生效，通常配合 <code>frame_wj_custom_回到后期</code> 设置转换关卡。</p>
                     </div>
                 </div>
 
-                <h3>卡槽配置</h3>
-                <img src="images/塔焦卡槽.png" alt="塔焦无尽卡槽配置图" />
-                <p>脚本依赖 <strong>固定卡槽顺序</strong>，请确保以下植物位于指定位置（卡槽6可根据自己阵容随意搭配）。</p>
+                <!-- 卡槽种植 -->
+                <h4 id="前期-卡槽种植">
+                    <a href="#前期-卡槽种植" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    卡槽种植（卡1~8）
+                </h4>
+                <p>为每个卡槽（1~8）设置种植位置，每个卡槽最多可配置 <strong>10 个</strong> 种植点位。</p>
 
-                <h3>装扮禁令（重中之重）</h3>
-                <table>
-                    <thead>
-                        <tr><th>植物</th><th>要求</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><strong>香蕉</strong></td><td>🈲 <strong>严禁佩戴任何装扮</strong>，必须保持默认外观</td></tr>
-                        <tr><td><strong>瓷砖</strong></td><td>🈲 <strong>严禁佩戴任何装扮</strong>，必须保持默认外观</td></tr>
-                    </tbody>
-                </table>
-                <div class="rp-callout rp-callout--tip">
-                    <div class="rp-callout__title">💡 提示</div>
-                    <div class="rp-callout__content">
-                        <p>若香蕉或瓷砖带有装扮，脚本无法正常操作。请务必在进入游戏前从植物详情页 <strong>卸下所有装扮</strong>。</p>
-                    </div>
+                <div class="config-grid">
+                    <div class="item"><span class="key">配置项</span><span class="value"><code>卡1种植</code> ~ <code>卡8种植</code></span></div>
+                    <div class="item"><span class="key">类型</span><span class="value">开关（嵌套坐标输入）</span></div>
+                    <div class="item"><span class="key">最大次数</span><span class="value">每卡槽 10 次</span></div>
+                    <div class="item"><span class="key">坐标格式</span><span class="value"><code>列-行</code>（如 <code>5-3</code>）</span></div>
+                </div>
+
+                <p><strong>使用建议</strong>：按卡槽顺序依次布置，建议先布核心输出植物，再布辅助植物。坐标从 <code>1-1</code>（左上角）到 <code>9-5</code>（右下角）。</p>
+
+                <!-- 守卫菇 -->
+                <h4 id="前期-守卫菇">
+                    <a href="#前期-守卫菇" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    守卫菇
+                </h4>
+                <p>在指定位置种植守卫菇，<strong>给周围植物二次开大</strong>，最多可设置 <strong>5 个</strong> 种植位置。</p>
+                <div class="config-grid">
+                    <div class="item"><span class="key">配置项</span><span class="value"><code>frame_wj_custom_是否种守卫菇</code></span></div>
+                    <div class="item"><span class="key">子项</span><span class="value"><code>frame_wj_custom_种守卫菇位置1</code> ~ <code>位置5</code></span></div>
+                    <div class="item"><span class="key">最大次数</span><span class="value">5 次</span></div>
+                </div>
+                <p>守卫菇种植后会自动喂豆并铲除（取决于铲子配置），实现“种→喂→铲”的循环操作，让周围植物获得二次开大的机会。</p>
+
+                <!-- 铲子 -->
+                <h4 id="前期-铲子">
+                    <a href="#前期-铲子" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    铲子（前/后）
+                </h4>
+                <p>分为 <strong>守卫菇前铲子</strong> 和 <strong>守卫菇后铲子</strong> 两组，每组最多 5 个铲除位置。</p>
+                <div class="config-grid">
+                    <div class="item"><span class="key">前铲子开关</span><span class="value"><code>frame_wj_custom_是否使用铲子1</code></span></div>
+                    <div class="item"><span class="key">前铲子位置</span><span class="value"><code>frame_wj_custom_使用铲子1</code> ~ <code>铲子5</code></span></div>
+                    <div class="item"><span class="key">后铲子开关</span><span class="value"><code>frame_wj_custom_是否使用铲子2</code></span></div>
+                    <div class="item"><span class="key">后铲子位置</span><span class="value"><code>frame_wj_custom_使用铲子6</code> ~ <code>铲子10</code></span></div>
+                </div>
+                <ul>
+                    <li><strong>前铲子</strong>：在种守卫菇之前铲除指定位置的植物（用于清除过渡植物）。</li>
+                    <li><strong>后铲子</strong>：在种守卫菇之后铲除指定位置的植物（用于清除守卫菇）。</li>
+                </ul>
+
+                <!-- 喂豆（前期） -->
+                <h4 id="前期-喂豆">
+                    <a href="#前期-喂豆" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    喂豆（小关 / Boss）
+                </h4>
+                <p>前期布阵中的喂豆配置，与后期布阵的喂豆<strong>相互独立</strong>，仅在前期阶段生效。</p>
+                <div class="config-grid">
+                    <div class="item"><span class="key">小关喂豆开关</span><span class="value"><code>frame_wj_custom_布完阵是否喂豆</code></span></div>
+                    <div class="item"><span class="key">小关喂豆位置</span><span class="value"><code>frame_wj_custom_喂豆位置</code> + 坐标</span></div>
+                    <div class="item"><span class="key">Boss喂豆开关</span><span class="value"><code>frame_wj_custom_boss关是否喂豆</code></span></div>
+                    <div class="item"><span class="key">Boss喂豆位置</span><span class="value"><code>frame_wj_boss_custom_喂豆位置</code> + 坐标</span></div>
+                    <div class="item"><span class="key">Boss喂豆间隔</span><span class="value"><code>frame_wj_boss_custom_喂豆间隔</code>（1~10 秒）</span></div>
                 </div>
 
                 <!-- ==========================================================
-                📝 4. 通用框架
+                🌿 后期布阵（fw）
                 ========================================================== -->
-                <h2 id="通用框架">
-                    <a href="#通用框架" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-                    无尽挂机框架（通用）
-                </h2>
-                <p>轻量、灵活的挂机辅助框架，默认执行点波和天空划飞弹操作，您可自由配置专属阵型。</p>
 
-                <!-- 喂豆 -->
-                <h3 id="框架-喂豆">
-                    <a href="#框架-喂豆" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-                    喂豆配置
+                <h3 id="后期布阵">
+                    <a href="#后期布阵" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    🌿 后期布阵（fw）
                 </h3>
-                <ul>
-                    <li><strong>小关喂豆</strong>：是否在普通关喂豆，可开启“是否开局喂豆球果”功能。</li>
-                    <li><strong>喂豆位置</strong>：循环喂能量豆的位置（坐标输入）。</li>
-                    <li><strong>喂豆间隔</strong>：每次喂豆的间隔时间（4秒~100秒可选）。</li>
-                    <li><strong>Boss关喂豆</strong>：位置和间隔可独立设置。</li>
-                </ul>
-
-                <!-- 抛花 -->
-                <h3 id="框架-抛花">
-                    <a href="#框架-抛花" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-                    抛花配置
-                </h3>
-                <ul>
-                    <li><strong>是否抛花</strong>：全局开关，关闭后不执行任何抛花操作。</li>
-                    <li><strong>小关抛花</strong>：可分别设置1花和2花的位置坐标。</li>
-                    <li><strong>Boss关抛花</strong>：可分别设置4个抛花位置（boss关_1花~4花）。</li>
-                    <li><strong>识别能量花卡槽位置</strong>：开启后能量花可放在任意卡槽位置（默认固定在卡槽1）。</li>
-                </ul>
+                <p>后期布阵用于阵型成型后的挂机阶段，包含补植物、铲除、喂豆、抛花、魔甘收尾等核心功能。对应 JSON 中 <code>option</code> 下以 <code>fw_</code> 开头的选项及部分通用开关。</p>
 
                 <!-- 补植物 -->
-                <h3 id="框架-补植物">
-                    <a href="#框架-补植物" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-                    补植物配置
-                </h3>
-                <ul>
-                    <li><strong>是否需要补植物</strong>：开启后，在每关结算后自动补种上一关损失的植物。</li>
-                    <li><strong>卡槽2~5补植物</strong>：每个卡槽可设置5个补种位置（坐标输入）。</li>
-                    <li><strong>铲除植物</strong>：在补植物后，可对指定位置执行铲除操作（最多5个位置）。</li>
-                </ul>
+                <h4 id="后期-补植物">
+                    <a href="#后期-补植物" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    补植物
+                </h4>
+                <p>每关结算后自动补种上一关损失的植物，保障阵型完整性。</p>
+                <div class="config-grid">
+                    <div class="item"><span class="key">开关</span><span class="value"><code>是否需要补植物</code></span></div>
+                    <div class="item"><span class="key">补种卡槽</span><span class="value"><code>卡槽2_补植物</code> ~ <code>卡槽5_补植物</code></span></div>
+                    <div class="item"><span class="key">每卡槽次数</span><span class="value">最多 5 个位置</span></div>
+                </div>
+                <p>补植物只针对卡槽2~5，因为卡槽1通常为能量花等辅助植物，不需要补种。</p>
+
+                <!-- 铲除 -->
+                <h4 id="后期-铲除">
+                    <a href="#后期-铲除" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    铲除
+                </h4>
+                <p>在补植物完成后，对指定位置执行铲除操作，用于调整阵型或清理多余植物。</p>
+                <div class="config-grid">
+                    <div class="item"><span class="key">开关</span><span class="value"><code>铲除植物</code></span></div>
+                    <div class="item"><span class="key">位置</span><span class="value"><code>铲除植物1</code> ~ <code>铲除植物5</code></span></div>
+                    <div class="item"><span class="key">最大次数</span><span class="value">5 次</span></div>
+                </div>
+
+                <!-- 喂豆（后期） -->
+                <h4 id="后期-喂豆">
+                    <a href="#后期-喂豆" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    喂豆（小关 / Boss）
+                </h4>
+                <p>后期挂机阶段的喂豆配置，与前期布阵的喂豆独立。</p>
+                <div class="config-grid">
+                    <div class="item"><span class="key">小关喂豆开关</span><span class="value"><code>小关是否喂豆</code></span></div>
+                    <div class="item"><span class="key">小关喂豆位置</span><span class="value"><code>小关喂豆位置</code> + 坐标</span></div>
+                    <div class="item"><span class="key">小关喂豆间隔</span><span class="value"><code>小关喂豆间隔</code>（4~100 秒）</span></div>
+                    <div class="item"><span class="key">Boss喂豆开关</span><span class="value"><code>fw_boss关是否需要喂豆</code></span></div>
+                    <div class="item"><span class="key">Boss喂豆位置</span><span class="value"><code>fw_boss关喂豆位置</code> + 坐标</span></div>
+                    <div class="item"><span class="key">Boss喂豆间隔</span><span class="value"><code>fw_boss关喂豆间隔</code>（默认 4 秒）</span></div>
+                </div>
+
+                <!-- 喂豆球果 -->
+                <h4 id="后期-喂豆球果">
+                    <a href="#后期-喂豆球果" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    喂豆球果
+                </h4>
+                <p>在关卡开局时立即对指定位置使用能量豆，用于快速启动输出。</p>
+                <div class="config-grid">
+                    <div class="item"><span class="key">开关</span><span class="value"><code>是否开局喂豆球果</code>（依赖 <code>小关是否喂豆</code>）</span></div>
+                    <div class="item"><span class="key">位置</span><span class="value"><code>喂豆球果</code> + 坐标</span></div>
+                </div>
+                <div class="rp-callout rp-callout--tip">
+                    <div class="rp-callout__title">💡 提示</div>
+                    <div class="rp-callout__content">
+                        <p>喂豆球果仅在 <strong>小关是否喂豆</strong> 开启时生效，且需要在小关喂豆位置已经布置后使用。</p>
+                    </div>
+                </div>
+
+                <!-- 抛花 -->
+                <h4 id="后期-抛花">
+                    <a href="#后期-抛花" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    抛花（小关 / Boss）
+                </h4>
+                <p>在指定位置抛种能量花，收集能量豆供喂豆使用。需先开启 <code>是否抛花</code> 总开关。</p>
+                <div class="config-grid">
+                    <div class="item"><span class="key">总开关</span><span class="value"><code>是否抛花</code></span></div>
+                    <div class="item"><span class="key">小关抛花开关</span><span class="value"><code>小关是否抛花</code></span></div>
+                    <div class="item"><span class="key">小关抛花位置</span><span class="value"><code>1花位置</code>、<code>2花位置</code>（各 1 个）</span></div>
+                    <div class="item"><span class="key">Boss抛花开关</span><span class="value"><code>boss关是否抛花</code></span></div>
+                    <div class="item"><span class="key">Boss抛花位置</span><span class="value"><code>boss关_1花位置</code> ~ <code>_4花位置</code></span></div>
+                </div>
+                <p>Boss关可抛 4 朵花，小关可抛 2 朵，充分利用能量花产出。</p>
 
                 <!-- 魔甘收尾 -->
-                <h3 id="框架-魔甘">
-                    <a href="#框架-魔甘" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                <h4 id="后期-魔甘">
+                    <a href="#后期-魔甘" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     魔甘收尾
-                </h3>
-                <div class="rp-callout rp-callout--warning">
-                    <div class="rp-callout__title">⚠️ 牢玩家专属</div>
+                </h4>
+                <div class="rp-callout rp-callout--danger">
+                    <div class="rp-callout__title">🚨 牢玩家专属</div>
                     <div class="rp-callout__content">
                         <p>开启后大部分其他功能会失效，<strong>请慎重开启</strong>。</p>
                     </div>
                 </div>
-                <ul>
-                    <li><strong>魔甘收尾</strong>：魔音甜菜位于卡槽4，飓风甘兰位于卡槽5，甜薯位于卡槽6。</li>
-                    <li><strong>种植位置</strong>：魔音甜菜种在9-3，飓风甘兰种在7-2和7-4，甜薯种在8-2和8-4。</li>
-                    <li><strong>使用三叶草</strong>：三叶草位于卡槽7，种植在9-5。</li>
-                    <li><strong>魔甘前使用能量豆</strong>：可在魔甘收尾前对指定位置使用能量豆。</li>
-                </ul>
+                <p>使用魔音甜菜 + 飓风甘蓝（+甜薯）在关卡末尾将僵尸吹飞，实现快速清场。</p>
 
-                <!-- 加速 -->
-                <h3 id="框架-加速">
-                    <a href="#框架-加速" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-                    加速配置
-                </h3>
-                <ul>
-                    <li><strong>小关是否加速</strong>：进入普通关后是否开启加速键。</li>
-                    <li><strong>Boss关是否加速</strong>：进入Boss关后是否开启加速键。</li>
-                </ul>
-
-                <!-- 自定义布阵 -->
-                <h3 id="框架-自定义">
-                    <a href="#框架-自定义" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-                    自定义布阵
-                </h3>
-                <div class="rp-callout rp-callout--tip">
-                    <div class="rp-callout__title">💡 建议手动布阵</div>
-                    <div class="rp-callout__content">
-                        <p>建议手动布阵，<strong>最好不要开启此功能</strong>，以免出现不可预知的问题。</p>
-                    </div>
+                <p><strong>基础配置</strong></p>
+                <div class="config-grid">
+                    <div class="item"><span class="key">开关</span><span class="value"><code>是否魔甘收尾(牢玩家专属)</code></span></div>
+                    <div class="item"><span class="key">等待时间</span><span class="value"><code>多少秒后种魔甘</code>（默认 15 秒）</span></div>
+                    <div class="item"><span class="key">使用三叶草</span><span class="value"><code>使用三叶草</code>（卡槽7，种在 9-5）</span></div>
                 </div>
+
+                <p><strong>默认站位（未开启识别时）</strong></p>
                 <ul>
-                    <li><strong>自定义布阵</strong>：开启后可使用自定义阵型。</li>
-                    <li><strong>卡1~卡8种植</strong>：每个卡槽可设置最多10个种植位置。</li>
-                    <li><strong>种守卫菇</strong>：可设置5个守卫菇种植位置。</li>
-                    <li><strong>铲子功能</strong>：种守卫菇前后可使用铲子清除指定位置。</li>
-                    <li><strong>布阵后喂豆</strong>：布阵结束后可对指定位置喂豆。</li>
-                    <li><strong>回到后期</strong>：可设置第几关布好阵，开始使用预设配置。</li>
+                    <li><strong>魔音甜菜</strong>：卡槽4 → 种在 <code>9-3</code></li>
+                    <li><strong>飓风甘蓝</strong>：卡槽5 → 种在 <code>7-2</code>、<code>7-4</code></li>
+                    <li><strong>甜薯</strong>：卡槽6 → 种在 <code>8-2</code>、<code>8-4</code></li>
+                    <li><strong>三叶草</strong>：卡槽7 → 种在 <code>9-5</code>（若开启）</li>
+                </ul>
+
+                <p><strong>高级选项</strong></p>
+                <ul>
+                    <li><code>识别魔甘卡槽位置</code>：允许魔音/甘蓝/甜薯放在任意卡槽（需开启识别）。</li>
+                    <li><code>魔甘前使用能量豆</code>：可指定喂豆位置增强魔甘效果。</li>
+                    <li><code>魔甘失败后是否重开</code>：若失败自动重开（有气流水仙花可关闭）。</li>
+                    <li><code>甜薯1/2种植位置</code>、<code>飓风甘蓝1/2种植位置</code>：自定义种植坐标。</li>
                 </ul>
 
                 <!-- ==========================================================
-                📝 5. 全自动循环
+                🔘 通用开关
                 ========================================================== -->
+
+                <h3 id="通用开关">
+                    <a href="#通用开关" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    🔘 通用开关
+                </h3>
+                <p>以下开关在前期和后期布阵中均可使用，控制脚本的整体行为。</p>
+
+                <table>
+                    <thead>
+                        <tr><th>开关</th><th>JSON 字段</th><th>说明</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>小关加速</strong></td><td><code>小关是否加速</code></td><td>进入普通关后自动点击加速键</td></tr>
+                        <tr><td><strong>Boss加速</strong></td><td><code>fw_boss关是否加速</code></td><td>进入Boss关后自动点击加速键</td></tr>
+                        <tr><td><strong>补给智能选取</strong></td><td><code>fw_boss_补给智能选取</code></td><td>自动按优先级选取补给（神器→全部植物→橙色→蓝色→紫色）</td></tr>
+                        <tr><td><strong>相机神器</strong></td><td><code>fw_boss_是否开相机神器</code></td><td>Boss关自动使用相机神器复原植物</td></tr>
+                        <tr><td><strong>识别能量花</strong></td><td><code>识别能量花卡槽位置</code></td><td>能量花可放在任意卡槽（需与 <code>是否抛花</code> 配合）</td></tr>
+                        <tr><td><strong>识别魔甘</strong></td><td><code>识别魔甘卡槽位置</code></td><td>魔甘植物可放在任意卡槽（需与魔甘开关配合）</td></tr>
+                        <tr><td><strong>识别三叶草</strong></td><td><code>识别三叶草卡槽位置</code></td><td>三叶草可放在任意卡槽（需与魔甘开关配合）</td></tr>
+                        <tr><td><strong>刷掉僵尸</strong></td><td><code>刷掉僵尸</code></td><td>测试性质，暂不建议开启</td></tr>
+                    </tbody>
+                </table>
+
+                <!-- ==========================================================
+                🔄 全自动循环
+                ========================================================== -->
+
                 <h2 id="全自动循环">
                     <a href="#全自动循环" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-                    🔄 无尽全自动循环
+                    🔄 全自动循环
                 </h2>
-                <p>打一遍后自动花钻石刷新重新打，实现真正的全自动挂机。</p>
-                <ul>
-                    <li><strong>开启</strong>：打完一局后自动使用钻石刷新，重新开始。</li>
-                    <li><strong>关闭</strong>：打完一局后停止，不自动刷新。</li>
-                </ul>
+                <p>打完一局后自动花钻石刷新重新打，实现真正的全自动挂机。</p>
+                <div class="config-grid">
+                    <div class="item"><span class="key">开关</span><span class="value"><code>无尽全自动循环</code></span></div>
+                    <div class="item"><span class="key">开启</span><span class="value">打完一局后自动使用钻石刷新重新开始</span></div>
+                    <div class="item"><span class="key">关闭</span><span class="value">打完一局后停止，不自动刷新</span></div>
+                </div>
                 <div class="rp-callout rp-callout--info">
                     <div class="rp-callout__title">ℹ️ 说明</div>
                     <div class="rp-callout__content">
-                        <p>该功能需要消耗钻石，请确保钻石充足。全自动循环适用于所有预设模式和通用框架。</p>
+                        <p>该功能需要消耗钻石，请确保钻石充足。适用于所有预设模式和通用框架。</p>
+                    </div>
+                </div>
+
+                <!-- ==========================================================
+                🧩 可视化配置工具
+                ========================================================== -->
+
+                <h2 id="可视化工具">
+                    <a href="#可视化工具" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    🧩 可视化配置工具
+                </h2>
+
+                <div class="visual-tool-card">
+                    <div class="icon">🧩</div>
+                    <div class="content">
+                        <div class="title">无尽通用框架 — 可视化编辑界面</div>
+                        <p class="desc">
+                            通过拖拽和点击即可完成无尽配置，无需手动编写 JSON。
+                            <br />
+                            👉 <a href="https://daoyanxiaoz.github.io/Endless_Visualization_Configuration/" target="_blank">https://daoyanxiaoz.github.io/Endless_Visualization_Configuration/</a>
+                        </p>
+                    </div>
+                    <span class="badge">推荐</span>
+                </div>
+
+                <p><strong>工具功能概览：</strong></p>
+                <ul>
+                    <li><strong>卡槽备注</strong>：为卡槽添加备注，方便识别[reference:1]</li>
+                    <li><strong>布阵操作</strong>：拖拽操作项到棋盘格子即可布置，支持 WASD 键盘导航[reference:2]</li>
+                    <li><strong>前期/后期切换</strong>：分别配置 custom（前期布阵）和 fw（后期布阵）[reference:3]</li>
+                    <li><strong>快捷开关</strong>：快速开关核心功能（小关喂豆、Boss喂豆、加速等）[reference:4]</li>
+                    <li><strong>无尽选项树</strong>：完整展示所有配置项层级[reference:5]</li>
+                    <li><strong>实时预览</strong>：右侧实时生成可导出的 JSON 配置</li>
+                    <li><strong>批量放置</strong>：开启后连续放置同种操作，提高配置效率[reference:6]</li>
+                </ul>
+
+                <div class="rp-callout rp-callout--tip">
+                    <div class="rp-callout__title">💡 使用建议</div>
+                    <div class="rp-callout__content">
+                        <p>建议先通过可视化工具完成配置预览，确认无误后再导出 JSON 文件使用。工具支持 <strong>导出 JSON</strong> 和 <strong>复制预览</strong> 功能，方便快速部署。</p>
                     </div>
                 </div>
 
@@ -790,6 +999,8 @@
                 </div>
                 <div style="margin-top:16px; text-align:center; font-size:0.85rem; color:var(--text-color-3);">
                     <a href="../index.html" style="color:var(--brand-color);">← 返回主页</a>
+                    &nbsp;·&nbsp;
+                    <a href="https://daoyanxiaoz.github.io/Endless_Visualization_Configuration/" target="_blank" style="color:var(--brand-color);">🧩 可视化配置工具</a>
                 </div>
             </footer>
         </main>
@@ -802,29 +1013,47 @@
         function toggleFolder(folderId) {
             const children = document.getElementById('children-' + folderId.replace('folder-', ''));
             const arrow = document.getElementById('arrow-' + folderId.replace('folder-', ''));
-
             if (!children || !arrow) return;
-
             const isOpen = children.classList.toggle('open');
             arrow.classList.toggle('open', isOpen);
             arrow.textContent = isOpen ? '▼' : '▶';
         }
 
-        // 默认展开“预设模式”和“通用框架”
         document.addEventListener('DOMContentLoaded', function() {
+            // 预设模式默认折叠
             const presetChildren = document.getElementById('children-preset');
             const presetArrow = document.getElementById('arrow-preset');
             if (presetChildren && presetArrow) {
-                presetChildren.classList.add('open');
-                presetArrow.classList.add('open');
-                presetArrow.textContent = '▼';
+                presetChildren.classList.remove('open');
+                presetArrow.classList.remove('open');
+                presetArrow.textContent = '▶';
             }
+
+            // 通用框架默认展开
             const frameworkChildren = document.getElementById('children-framework');
             const frameworkArrow = document.getElementById('arrow-framework');
             if (frameworkChildren && frameworkArrow) {
                 frameworkChildren.classList.add('open');
                 frameworkArrow.classList.add('open');
                 frameworkArrow.textContent = '▼';
+            }
+
+            // 前期布阵（custom）默认展开
+            const customChildren = document.getElementById('children-custom');
+            const customArrow = document.getElementById('arrow-custom');
+            if (customChildren && customArrow) {
+                customChildren.classList.add('open');
+                customArrow.classList.add('open');
+                customArrow.textContent = '▼';
+            }
+
+            // 后期布阵（fw）默认展开
+            const fwChildren = document.getElementById('children-fw');
+            const fwArrow = document.getElementById('arrow-fw');
+            if (fwChildren && fwArrow) {
+                fwChildren.classList.add('open');
+                fwArrow.classList.add('open');
+                fwArrow.textContent = '▼';
             }
         });
     </script>
