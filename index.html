@@ -131,7 +131,7 @@
             gap: 24px;
         }
 
-        /* ===== 访问计数横幅样式（双行显示） ===== */
+        /* ===== 访问计数横幅样式 ===== */
         .visit-counter {
             background: var(--bg-color-soft);
             border-bottom: 1px solid var(--divider-light);
@@ -493,7 +493,6 @@
             background: var(--brand-color-tint);
             font-weight: 600;
         }
-        /* 子菜单缩进（用于“小工具”下的子项） */
         .sidebar-sub {
             display: block;
             padding: 4px 12px 4px 28px;
@@ -536,7 +535,7 @@
         </div>
     </header>
 
-    <!-- ===== 访问计数横幅（双行显示） ===== -->
+    <!-- ===== 访问计数横幅 ===== -->
     <div id="visit-counter" class="visit-counter">
         <span>📊 加载中...</span>
     </div>
@@ -945,7 +944,7 @@ helloMaaPvz();</code></pre>
     </div>
 
     <!-- ============================================================
-    🆕 折叠菜单控制脚本 + 访问计数器（不蒜子版本 + site_uv）
+    🆕 折叠菜单控制脚本 + 访问计数器（countapi.xyz 版本）
     ============================================================ -->
     <script>
         function toggleFolder(folderId) {
@@ -980,172 +979,185 @@ helloMaaPvz();</code></pre>
         });
 
         // ============================================================
-        // 🆕 访问计数器（不蒜子版本 + 站点总UV）
-        // 当天计数使用不蒜子 pv.php（每个设备每天仅计一次）
-        // 累计总数使用不蒜子 site_uv（通过官方脚本获取）
+        // 🆕 访问计数器（countapi.xyz 版本 + 本地降级）
+        // 当天 UV：每天一个 key，每个设备仅计一次
+        // 累计 UV：一个固定 key，每个设备仅计一次
         // ============================================================
         (function() {
             const counterEl = document.getElementById('visit-counter');
             if (!counterEl) return;
 
             const today = new Date().toISOString().slice(0, 10);
-            const key = 'maapvz_' + today;
+            const namespace = 'maapvz';
+            const dailyKey = 'daily-' + today;
+            const totalKey = 'total';
 
-            // 本地存储键名（用于去重，防止同一设备重复计数）
+            // 本地存储键名（用于去重）
             const lsDateKey = 'maapvz_visit_date';
-            const lsCountedKey = 'maapvz_visit_counted';
-            const lsCountKey = 'maapvz_visit_count';
+            const lsDailyCountedKey = 'maapvz_daily_counted';
+            const lsTotalCountedKey = 'maapvz_total_counted';
+            const lsDailyCacheKey = 'maapvz_daily_cache';
+            const lsTotalCacheKey = 'maapvz_total_cache';
 
-            // 初始化显示
             counterEl.innerHTML = '📊 加载中...';
 
-            // 检查今天是否已经计过数（本地去重标记）
+            // 检查今天是否已计过当天
             const storedDate = localStorage.getItem(lsDateKey);
-            const alreadyCounted = (storedDate === today) && (localStorage.getItem(lsCountedKey) === 'true');
+            const dailyAlreadyCounted = (storedDate === today) && (localStorage.getItem(lsDailyCountedKey) === 'true');
+            const totalAlreadyCounted = localStorage.getItem(lsTotalCountedKey) === 'true';
 
-            // 当天计数逻辑（使用不蒜子 pv.php）
-            function fetchTodayCount() {
-                if (!alreadyCounted) {
-                    // 未计过：调用 API，增加计数
-                    const apiUrl = 'https://api.btstu.cn/pv/pv.php?key=' + key + '&type=json';
-                    return fetch(apiUrl, { method: 'GET', mode: 'cors' })
-                        .then(response => {
-                            if (!response.ok) throw new Error('API 请求失败');
-                            return response.json();
-                        })
+            // 封装 fetch 请求（带重试）
+            function fetchWithRetry(url, retries = 2) {
+                return fetch(url, { method: 'GET', mode: 'cors' })
+                    .then(res => {
+                        if (!res.ok) throw new Error('HTTP ' + res.status);
+                        return res.json();
+                    })
+                    .catch(err => {
+                        if (retries > 0) {
+                            return new Promise(resolve => setTimeout(resolve, 800))
+                                .then(() => fetchWithRetry(url, retries - 1));
+                        }
+                        throw err;
+                    });
+            }
+
+            // 获取当天计数
+            function fetchDailyCount() {
+                if (!dailyAlreadyCounted) {
+                    // 未计过：调用 hit 增加
+                    const url = 'https://api.countapi.xyz/hit/' + namespace + '/' + dailyKey;
+                    return fetchWithRetry(url)
                         .then(data => {
-                            const count = data.pv || 1;
+                            const count = data.value || 1;
                             localStorage.setItem(lsDateKey, today);
-                            localStorage.setItem(lsCountedKey, 'true');
-                            localStorage.setItem(lsCountKey, String(count));
+                            localStorage.setItem(lsDailyCountedKey, 'true');
+                            localStorage.setItem(lsDailyCacheKey, String(count));
                             return count;
                         })
                         .catch(() => {
-                            // 失败则降级到本地计数
-                            return fallbackLocalToday();
+                            return fallbackDailyLocal();
                         });
                 } else {
-                    // 已计过：从缓存读取
-                    const cached = parseInt(localStorage.getItem(lsCountKey) || '1', 10);
-                    return Promise.resolve(cached);
+                    // 已计过：调用 get 只获取
+                    const url = 'https://api.countapi.xyz/get/' + namespace + '/' + dailyKey;
+                    return fetchWithRetry(url)
+                        .then(data => {
+                            const count = data.value || 1;
+                            localStorage.setItem(lsDailyCacheKey, String(count));
+                            return count;
+                        })
+                        .catch(() => {
+                            // 如果 get 失败，尝试用 hit 可能重复计数，所以直接读缓存
+                            const cached = parseInt(localStorage.getItem(lsDailyCacheKey) || '1', 10);
+                            return cached;
+                        });
                 }
             }
 
-            // 本地降级（当天计数）
-            function fallbackLocalToday() {
+            // 获取累计总数
+            function fetchTotalCount() {
+                if (!totalAlreadyCounted) {
+                    const url = 'https://api.countapi.xyz/hit/' + namespace + '/' + totalKey;
+                    return fetchWithRetry(url)
+                        .then(data => {
+                            const count = data.value || 1;
+                            localStorage.setItem(lsTotalCountedKey, 'true');
+                            localStorage.setItem(lsTotalCacheKey, String(count));
+                            return count;
+                        })
+                        .catch(() => {
+                            return fallbackTotalLocal();
+                        });
+                } else {
+                    const url = 'https://api.countapi.xyz/get/' + namespace + '/' + totalKey;
+                    return fetchWithRetry(url)
+                        .then(data => {
+                            const count = data.value || 1;
+                            localStorage.setItem(lsTotalCacheKey, String(count));
+                            return count;
+                        })
+                        .catch(() => {
+                            const cached = parseInt(localStorage.getItem(lsTotalCacheKey) || '1', 10);
+                            return cached;
+                        });
+                }
+            }
+
+            // 本地降级 - 当天
+            function fallbackDailyLocal() {
                 const storedDate = localStorage.getItem(lsDateKey);
                 let count = 1;
                 if (storedDate === today) {
-                    const counted = localStorage.getItem(lsCountedKey) === 'true';
+                    const counted = localStorage.getItem(lsDailyCountedKey) === 'true';
                     if (!counted) {
-                        const prev = parseInt(localStorage.getItem(lsCountKey) || '0', 10);
+                        const prev = parseInt(localStorage.getItem(lsDailyCacheKey) || '0', 10);
                         count = prev + 1;
-                        localStorage.setItem(lsCountKey, String(count));
-                        localStorage.setItem(lsCountedKey, 'true');
+                        localStorage.setItem(lsDailyCacheKey, String(count));
+                        localStorage.setItem(lsDailyCountedKey, 'true');
                     } else {
-                        count = parseInt(localStorage.getItem(lsCountKey) || '1', 10);
+                        count = parseInt(localStorage.getItem(lsDailyCacheKey) || '1', 10);
                     }
                 } else {
                     localStorage.setItem(lsDateKey, today);
-                    localStorage.setItem(lsCountKey, '1');
-                    localStorage.setItem(lsCountedKey, 'true');
+                    localStorage.setItem(lsDailyCacheKey, '1');
+                    localStorage.setItem(lsDailyCountedKey, 'true');
                 }
                 return count;
             }
 
-            // 获取累计总 UV（通过不蒜子官方脚本）
-            function fetchTotalUV() {
-                return new Promise((resolve) => {
-                    // 检查是否已经有 busuanzi 值
-                    const busuanziElement = document.getElementById('busuanzi_value_site_uv');
-                    if (busuanziElement && busuanziElement.textContent) {
-                        const val = parseInt(busuanziElement.textContent.replace(/,/g, ''), 10);
-                        if (!isNaN(val) && val > 0) {
-                            resolve(val);
-                            return;
-                        }
-                    }
-                    // 如果没有，尝试加载脚本
-                    if (typeof window.busuanzi !== 'undefined' && window.busuanzi.site_uv) {
-                        resolve(window.busuanzi.site_uv);
-                        return;
-                    }
-                    // 动态加载不蒜子脚本
-                    const script = document.createElement('script');
-                    script.async = true;
-                    script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
-                    script.onload = function() {
-                        // 等待不蒜子更新DOM
-                        setTimeout(() => {
-                            const el = document.getElementById('busuanzi_value_site_uv');
-                            if (el && el.textContent) {
-                                const val = parseInt(el.textContent.replace(/,/g, ''), 10);
-                                if (!isNaN(val) && val > 0) {
-                                    resolve(val);
-                                    return;
-                                }
-                            }
-                            // 尝试从 busuanzi 对象读取
-                            if (window.busuanzi && window.busuanzi.site_uv) {
-                                resolve(window.busuanzi.site_uv);
-                                return;
-                            }
-                            resolve(null);
-                        }, 500);
-                    };
-                    script.onerror = function() {
-                        resolve(null);
-                    };
-                    document.head.appendChild(script);
-                    // 超时处理
-                    setTimeout(() => {
-                        resolve(null);
-                    }, 3000);
-                });
+            // 本地降级 - 累计
+            function fallbackTotalLocal() {
+                const counted = localStorage.getItem(lsTotalCountedKey) === 'true';
+                let count = 1;
+                if (!counted) {
+                    const prev = parseInt(localStorage.getItem(lsTotalCacheKey) || '0', 10);
+                    count = prev + 1;
+                    localStorage.setItem(lsTotalCacheKey, String(count));
+                    localStorage.setItem(lsTotalCountedKey, 'true');
+                } else {
+                    count = parseInt(localStorage.getItem(lsTotalCacheKey) || '1', 10);
+                }
+                return count;
+            }
+
+            // 判断是否本地计数（没有在线标记）
+            function isLocalMode() {
+                // 如果 localStorage 中没有在线标记，且缓存值大于1，可能来自本地
+                const onlineFlag = localStorage.getItem('__maapvz_online_daily') === 'true';
+                return !onlineFlag;
             }
 
             // 执行计数并显示
-            Promise.all([fetchTodayCount(), fetchTotalUV()])
-                .then(([todayCount, totalUV]) => {
-                    // 判断今天计数是否来自本地
-                    const isLocalToday = localStorage.getItem(lsCountedKey) === 'true' &&
-                        localStorage.getItem(lsDateKey) === today &&
-                        !(localStorage.getItem('__maapvz_online') === 'true');
-                    // 实际上，我们可以通过是否有API调用来判断，但这里简化：如果API成功，不显示本地标签。
-                    // 我们用一个标记：如果今天计数是从缓存读取的，且没有主动调用API，可能是本地。
-                    // 但为了准确，我们记录一个在线标记。
-                    const onlineFlag = localStorage.getItem('__maapvz_online') === 'true';
-                    // 如果今天计数 > 1 且没有在线标记，可能是本地累计的
-                    const isLocal = !onlineFlag && todayCount > 1;
+            Promise.all([fetchDailyCount(), fetchTotalCount()])
+                .then(([dailyCount, totalCount]) => {
+                    // 标记在线模式
+                    localStorage.setItem('__maapvz_online_daily', 'true');
 
-                    // 构建显示文本
+                    // 构建显示
                     let html = '';
-                    // 当天计数
-                    html += '<span class="emoji">🌟</span> 今天第 <strong>' + todayCount + '</strong> 个打开';
+                    html += '<span class="emoji">🌟</span> 今天第 <strong>' + dailyCount + '</strong> 个打开';
+                    // 如果 API 完全失败，降级到本地时显示标签
+                    // 这里判断：如果 localStorage 中的计数与 API 返回的不一致，且没有在线标记
+                    const isLocal = !localStorage.getItem('__maapvz_online_daily') ||
+                        (parseInt(localStorage.getItem(lsDailyCacheKey) || '0') !== dailyCount && dailyCount === 1);
                     if (isLocal) {
                         html += ' <span class="badge">本地</span>';
                     }
-                    // 分隔符
                     html += ' <span class="divider">|</span> ';
-                    // 累计总数
-                    if (totalUV !== null && totalUV > 0) {
-                        html += '<span class="total-label">📌 累计</span> <span class="total-num">' + totalUV + '</span> 人';
-                    } else {
-                        html += '<span class="total-label">📌 累计</span> <span class="total-num" style="color:var(--text-color-3);">--</span> 人';
-                    }
+                    html += '<span class="total-label">📌 累计</span> <span class="total-num">' + totalCount + '</span> 人';
                     html += ' <span class="emoji">✨</span> 自己查阅文档的样子真的很棒！';
                     counterEl.innerHTML = html;
-
-                    // 如果API成功，设置在线标记（本次加载时）
-                    // 这里我们无法区分，但我们可以在fetch时设置。
-                    // 在fetchTodayCount中，如果成功，可以设置。
-                    // 但我们这里简化，不处理。
                 })
                 .catch(() => {
-                    // 完全失败时显示友好信息
-                    counterEl.innerHTML = '🌟 今天第 <strong>?</strong> 个打开 | 📌 累计 <strong>?</strong> 人 ✨ 加载失败，请刷新重试';
+                    // 完全失败 - 使用本地缓存显示
+                    const daily = parseInt(localStorage.getItem(lsDailyCacheKey) || '1', 10);
+                    const total = parseInt(localStorage.getItem(lsTotalCacheKey) || '1', 10);
+                    counterEl.innerHTML =
+                        '🌟 今天第 <strong>' + daily +
+                        '</strong> 个打开 <span class="badge">本地</span> | 📌 累计 <strong>' + total +
+                        '</strong> 人 ✨ 自己查阅文档的样子真的很棒！';
                 });
-
         })();
     </script>
 
