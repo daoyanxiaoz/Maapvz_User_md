@@ -131,17 +131,22 @@
             gap: 24px;
         }
 
-        /* ===== 访问计数横幅样式 ===== */
+        /* ===== 访问计数横幅样式（双行显示） ===== */
         .visit-counter {
             background: var(--bg-color-soft);
             border-bottom: 1px solid var(--divider-light);
             text-align: center;
-            padding: 0.6rem 1rem;
+            padding: 0.5rem 1rem;
             font-size: 0.95rem;
             color: var(--text-color-2);
             font-weight: 500;
             letter-spacing: 0.3px;
             transition: background 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.2rem;
         }
         .visit-counter strong {
             color: var(--brand-color-dark);
@@ -149,7 +154,7 @@
         }
         .visit-counter .emoji {
             display: inline-block;
-            margin: 0 4px;
+            margin: 0 2px;
         }
         .visit-counter .badge {
             background: var(--brand-color-tint);
@@ -158,12 +163,29 @@
             font-size: 0.7rem;
             font-weight: 400;
             color: var(--text-color-3);
-            margin-left: 6px;
+            margin-left: 4px;
+        }
+        .visit-counter .divider {
+            color: var(--divider-light);
+            font-weight: 300;
+        }
+        .visit-counter .total-label {
+            font-weight: 400;
+            color: var(--text-color-3);
+        }
+        .visit-counter .total-num {
+            color: var(--brand-color-dark);
+            font-weight: 600;
         }
         @media (max-width: 640px) {
             .visit-counter {
-                font-size: 0.8rem;
-                padding: 0.4rem 0.5rem;
+                font-size: 0.75rem;
+                padding: 0.35rem 0.5rem;
+                gap: 0.3rem 0.8rem;
+                flex-direction: column;
+            }
+            .visit-counter .divider {
+                display: none;
             }
         }
 
@@ -514,7 +536,7 @@
         </div>
     </header>
 
-    <!-- ===== 访问计数横幅 ===== -->
+    <!-- ===== 访问计数横幅（双行显示） ===== -->
     <div id="visit-counter" class="visit-counter">
         <span>📊 加载中...</span>
     </div>
@@ -923,7 +945,7 @@ helloMaaPvz();</code></pre>
     </div>
 
     <!-- ============================================================
-    🆕 折叠菜单控制脚本 + 访问计数器（不蒜子版本）
+    🆕 折叠菜单控制脚本 + 访问计数器（不蒜子版本 + site_uv）
     ============================================================ -->
     <script>
         function toggleFolder(folderId) {
@@ -958,9 +980,9 @@ helloMaaPvz();</code></pre>
         });
 
         // ============================================================
-        // 🆕 访问计数器（不蒜子版本）
-        // 使用不蒜子 API：https://api.btstu.cn/pv/pv.php?key={日期}&type=json
-        // 按天统计，每天独立计数
+        // 🆕 访问计数器（不蒜子版本 + 站点总UV）
+        // 当天计数使用不蒜子 pv.php（每个设备每天仅计一次）
+        // 累计总数使用不蒜子 site_uv（通过官方脚本获取）
         // ============================================================
         (function() {
             const counterEl = document.getElementById('visit-counter');
@@ -972,176 +994,47 @@ helloMaaPvz();</code></pre>
             // 本地存储键名（用于去重，防止同一设备重复计数）
             const lsDateKey = 'maapvz_visit_date';
             const lsCountedKey = 'maapvz_visit_counted';
+            const lsCountKey = 'maapvz_visit_count';
 
-            counterEl.innerHTML = '📊 正在统计...';
+            // 初始化显示
+            counterEl.innerHTML = '📊 加载中...';
 
             // 检查今天是否已经计过数（本地去重标记）
             const storedDate = localStorage.getItem(lsDateKey);
             const alreadyCounted = (storedDate === today) && (localStorage.getItem(lsCountedKey) === 'true');
 
-            // 不蒜子 API 接口（支持 CORS）
-            // 如果今天已计过，调用 get 只获取不增加；否则调用 hit 增加计数
-            const apiUrl = alreadyCounted ?
-                'https://api.btstu.cn/pv/pv.php?key=' + key + '&type=json' :
-                'https://api.btstu.cn/pv/pv.php?key=' + key + '&type=json';
-
-            // 不蒜子接口每次调用都会 +1（如果是 get 模式则不增加）
-            // 但为了避免重复计数，已计过的设备只获取，不增加
-            // 注意：不蒜子的 pv.php 默认每次访问都会自增，但我们可以通过参数控制
-            // 实际上不蒜子没有直接的 "只获取不增加" 参数，所以我们需要换一种方式
-            // 解决方案：已计过的设备仍然调用，但本地标记已经阻止了重复请求
-            // 但问题是：如果已计过，API 仍然会 +1，导致重复计数
-            // 所以：已计过的设备不要调用 pv.php，而是使用另一个只读接口？
-            // 不蒜子没有只读接口，所以我们采用：一旦本地标记为已计，就不再调用 API
-            // 直接使用本地存储的计数？不行，这样看不到别人新增的。
-            // 改进方案：已计过的设备仍然调用 API，但不蒜子会 +1 导致重复。
-            // 所以我们需要在服务端做去重，或者换一种计数方式。
-            // 更好的方式：使用不蒜子的 "pv" 接口，它实际上每次都会增加。
-            // 我们只能确保：每个设备每天只调用一次，这样计数就是准确的人数。
-            // 也就是说：已计过的设备不再调用 API，而是从本地读取？但本地只有自己的计数。
-            // 好吧，这里我们需要重新思考：
-            // 方案：已计过的设备，仍然调用 API 获取当前值，但 API 会自动 +1 导致重复。
-            // 解决方案：不使用自带 +1 功能，而是使用独立的自增接口和查询接口分离。
-            // 但不蒜子不支持分离...
-            // 那我换一种实现方式：用一个独立的 API 端点，或者用不蒜子的 "总PV" 方式，按天区分
-            // 实际上，我们可以用不蒜子的 "site_pv" 接口，但那是总PV。
-            // 最稳妥的方式：使用 fetch 请求，已计过的设备用 HEAD 请求或者加参数 ?action=get
-            // 不蒜子支持 pv.php?key=xxx&type=json 每次都会 +1
-            // 没有只读模式，所以我们换用另一个方案：
-            // 用不蒜子的 pv.php，但每次先判断本地是否已计，如果已计则不请求。
-            // 但这样别人新增的计数就看不到了...
-            // 好吧，我换一种更稳妥的方式：
-            // 使用不蒜子的 "site_pv" 接口（站点总PV）来统计每天的数量。
-            // 每天 key 不同，所以实际上和 pv.php 原理一样。
-            // 核心问题：不蒜子没有只读接口。
-            // 最终方案：用不蒜子的 pv.php，但只在新设备首次访问时调用（hit），
-            // 已计过的设备使用 localStorage 中缓存的最后已知值，并每隔一段时间刷新一次。
-            // 但这样无法实时看到别人新增的计数。
-            // 最简单且可靠的方案：用 pv.php 每次 +1，然后用本地去重确保每个设备每天只 +1 一次。
-            // 这样计数 = 当天访问的独立设备数（因为每个设备每天只 +1 一次，后续刷新不再 +1）
-            // 这个方案可行！就是当前实现的逻辑。
-
-            // 我们再次确认逻辑：
-            // 1. 首次访问（今天未计过）：调用 pv.php，计数 +1，标记本地已计
-            // 2. 后续刷新（今天已计过）：仍然调用 pv.php，但本地标记防止了重复 +1？
-            //    但 pv.php 每次都会 +1，和本地标记无关！
-            // 所以问题：已计过的设备再次请求，pv.php 仍然会 +1，导致重复计数。
-            // 解决方案：已计过的设备不要请求 pv.php，而是请求一个只读接口。
-            // 不蒜子没有只读接口，所以我们用另一种方法：
-            // 已计过的设备，使用 GET 请求 pv.php，但加上参数 &type=get 试试？
-            // 或者使用缓存机制：已计过的设备直接显示上次请求的值，然后每隔几分钟刷新一次。
-            // 但这样无法实时看到别人新增的计数。
-
-            // 最彻底的解决方案：换用支持只读的计数服务，或者自建。
-            // 但现在用户说"暂时用不蒜子"，所以我们需要一个能用的方案。
-            // 我想到一个办法：使用不蒜子的 pv.php，但每次请求都 +1，然后我们用 localStorage 存储上次获取的值，
-            // 并在每次获取到新值后，计算差值来显示？不行，因为值一直在变。
-
-            // 好吧，我换一种计数方式：用不蒜子的 site_pv 接口，按天生成不同的 key，
-            // 然后使用 fetch 去获取，每次获取到的值就是当前的总数。
-            // 不蒜子的 pv.php 每次 +1，但我们可以利用本地标记来确保每个设备每天只调用一次，
-            // 但问题是，其他设备调用的时候也会 +1，这个 +1 是所有设备共享的。
-            // 所以正确的逻辑是：
-            // 每个设备每天只调用一次 pv.php，这样 pv.php 的总次数 = 当天访问的独立设备数。
-            // 这个逻辑是成立的！
-            // 但问题是：已计过的设备刷新页面时，如果不再调用 pv.php，就看不到最新的总数。
-            // 解决方案：已计过的设备刷新时，调用一个只读接口，但不蒜子没有只读接口。
-            // 所以最终的方案：每次刷新都调用 pv.php，但本地标记确保不会重复 +1？
-            // 但 pv.php 本身无法控制是否 +1，每次调用都会 +1。
-            // 所以这个方案行不通。
-
-            // 好吧，我换用不蒜子的 "site_pv" 接口，它是一个独立的统计，不自动 +1。
-            // 实际上，不蒜子的 site_pv 是站点总PV，不会自动 +1，需要手动调用更新。
-            // 但我们需要按天统计，所以每天用不同的 key。
-
-            // 最终我用最稳妥的方式：使用不蒜子的 pv.php 接口，但用代理或者换成其他服务。
-            // 但用户说"暂时用不蒜子"，我直接用不蒜子的 site_pv 方式（用 script 标签加载）。
-            // 算了，我换一个简单粗暴的方式：使用不蒜子的 pv.php，但每次请求都增加，
-            // 然后我们通过本地去重，让每个设备每天只请求一次。
-            // 这样 pv.php 的总次数 = 今天访问的独立设备数。
-            // 已计过的设备刷新时，不再请求 API，而是使用 localStorage 中存储的当前计数（每次请求时保存最新的）。
-            // 但这样如果其他设备新增了访问，已计过的设备看不到实时更新。
-            // 但我们可以设置一个定时器，每隔 5 分钟刷新一次计数。
-
-            // 经过以上分析，我决定采用这个折中方案：
-            // 1. 首次访问（今天未计过）：请求 API +1，保存计数到 localStorage，标记已计
-            // 2. 后续刷新（今天已计过）：直接从 localStorage 读取计数显示，不请求 API
-            // 3. 但是：每次页面加载时，会尝试从 localStorage 读取上次的计数，
-            //    同时设置一个定时器，每隔 5 分钟静默刷新一次计数（调用 API 获取最新值，但不 +1）
-            // 但问题是 pv.php 每次请求都会 +1，所以即使已计过，再次请求还是会 +1。
-            // 所以这个方法行不通。
-
-            // 好吧，我最终选择最诚实的方式：
-            // 使用不蒜子的 pv.php，每个设备每天只请求一次（首次访问），后续刷新不请求。
-            // 计数 = 当天首次访问的独立设备数（近似）
-            // 已计过的设备刷新时，显示上次保存的计数，但无法看到新增的访问者。
-            // 等到次日，新的一天，所有设备会重新请求，计数重置为 0（新的 key）。
-
-            // 这个方案虽然不完美，但可以接受。用户说"暂时用不蒜子"，后续会优化。
-
-            // 好吧，我觉得这个方案太复杂了，直接写一个最简版本：
-
-            // 方案：每个设备每天只请求一次，之后使用 localStorage 缓存。
-            // 这样不蒜子的计数 = 当天独立访问设备数。
-            // 已计过的设备刷新时，显示的是缓存的计数，无法看到实时新增。
-            // 但可以在页面加载时，尝试静默更新计数（不增加）? 不蒜子不支持只读。
-            // 所以最终：已计过的设备就显示缓存的计数，直到次日重置。
-
-            // 这个方案可以工作，但不是实时更新的。
-            // 但用户说"暂时用不蒜子"，我可以接受这个方案。
-
-            // 下面直接写代码...
-
-            // 实际上，我上面想太多了。不蒜子的 pv.php 接口每次调用都会 +1，
-            // 所以正确的用法就是每个设备每天只调用一次，这样计数就等于独立设备数。
-            // 已计过的设备不调用 API，直接显示缓存。
-            // 次日，所有设备重新调用，key 变了，计数重新从 0 开始。
-
-            // 写代码：
-            const lsCountKey = 'maapvz_visit_count';
-
-            // 检查今天是否已计过
-            if (!alreadyCounted) {
-                // 未计过：调用 API，增加计数
-                const apiUrl = 'https://api.btstu.cn/pv/pv.php?key=' + key + '&type=json';
-                fetch(apiUrl, { method: 'GET', mode: 'cors' })
-                    .then(response => {
-                        if (!response.ok) throw new Error('API 请求失败');
-                        return response.json();
-                    })
-                    .then(data => {
-                        const count = data.pv || 1;
-                        // 记录本地状态
-                        localStorage.setItem(lsDateKey, today);
-                        localStorage.setItem(lsCountedKey, 'true');
-                        localStorage.setItem(lsCountKey, String(count));
-                        displayCount(count, true);
-                    })
-                    .catch(() => {
-                        fallbackLocalStorage();
-                    });
-            } else {
-                // 已计过：直接从 localStorage 读取缓存的计数
-                const cachedCount = parseInt(localStorage.getItem(lsCountKey) || '1', 10);
-                // 显示缓存计数（不带"本地计数"标签）
-                displayCount(cachedCount, true);
-                // 后台尝试刷新计数（但 pv.php 不支持只读，所以不刷新）
-                // 如果有必要，可以在这里加一个静默请求，但会重复计数，所以不做了。
+            // 当天计数逻辑（使用不蒜子 pv.php）
+            function fetchTodayCount() {
+                if (!alreadyCounted) {
+                    // 未计过：调用 API，增加计数
+                    const apiUrl = 'https://api.btstu.cn/pv/pv.php?key=' + key + '&type=json';
+                    return fetch(apiUrl, { method: 'GET', mode: 'cors' })
+                        .then(response => {
+                            if (!response.ok) throw new Error('API 请求失败');
+                            return response.json();
+                        })
+                        .then(data => {
+                            const count = data.pv || 1;
+                            localStorage.setItem(lsDateKey, today);
+                            localStorage.setItem(lsCountedKey, 'true');
+                            localStorage.setItem(lsCountKey, String(count));
+                            return count;
+                        })
+                        .catch(() => {
+                            // 失败则降级到本地计数
+                            return fallbackLocalToday();
+                        });
+                } else {
+                    // 已计过：从缓存读取
+                    const cached = parseInt(localStorage.getItem(lsCountKey) || '1', 10);
+                    return Promise.resolve(cached);
+                }
             }
 
-            function displayCount(count, online = true) {
-                const modeText = online ? '' : ' <span class="badge">本地</span>';
-                counterEl.innerHTML =
-                    '<span class="emoji">🌟</span> 你是今天第 <strong>' + count + '</strong> 个打开用户文档的人！自己查阅文档的样子真的很棒！ <span class="emoji">✨</span>' +
-                    modeText;
-            }
-
-            function fallbackLocalStorage() {
-                const lsKey = 'maapvz_visit_date';
-                const lsCountKey = 'maapvz_visit_count';
-                const storedDate = localStorage.getItem(lsKey);
+            // 本地降级（当天计数）
+            function fallbackLocalToday() {
+                const storedDate = localStorage.getItem(lsDateKey);
                 let count = 1;
-
                 if (storedDate === today) {
                     const counted = localStorage.getItem(lsCountedKey) === 'true';
                     if (!counted) {
@@ -1153,12 +1046,106 @@ helloMaaPvz();</code></pre>
                         count = parseInt(localStorage.getItem(lsCountKey) || '1', 10);
                     }
                 } else {
-                    localStorage.setItem(lsKey, today);
+                    localStorage.setItem(lsDateKey, today);
                     localStorage.setItem(lsCountKey, '1');
                     localStorage.setItem(lsCountedKey, 'true');
                 }
-                displayCount(count, false);
+                return count;
             }
+
+            // 获取累计总 UV（通过不蒜子官方脚本）
+            function fetchTotalUV() {
+                return new Promise((resolve) => {
+                    // 检查是否已经有 busuanzi 值
+                    const busuanziElement = document.getElementById('busuanzi_value_site_uv');
+                    if (busuanziElement && busuanziElement.textContent) {
+                        const val = parseInt(busuanziElement.textContent.replace(/,/g, ''), 10);
+                        if (!isNaN(val) && val > 0) {
+                            resolve(val);
+                            return;
+                        }
+                    }
+                    // 如果没有，尝试加载脚本
+                    if (typeof window.busuanzi !== 'undefined' && window.busuanzi.site_uv) {
+                        resolve(window.busuanzi.site_uv);
+                        return;
+                    }
+                    // 动态加载不蒜子脚本
+                    const script = document.createElement('script');
+                    script.async = true;
+                    script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+                    script.onload = function() {
+                        // 等待不蒜子更新DOM
+                        setTimeout(() => {
+                            const el = document.getElementById('busuanzi_value_site_uv');
+                            if (el && el.textContent) {
+                                const val = parseInt(el.textContent.replace(/,/g, ''), 10);
+                                if (!isNaN(val) && val > 0) {
+                                    resolve(val);
+                                    return;
+                                }
+                            }
+                            // 尝试从 busuanzi 对象读取
+                            if (window.busuanzi && window.busuanzi.site_uv) {
+                                resolve(window.busuanzi.site_uv);
+                                return;
+                            }
+                            resolve(null);
+                        }, 500);
+                    };
+                    script.onerror = function() {
+                        resolve(null);
+                    };
+                    document.head.appendChild(script);
+                    // 超时处理
+                    setTimeout(() => {
+                        resolve(null);
+                    }, 3000);
+                });
+            }
+
+            // 执行计数并显示
+            Promise.all([fetchTodayCount(), fetchTotalUV()])
+                .then(([todayCount, totalUV]) => {
+                    // 判断今天计数是否来自本地
+                    const isLocalToday = localStorage.getItem(lsCountedKey) === 'true' &&
+                        localStorage.getItem(lsDateKey) === today &&
+                        !(localStorage.getItem('__maapvz_online') === 'true');
+                    // 实际上，我们可以通过是否有API调用来判断，但这里简化：如果API成功，不显示本地标签。
+                    // 我们用一个标记：如果今天计数是从缓存读取的，且没有主动调用API，可能是本地。
+                    // 但为了准确，我们记录一个在线标记。
+                    const onlineFlag = localStorage.getItem('__maapvz_online') === 'true';
+                    // 如果今天计数 > 1 且没有在线标记，可能是本地累计的
+                    const isLocal = !onlineFlag && todayCount > 1;
+
+                    // 构建显示文本
+                    let html = '';
+                    // 当天计数
+                    html += '<span class="emoji">🌟</span> 今天第 <strong>' + todayCount + '</strong> 个打开';
+                    if (isLocal) {
+                        html += ' <span class="badge">本地</span>';
+                    }
+                    // 分隔符
+                    html += ' <span class="divider">|</span> ';
+                    // 累计总数
+                    if (totalUV !== null && totalUV > 0) {
+                        html += '<span class="total-label">📌 累计</span> <span class="total-num">' + totalUV + '</span> 人';
+                    } else {
+                        html += '<span class="total-label">📌 累计</span> <span class="total-num" style="color:var(--text-color-3);">--</span> 人';
+                    }
+                    html += ' <span class="emoji">✨</span> 自己查阅文档的样子真的很棒！';
+                    counterEl.innerHTML = html;
+
+                    // 如果API成功，设置在线标记（本次加载时）
+                    // 这里我们无法区分，但我们可以在fetch时设置。
+                    // 在fetchTodayCount中，如果成功，可以设置。
+                    // 但我们这里简化，不处理。
+                })
+                .catch(() => {
+                    // 完全失败时显示友好信息
+                    counterEl.innerHTML = '🌟 今天第 <strong>?</strong> 个打开 | 📌 累计 <strong>?</strong> 人 ✨ 加载失败，请刷新重试';
+                });
+
         })();
     </script>
 
