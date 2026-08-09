@@ -944,9 +944,10 @@ helloMaaPvz();</code></pre>
     </div>
 
     <!-- ============================================================
-    🆕 折叠菜单控制脚本 + 访问计数器（countapi.xyz 版本）
+    🆕 折叠菜单控制脚本 + 访问计数器（Abacus 版本）
     ============================================================ -->
     <script>
+        // ===== 折叠菜单控制 =====
         function toggleFolder(folderId) {
             const folder = document.getElementById(folderId);
             const children = document.getElementById('children-' + folderId.replace('folder-', ''));
@@ -979,9 +980,11 @@ helloMaaPvz();</code></pre>
         });
 
         // ============================================================
-        // 🆕 访问计数器（countapi.xyz 版本 + 本地降级）
-        // 当天 UV：每天一个 key，每个设备仅计一次
-        // 累计 UV：一个固定 key，每个设备仅计一次
+        // 🆕 访问计数器（Abacus API 版本）
+        // 官方文档：https://v2.jasoncameron.dev/abacus/
+        // API 地址：https://abacus.jasoncameron.dev
+        // 当天计数：/hit/maapvz/daily-YYYY-MM-DD
+        // 累计计数：/hit/maapvz/total
         // ============================================================
         (function() {
             const counterEl = document.getElementById('visit-counter');
@@ -1025,8 +1028,8 @@ helloMaaPvz();</code></pre>
             // 获取当天计数
             function fetchDailyCount() {
                 if (!dailyAlreadyCounted) {
-                    // 未计过：调用 hit 增加
-                    const url = 'https://api.countapi.xyz/hit/' + namespace + '/' + dailyKey;
+                    // 未计过：调用 hit 增加计数
+                    const url = 'https://abacus.jasoncameron.dev/hit/' + namespace + '/' + dailyKey;
                     return fetchWithRetry(url)
                         .then(data => {
                             const count = data.value || 1;
@@ -1040,7 +1043,7 @@ helloMaaPvz();</code></pre>
                         });
                 } else {
                     // 已计过：调用 get 只获取
-                    const url = 'https://api.countapi.xyz/get/' + namespace + '/' + dailyKey;
+                    const url = 'https://abacus.jasoncameron.dev/get/' + namespace + '/' + dailyKey;
                     return fetchWithRetry(url)
                         .then(data => {
                             const count = data.value || 1;
@@ -1058,7 +1061,7 @@ helloMaaPvz();</code></pre>
             // 获取累计总数
             function fetchTotalCount() {
                 if (!totalAlreadyCounted) {
-                    const url = 'https://api.countapi.xyz/hit/' + namespace + '/' + totalKey;
+                    const url = 'https://abacus.jasoncameron.dev/hit/' + namespace + '/' + totalKey;
                     return fetchWithRetry(url)
                         .then(data => {
                             const count = data.value || 1;
@@ -1070,7 +1073,7 @@ helloMaaPvz();</code></pre>
                             return fallbackTotalLocal();
                         });
                 } else {
-                    const url = 'https://api.countapi.xyz/get/' + namespace + '/' + totalKey;
+                    const url = 'https://abacus.jasoncameron.dev/get/' + namespace + '/' + totalKey;
                     return fetchWithRetry(url)
                         .then(data => {
                             const count = data.value || 1;
@@ -1121,29 +1124,12 @@ helloMaaPvz();</code></pre>
                 return count;
             }
 
-            // 判断是否本地计数（没有在线标记）
-            function isLocalMode() {
-                // 如果 localStorage 中没有在线标记，且缓存值大于1，可能来自本地
-                const onlineFlag = localStorage.getItem('__maapvz_online_daily') === 'true';
-                return !onlineFlag;
-            }
-
             // 执行计数并显示
             Promise.all([fetchDailyCount(), fetchTotalCount()])
                 .then(([dailyCount, totalCount]) => {
-                    // 标记在线模式
-                    localStorage.setItem('__maapvz_online_daily', 'true');
-
                     // 构建显示
                     let html = '';
                     html += '<span class="emoji">🌟</span> 今天第 <strong>' + dailyCount + '</strong> 个打开';
-                    // 如果 API 完全失败，降级到本地时显示标签
-                    // 这里判断：如果 localStorage 中的计数与 API 返回的不一致，且没有在线标记
-                    const isLocal = !localStorage.getItem('__maapvz_online_daily') ||
-                        (parseInt(localStorage.getItem(lsDailyCacheKey) || '0') !== dailyCount && dailyCount === 1);
-                    if (isLocal) {
-                        html += ' <span class="badge">本地</span>';
-                    }
                     html += ' <span class="divider">|</span> ';
                     html += '<span class="total-label">📌 累计</span> <span class="total-num">' + totalCount + '</span> 人';
                     html += ' <span class="emoji">✨</span> 自己查阅文档的样子真的很棒！';
