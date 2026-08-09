@@ -551,6 +551,8 @@
                 📖 目录导航
             </div>
             <nav style="display:flex; flex-direction:column; gap:3px;">
+                <!-- ===== 🆕 使用前必看 ===== -->
+<a href="#使用前必看" class="sidebar-link" style="font-weight:600; color:var(--brand-color-dark);">⚠️ 使用前必看</a>
 
                 <!-- ===== 可折叠父级：新手上路 ===== -->
                 <div class="sidebar-folder" id="folder-newbie" onclick="toggleFolder('folder-newbie')">
@@ -598,6 +600,24 @@
         <!-- 文档正文 -->
         <main class="rp-doc-layout__doc">
             <div class="rp-doc">
+                <!-- ===== 🆕 使用前必看 ===== -->
+<h2 id="使用前必看">
+    <a href="#使用前必看" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+    ⚠️ 使用前必看
+</h2>
+<div class="rp-callout rp-callout--warning">
+    <div class="rp-callout__title">📢 重要提示</div>
+    <div class="rp-callout__content">
+        <p style="font-weight:600;">在开始使用 MaaPvz 之前，请确保以下准备工作已完成：</p>
+        <ul style="font-weight:500;">
+            <li>✅ 已安装 <strong>.NET 10.0</strong> 运行环境</li>
+            <li>✅ 模拟器分辨率设置为 <strong>1920 × 1080</strong> 并锁定横屏</li>
+            <li>✅ 已从 <strong>GitHub Releases</strong> 或群文件下载最新版本的 MaaPvz</li>
+            <li>✅ 解压后先安装 <code>dotnet-runtime</code>，再运行 <code>MaaPvz.exe</code></li>
+        </ul>
+        <p style="margin-top:0.75rem; font-weight:500;">💡 如遇问题，请先查阅 <a href="#常见问题">常见问题</a> 或联系群管理。</p>
+    </div>
+</div>
 
                 <h1 id="新手上路">
                     <a href="#新手上路" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
@@ -614,6 +634,7 @@
                 </h2>
                 <div class="rp-toc-container">
                     <ul>
+                        <li><a href="#使用前必看">⚠️ 使用前必看</a></li>
                         <li><a href="#快速开始">快速开始</a></li>
                         <li>
                             <a href="#主要功能">主要功能</a>
@@ -673,15 +694,6 @@
                         <img src="index_iamges/主界面说明.png" alt="MaaPvz 主界面示意图" />
                     </div>
                 </div>
-
-                <!-- ===== 主要功能 ===== -->
-                <h2 id="主要功能">
-                    <a href="#主要功能" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-                    主要功能
-                </h2>
-                <p style="font-weight:600; margin: 1.2rem 0 0.8rem 0; color: var(--text-color-1);">
-    📌 所有拥有导航的任务在执行完毕后和执行前都会优先导航一次主界面。有些限时或特殊活动未做导航，需要用户自行配置。
-</p>
 
                 <!-- 签到 -->
                 <h3 id="签到">
