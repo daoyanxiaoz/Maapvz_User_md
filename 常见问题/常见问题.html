@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>常见问题 — MaaPvz</title>
     <meta name="description" content="MaaPvz 使用过程中的常见问题与解决方案" />
-    <meta name="keywords" content="MaaPvz,常见问题,双人对决,悬浮窗,教程" />
+    <meta name="keywords" content="MaaPvz,常见问题,日志导出,截图模式,双人对决,悬浮窗,教程" />
     <meta name="author" content="MaaPvz 文档团队" />
     <link rel="icon" href="https://daoyanxiaoz.github.io/Endless_Visualization_Configuration/images/PVZAA_small.png" />
 
@@ -418,6 +418,16 @@
             </div>
             <nav style="display:flex; flex-direction:column; gap:3px;">
 
+                <!-- ===== 🆕 可折叠父级：日志导出 ===== -->
+                <div class="sidebar-folder" id="folder-log" onclick="toggleFolder('folder-log')">
+                    <span>📋 日志导出</span>
+                    <span class="arrow" id="arrow-log">▶</span>
+                </div>
+                <div class="sidebar-children" id="children-log">
+                    <a href="#导出日志步骤">导出日志步骤</a>
+                    <a href="#启用截图模式">启用截图模式</a>
+                </div>
+
                 <!-- ===== 可折叠父级：双人对决 ===== -->
                 <div class="sidebar-folder" id="folder-duel" onclick="toggleFolder('folder-duel')">
                     <span>⚔️ 双人对决</span>
@@ -456,6 +466,13 @@
                 <div class="rp-toc-container">
                     <ul>
                         <li>
+                            <a href="#日志导出">📋 日志导出</a>
+                            <ul>
+                                <li><a href="#导出日志步骤">导出日志步骤</a></li>
+                                <li><a href="#启用截图模式">启用截图模式</a></li>
+                            </ul>
+                        </li>
+                        <li>
                             <a href="#双人对决">⚔️ 双人对决</a>
                             <ul>
                                 <li><a href="#悬浮窗遮挡">悬浮窗遮挡识别区域</a></li>
@@ -463,6 +480,71 @@
                         </li>
                     </ul>
                 </div>
+
+                <!-- ==========================================================
+                📝 日志导出分类
+                ========================================================== -->
+                <h2 id="日志导出">
+                    <a href="#日志导出" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    📋 日志导出
+                </h2>
+
+                <!-- ==========================================================
+                📝 子问题：导出日志步骤
+                ========================================================== -->
+                <h3 id="导出日志步骤">
+                    <a href="#导出日志步骤" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    导出日志步骤
+                </h3>
+
+                <p>当遇到脚本运行异常或 Bug 时，导出日志是反馈问题的重要途径。请按以下步骤操作：</p>
+
+                <h4>第一步：打开日志导出界面</h4>
+                <img src="images/导出日志第一步.png" alt="导出日志第一步" />
+                <p style="font-size:0.85rem; color:var(--text-color-3); text-align:center; margin-top:-0.5rem;">▲ 点击“导出日志”按钮</p>
+
+                <h4>第二步：选择保存位置并导出</h4>
+                <img src="images/导出日志第二步.png" alt="导出日志第二步" />
+                <p style="font-size:0.85rem; color:var(--text-color-3); text-align:center; margin-top:-0.5rem;">▲ 选择保存路径，点击“保存”即可导出日志文件</p>
+
+                <div class="rp-callout rp-callout--tip">
+                    <div class="rp-callout__title">💡 提示</div>
+                    <div class="rp-callout__content">
+                        <p>导出的日志文件（一般为 <code>.zip</code>格式）包含程序运行的详细记录，请将其提供给开发人员以便快速定位问题。</p>
+                    </div>
+                </div>
+
+                <!-- ==========================================================
+                📝 子问题：启用截图模式
+                ========================================================== -->
+                <h3 id="启用截图模式">
+                    <a href="#启用截图模式" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    启用截图模式
+                </h3>
+
+                <p><strong>截图模式</strong> 是为了更精细地获取日志信息而设计的辅助功能。在遇到难以复现的 Bug 时，开启截图模式可以捕获更多的运行细节。</p>
+
+                <img src="images/如何启用截图模式.png" alt="如何启用截图模式" />
+                <p style="font-size:0.85rem; color:var(--text-color-3); text-align:center; margin-top:-0.5rem;">▲ 在设置中开启“截图模式”</p>
+
+                <h4>使用场景</h4>
+                <ul>
+                    <li><strong>疑难 Bug 定位</strong>：当常规日志不足以定位问题时，截图模式可提供额外的视觉信息。</li>
+                    <li><strong>界面识别异常</strong>：当脚本提示识别失败时，截图模式可以帮助开发人员了解当时的屏幕状态。</li>
+                    <li><strong>功能测试验证</strong>：开发人员可通过截图模式验证特定功能的执行情况。</li>
+                </ul>
+
+                <div class="rp-callout rp-callout--warning">
+                    <div class="rp-callout__title">⚠️ 注意事项</div>
+                    <div class="rp-callout__content">
+                        <ul>
+                            <li>截图模式会<strong>占用更多存储空间</strong>，建议仅在排查问题时临时开启。</li>
+                            <li>开启截图模式后，程序运行速度可能<strong>略有下降</strong>，属于正常现象。</li>
+                            <li>导出日志时，截图会一并打包，请<strong>注意隐私信息</strong>（如账号等）。</li>
+                        </ul>
+                    </div>
+                </div>
+
 
                 <!-- ==========================================================
                 📝 双人对决分类
@@ -488,7 +570,7 @@
                 </div>
 
                 <!-- 插入图片 -->
-                <img src="识别区域被悬浮窗挡住的情况.png" alt="悬浮窗挡住识别区域示例图" />
+                <img src="images/识别区域被悬浮窗挡住的情况.png" alt="悬浮窗挡住识别区域示例图" />
 
                 <p style="font-size:0.85rem; color:var(--text-color-3); text-align:center; margin-top:-0.5rem;">▲ 如图所示，悬浮窗遮挡了识别区域</p>
 
@@ -513,7 +595,7 @@
             <footer class="rp-doc-footer">
                 <div class="rp-doc-footer__edit">
                     <div class="rp-last-updated">
-                        <p>最后更新： <span>2026-08-10</span></p>
+                        <p>最后更新： <span>2026-08-11</span></p>
                     </div>
                     <a href="#" style="color:var(--brand-color); font-weight:500; font-size:0.9rem;">
                         ✎ 编辑此页
@@ -556,7 +638,7 @@
 
         // 默认展开所有分类
         document.addEventListener('DOMContentLoaded', function() {
-            ['duel'].forEach(id => {
+            ['log', 'duel'].forEach(id => {
                 const children = document.getElementById('children-' + id);
                 const arrow = document.getElementById('arrow-' + id);
                 if (children && arrow) {
