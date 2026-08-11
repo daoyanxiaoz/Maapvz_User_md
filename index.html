@@ -53,14 +53,14 @@
             scroll-padding-top: calc(var(--nav-height) + 20px);
         }
         body {
-    font-family: var(--font-family-base);
-    color: var(--text-color-1);
-    background: linear-gradient(180deg, #f5faf7 0%, #dce8e0 100%);
-    width: 100%;
-    min-width: 320px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
+            font-family: var(--font-family-base);
+            color: var(--text-color-1);
+            background: linear-gradient(180deg, #f5faf7 0%, #dce8e0 100%);
+            width: 100%;
+            min-width: 320px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
         a {
             color: var(--brand-color-dark);
             text-decoration: none;
@@ -314,6 +314,93 @@
         }
         .rp-callout--danger .rp-callout__title {
             color: #ab2131;
+        }
+
+        /* ===== 收益小栏（新增） ===== */
+        .earnings-bar {
+            background: linear-gradient(135deg, var(--brand-color-tint), var(--bg-color-soft));
+            border-radius: var(--radius);
+            padding: 14px 24px;
+            margin: 16px 0 20px 0;
+            border: 1px solid var(--brand-color-light);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px 24px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .earnings-bar:hover {
+            background: linear-gradient(135deg, rgba(110, 154, 122, 0.22), var(--bg-color-soft));
+            box-shadow: 0 2px 12px rgba(110, 154, 122, 0.12);
+        }
+        .earnings-bar__icon {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--brand-color-dark);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .earnings-bar__icon span {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .earnings-bar__item {
+            display: flex;
+            align-items: baseline;
+            gap: 4px 8px;
+            flex-wrap: wrap;
+        }
+        .earnings-bar__label {
+            font-weight: 500;
+            color: var(--text-color-2);
+            font-size: 0.95rem;
+        }
+        .earnings-bar__number {
+            font-weight: 700;
+            color: var(--brand-color-dark);
+            font-size: 1.3rem;
+            letter-spacing: 0.3px;
+        }
+        .earnings-bar__unit {
+            font-weight: 400;
+            color: var(--text-color-3);
+            font-size: 0.9rem;
+            margin-left: 2px;
+        }
+        .earnings-bar__divider {
+            color: var(--divider-light);
+            font-weight: 300;
+            font-size: 1.2rem;
+        }
+        .earnings-bar__badge {
+            background: var(--brand-color);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.1rem 0.7rem;
+            border-radius: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-left: 4px;
+        }
+        @media (max-width: 640px) {
+            .earnings-bar {
+                padding: 12px 16px;
+                gap: 6px 14px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .earnings-bar__divider {
+                display: none;
+            }
+            .earnings-bar__number {
+                font-size: 1.15rem;
+            }
+            .earnings-bar__item {
+                width: 100%;
+            }
         }
 
         /* ===== 目录 ===== */
@@ -745,7 +832,7 @@
                 </h3>
                 <p>进入游戏后直接开启任务即可自动完成。</p>
 
-                <!-- 刷胜场/金币 -->
+                <!-- ===== 刷胜场/金币（含收益小栏） ===== -->
                 <h3 id="刷胜场">
                     <a href="#刷胜场" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     刷胜场/金币
@@ -757,6 +844,25 @@
                     <li><strong>特点</strong>：不需要额外配置，开箱即用。</li>
                     <li><strong>适用场景</strong>：快速刷金币和基础胜场。</li>
                 </ul>
+
+                <!-- ===== 🆕 收益小栏（埃及1 挂机收益） ===== -->
+                <div class="earnings-bar">
+                    <div class="earnings-bar__icon">
+                        💰 <span>埃及1 收益</span>
+                        <span class="earnings-bar__badge">挂机</span>
+                    </div>
+                    <div class="earnings-bar__item">
+                        <span class="earnings-bar__label">1 小时 ≈</span>
+                        <span class="earnings-bar__number">26</span>
+                        <span class="earnings-bar__unit">万金币</span>
+                    </div>
+                    <span class="earnings-bar__divider">|</span>
+                    <div class="earnings-bar__item">
+                        <span class="earnings-bar__label">10 小时 ≈</span>
+                        <span class="earnings-bar__number">260</span>
+                        <span class="earnings-bar__unit">万金币</span>
+                    </div>
+                </div>
 
                 <h4>模式二：功夫13（需街机神器）</h4>
                 <ul>
@@ -920,11 +1026,11 @@ helloMaaPvz();</code></pre>
                 <p>本项目由 <strong><a href="https://github.com/MaaXYZ/MaaFramework" target="_blank">MaaFramework</a></strong> 强力驱动！</p>
                 <p>感谢所有贡献者：</p>
                 <div style="background:var(--bg-color-soft); padding:20px; border-radius:var(--radius); text-align:center;">
-    <h4 style="margin-bottom:12px; color:var(--text-color-2); font-weight:500;">👇 感谢以下贡献者</h4>
-    <a href="https://github.com/Maa-Assistant-PVZ-The-best/MAAPVZ/graphs/contributors" target="_blank" style="border-bottom:none;">
-        <img src="https://github.com/Maa-Assistant-PVZ-The-best/MAAPVZ/contributors.svg?size=64" alt="贡献者头像" style="max-width:100%; border-radius:var(--radius-small);" />
-    </a>
-</div>
+                    <h4 style="margin-bottom:12px; color:var(--text-color-2); font-weight:500;">👇 感谢以下贡献者</h4>
+                    <a href="https://github.com/Maa-Assistant-PVZ-The-best/MAAPVZ/graphs/contributors" target="_blank" style="border-bottom:none;">
+                        <img src="https://github.com/Maa-Assistant-PVZ-The-best/MAAPVZ/contributors.svg?size=64" alt="贡献者头像" style="max-width:100%; border-radius:var(--radius-small);" />
+                    </a>
+                </div>
 
                 <h3 id="join-us">
                     <a href="#join-us" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
