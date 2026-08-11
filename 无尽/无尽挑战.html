@@ -521,11 +521,11 @@
     <header class="rp-nav">
         <div class="rp-nav__left">
             <div class="rp-nav__title">
-    <a href="https://daoyanxiaoz.github.io/Maapvz_User_md/index.html" class="rp-nav__title__link">
-        <img src="../index_iamges/PVZAA.png" alt="MaaPvz Logo" style="height:32px; width:auto;" />
-        <span style="font-size:1.2rem; font-weight:600;">MaaPvz 用户文档</span>
-    </a>
-</div>
+                <a href="https://daoyanxiaoz.github.io/Maapvz_User_md/index.html" class="rp-nav__title__link">
+                    <img src="../index_iamges/PVZAA.png" alt="MaaPvz Logo" style="height:32px; width:auto;" />
+                    <span style="font-size:1.2rem; font-weight:600;">MaaPvz 用户文档</span>
+                </a>
+            </div>
         </div>
         <div class="rp-nav__right">
             <a href="../index.html" style="font-weight:500; color:var(--text-color-1);">← 返回主页</a>
@@ -565,27 +565,29 @@
                     <!-- 前期布阵（custom） -->
                     <div class="sidebar-folder" id="folder-custom" onclick="toggleFolder('folder-custom')" style="background:transparent; color:var(--text-color-2); font-weight:500; padding:4px 12px;">
                         <span>🌱 前期布阵（custom）</span>
-                        <span class="arrow" id="arrow-custom">▶</span>
+                        <span class="arrow" id="arrow-custom">▼</span>
                     </div>
-                    <div class="sidebar-children" id="children-custom" style="padding-left:4px;">
+                    <div class="sidebar-children open" id="children-custom" style="padding-left:4px;">
                         <a href="#前期-卡槽种植">卡槽种植（卡1~8）</a>
                         <a href="#前期-守卫菇">守卫菇</a>
                         <a href="#前期-铲子">铲子（前/后）</a>
                         <a href="#前期-喂豆">喂豆（小关/Boss）</a>
+                        <a href="#前期-编队切换">编队切换（前期）</a>
                     </div>
 
                     <!-- 后期布阵（fw） -->
                     <div class="sidebar-folder" id="folder-fw" onclick="toggleFolder('folder-fw')" style="background:transparent; color:var(--text-color-2); font-weight:500; padding:4px 12px;">
                         <span>🌿 后期布阵（fw）</span>
-                        <span class="arrow" id="arrow-fw">▶</span>
+                        <span class="arrow" id="arrow-fw">▼</span>
                     </div>
-                    <div class="sidebar-children" id="children-fw" style="padding-left:4px;">
+                    <div class="sidebar-children open" id="children-fw" style="padding-left:4px;">
                         <a href="#后期-补植物">补植物</a>
                         <a href="#后期-铲除">铲除</a>
                         <a href="#后期-喂豆">喂豆（小关/Boss）</a>
                         <a href="#后期-喂豆球果">喂豆球果</a>
                         <a href="#后期-抛花">抛花（小关/Boss）</a>
                         <a href="#后期-魔甘">魔甘收尾</a>
+                        <a href="#后期-编队切换">编队切换（后期）</a>
                     </div>
 
                     <!-- 辅助开关（独立） -->
@@ -637,6 +639,7 @@
                                         <li><a href="#前期-守卫菇">守卫菇</a></li>
                                         <li><a href="#前期-铲子">铲子（前/后）</a></li>
                                         <li><a href="#前期-喂豆">喂豆（小关/Boss）</a></li>
+                                        <li><a href="#前期-编队切换">编队切换（前期）</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#后期布阵">🌿 后期布阵（fw）</a>
@@ -647,6 +650,7 @@
                                         <li><a href="#后期-喂豆球果">喂豆球果</a></li>
                                         <li><a href="#后期-抛花">抛花（小关/Boss）</a></li>
                                         <li><a href="#后期-魔甘">魔甘收尾</a></li>
+                                        <li><a href="#后期-编队切换">编队切换（后期）</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#通用开关">🔘 通用开关</a></li>
@@ -781,6 +785,18 @@
                     <div class="item"><span class="key">Boss喂豆间隔</span><span class="value"><code>frame_wj_boss_custom_喂豆间隔</code>（1~10 秒）</span></div>
                 </div>
 
+                <!-- 编队切换（前期） -->
+                <h4 id="前期-编队切换">
+                    <a href="#前期-编队切换" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    编队切换（前期）
+                </h4>
+                <p>在前期布阵阶段自动切换到指定编队，方便快速布阵。该功能在 <code>自定义布阵</code> 开启时生效。</p>
+                <div class="config-grid">
+                    <div class="item"><span class="key">开关</span><span class="value"><code>frame_wj_custom_前期使用编队</code></span></div>
+                    <div class="item"><span class="key">编队编号</span><span class="value"><code>frame_wj_custom_前期切换到第几编队</code>（输入 1~6）</span></div>
+                </div>
+                <p><strong>使用建议</strong>：在前期布阵开始前自动切换到目标编队，确保布阵操作在正确的编队上执行。若不需要切换编队，将开关设为 <code>No</code> 即可。</p>
+
                 <!-- ==========================================================
                 🌿 后期布阵（fw）
                 ========================================================== -->
@@ -899,6 +915,18 @@
                     <li><code>甜薯1/2种植位置</code>、<code>飓风甘蓝1/2种植位置</code>：自定义种植坐标。</li>
                 </ul>
 
+                <!-- 编队切换（后期） -->
+                <h4 id="后期-编队切换">
+                    <a href="#后期-编队切换" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    编队切换（后期）
+                </h4>
+                <p>在从前期转为后期时自动切换到指定编队，确保阵型与编队一致。该功能在 <code>自定义布阵</code> 开启时生效。</p>
+                <div class="config-grid">
+                    <div class="item"><span class="key">开关</span><span class="value"><code>frame_wj_custom_回到后期切换编队</code></span></div>
+                    <div class="item"><span class="key">编队编号</span><span class="value"><code>frame_wj_custom_切换到第几编队</code>（输入 1~6）</span></div>
+                </div>
+                <p><strong>使用建议</strong>：当 <code>frame_wj_custom_回到后期</code> 触发时，自动切换到目标编队，确保后期挂机使用正确的编队。若不需要切换编队，将开关设为 <code>No</code> 即可。</p>
+
                 <!-- ==========================================================
                 🔘 通用开关
                 ========================================================== -->
@@ -970,13 +998,14 @@
 
                 <p><strong>工具功能概览：</strong></p>
                 <ul>
-                    <li><strong>卡槽备注</strong>：为卡槽添加备注，方便识别[reference:1]</li>
-                    <li><strong>布阵操作</strong>：拖拽操作项到棋盘格子即可布置，支持 WASD 键盘导航[reference:2]</li>
-                    <li><strong>前期/后期切换</strong>：分别配置 custom（前期布阵）和 fw（后期布阵）[reference:3]</li>
-                    <li><strong>快捷开关</strong>：快速开关核心功能（小关喂豆、Boss喂豆、加速等）[reference:4]</li>
-                    <li><strong>无尽选项树</strong>：完整展示所有配置项层级[reference:5]</li>
+                    <li><strong>卡槽备注</strong>：为卡槽添加备注，方便识别</li>
+                    <li><strong>布阵操作</strong>：拖拽操作项到棋盘格子即可布置，支持 WASD 键盘导航</li>
+                    <li><strong>前期/后期切换</strong>：分别配置 custom（前期布阵）和 fw（后期布阵）</li>
+                    <li><strong>快捷开关</strong>：快速开关核心功能（小关喂豆、Boss喂豆、加速等）</li>
+                    <li><strong>无尽选项树</strong>：完整展示所有配置项层级</li>
                     <li><strong>实时预览</strong>：右侧实时生成可导出的 JSON 配置</li>
-                    <li><strong>批量放置</strong>：开启后连续放置同种操作，提高配置效率[reference:6]</li>
+                    <li><strong>批量放置</strong>：开启后连续放置同种操作，提高配置效率</li>
+                    <li><strong>编队切换</strong>：支持前期和后期自动切换编队（1~6）</li>
                 </ul>
 
                 <div class="rp-callout rp-callout--tip">
@@ -992,7 +1021,7 @@
             <footer class="rp-doc-footer">
                 <div class="rp-doc-footer__edit">
                     <div class="rp-last-updated">
-                        <p>最后更新： <span>2026-08-09</span></p>
+                        <p>最后更新： <span>2026-08-11</span></p>
                     </div>
                     <a href="#" style="color:var(--brand-color); font-weight:500; font-size:0.9rem;">
                         ✎ 编辑此页
