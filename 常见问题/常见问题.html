@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>常见问题 — MaaPvz</title>
     <meta name="description" content="MaaPvz 使用过程中的常见问题与解决方案" />
-    <meta name="keywords" content="MaaPvz,常见问题,日志导出,截图模式,双人对决,悬浮窗,教程" />
+    <meta name="keywords" content="MaaPvz,常见问题,日志导出,截图模式,双人对决,悬浮窗,后台保活,教程" />
     <meta name="author" content="MaaPvz 文档团队" />
     <link rel="icon" href="https://daoyanxiaoz.github.io/Endless_Visualization_Configuration/images/PVZAA_small.png" />
 
@@ -435,6 +435,8 @@
                 </div>
                 <div class="sidebar-children" id="children-duel">
                     <a href="#悬浮窗遮挡">悬浮窗遮挡识别区域</a>
+                    <!-- 🆕 新增：后台保活 -->
+                    <a href="#后台保活">不要打开后台保活</a>
                 </div>
 
                 <!-- ===== 其他分类（预留） ===== -->
@@ -476,6 +478,8 @@
                             <a href="#双人对决">⚔️ 双人对决</a>
                             <ul>
                                 <li><a href="#悬浮窗遮挡">悬浮窗遮挡识别区域</a></li>
+                                <!-- 🆕 新增：后台保活 -->
+                                <li><a href="#后台保活">不要打开后台保活</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -589,13 +593,45 @@
                     </div>
                 </div>
 
+                <!-- 🆕 ==========================================================
+                📝 新增：不要打开后台保活
+                ========================================================== -->
+                <h3 id="后台保活">
+                    <a href="#后台保活" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    不要打开后台保活
+                </h3>
+
+                <div class="rp-callout rp-callout--warning">
+                    <div class="rp-callout__title">⚠️ 问题描述</div>
+                    <div class="rp-callout__content">
+                        <p>在运行 <strong>双人对决</strong> 任务时，如果开启了模拟器的 <strong>后台保活</strong> 功能，可能会导致游戏进程在后台被系统强制重启，从而中断自动化任务，造成脚本异常。</p>
+                    </div>
+                </div>
+
+                <img src="images/不要打开后台保活.png" alt="不要打开后台保活设置示例" />
+                <p style="font-size:0.85rem; color:var(--text-color-3); text-align:center; margin-top:-0.5rem;">▲ 后台保活设置界面（示例）</p>
+
+                <h4>✅ 解决方案</h4>
+                <ol>
+                    <li><strong>关闭后台保活</strong>：进入模拟器的设置或游戏加速器设置，找到 <strong>后台保活</strong>类似选项，将其 <strong>关闭</strong>。</li>
+                    <li><strong>重启模拟器</strong>：关闭设置后，建议重启模拟器以确保设置生效。</li>
+                    <li><strong>重新运行任务</strong>：重启后，再次启动双人对决任务，观察是否恢复正常。</li>
+                </ol>
+
+                <div class="rp-callout rp-callout--tip">
+                    <div class="rp-callout__title">💡 建议</div>
+                    <div class="rp-callout__content">
+                        <p>为了确保自动化任务稳定运行，建议在运行 <strong>双人对决</strong> 及其他长时间任务时，<strong>关闭所有可能干扰游戏进程的优化功能</strong>，包括后台保活、省电模式等。</p>
+                    </div>
+                </div>
+
             </div>
 
             <!-- ===== 页脚 ===== -->
             <footer class="rp-doc-footer">
                 <div class="rp-doc-footer__edit">
                     <div class="rp-last-updated">
-                        <p>最后更新： <span>2026-08-11</span></p>
+                        <p>最后更新： <span>2026-08-12</span></p>
                     </div>
                     <a href="#" style="color:var(--brand-color); font-weight:500; font-size:0.9rem;">
                         ✎ 编辑此页
