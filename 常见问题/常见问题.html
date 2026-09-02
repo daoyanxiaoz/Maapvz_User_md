@@ -241,6 +241,156 @@
             color: #ab2131;
         }
 
+        /* ===== 🔴 资源预设配置警告 ===== */
+        .preset-warning {
+            background: #fff5f5;
+            border: 3px solid #e53e3e;
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            margin: 1.5rem 0 2rem 0;
+            box-shadow: 0 0 0 4px rgba(229, 62, 62, 0.12);
+        }
+        .preset-warning .preset-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #c53030;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .preset-warning .preset-title .badge {
+            background: #e53e3e;
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 0.1rem 0.7rem;
+            border-radius: 12px;
+            letter-spacing: 0.5px;
+        }
+        .preset-warning ul {
+            color: var(--text-color-2);
+            margin-top: 0.5rem;
+            margin-bottom: 0;
+        }
+        .preset-warning ul li {
+            margin-top: 0.3rem;
+        }
+        .preset-warning .highlight {
+            color: #c53030;
+            font-weight: 700;
+        }
+        .preset-warning .highlight-box {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: rgba(229, 62, 62, 0.08);
+            border-radius: var(--radius-small);
+            border-left: 4px solid #e53e3e;
+        }
+        .preset-warning .highlight-box strong {
+            color: #c53030;
+        }
+
+        /* ===== 快速目录 ===== */
+        .quick-toc {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+            margin: 1.5rem 0 2rem 0;
+            padding: 12px 20px;
+            background: var(--bg-color-soft);
+            border-radius: var(--radius);
+            border: 1px solid var(--divider-light);
+        }
+        .quick-toc a {
+            color: var(--text-color-2);
+            font-weight: 500;
+            border-bottom: none;
+            font-size: 0.95rem;
+        }
+        .quick-toc a:hover {
+            color: var(--brand-color);
+            border-bottom: 1px solid var(--brand-color);
+        }
+        .quick-toc .sep {
+            color: var(--divider-light);
+        }
+
+        /* ===== 问题卡片 ===== */
+        .faq-item {
+            background: var(--bg-color);
+            border-radius: var(--radius);
+            border: 1px solid var(--divider-light);
+            padding: 20px 24px;
+            margin-bottom: 16px;
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+        .faq-item:hover {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            border-color: var(--brand-color-light);
+        }
+        .faq-item .faq-q {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-color-1);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .faq-item .faq-q .q-icon {
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+        .faq-item .faq-a {
+            margin-top: 10px;
+            padding-left: 4px;
+            color: var(--text-color-2);
+        }
+        .faq-item .faq-a p {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .faq-item .faq-a ul,
+        .faq-item .faq-a ol {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .faq-item .faq-a img {
+            margin: 0.8rem 0;
+        }
+        .faq-item .faq-a .img-caption {
+            font-size: 0.85rem;
+            color: var(--text-color-3);
+            text-align: center;
+            margin-top: -0.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        /* ===== 双人对决分类标题 ===== */
+        .faq-category {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--brand-color-dark);
+            border-bottom: 2px solid var(--brand-color-light);
+            padding-bottom: 0.5rem;
+            margin: 2.5rem 0 1.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* ===== 最后手段特殊样式 ===== */
+        .faq-item.faq-last {
+            border-color: #e53e3e;
+            border-width: 2px;
+            background: #fffafa;
+        }
+        .faq-item.faq-last .faq-q {
+            color: #c53030;
+        }
+        .faq-item.faq-last .q-icon {
+            color: #e53e3e;
+        }
+
         /* ===== 页脚 ===== */
         .rp-doc-footer {
             margin-top: 48px;
@@ -308,6 +458,25 @@
             }
             .rp-doc h3 {
                 font-size: 1.25rem;
+            }
+            .faq-item {
+                padding: 16px;
+            }
+            .faq-item .faq-q {
+                font-size: 1rem;
+            }
+            .preset-warning {
+                padding: 16px;
+            }
+            .preset-warning .preset-title {
+                font-size: 1.1rem;
+            }
+            .quick-toc {
+                padding: 10px 14px;
+                gap: 4px 10px;
+            }
+            .quick-toc a {
+                font-size: 0.85rem;
             }
         }
 
@@ -402,7 +571,7 @@
         <div class="rp-nav__right">
             <a href="../index.html" style="font-weight:500; color:var(--text-color-1);">← 返回主页</a>
             <a href="#" style="font-weight:500; color:var(--text-color-1);">用户手册</a>
-            <a href="#" style="font-weight:500; color:var(--text-color-1);" target="_blank">GitHub ↗</a>
+            <a href="https://github.com/Maa-Assistant-PVZ-The-best/MAAPVZ" style="font-weight:500; color:var(--text-color-1);" target="_blank">GitHub ↗</a>
         </div>
     </header>
 
@@ -418,29 +587,29 @@
             </div>
             <nav style="display:flex; flex-direction:column; gap:3px;">
 
-                <!-- ===== 🆕 可折叠父级：日志导出 ===== -->
-                <div class="sidebar-folder" id="folder-log" onclick="toggleFolder('folder-log')">
-                    <span>📋 日志导出</span>
-                    <span class="arrow" id="arrow-log">▶</span>
-                </div>
-                <div class="sidebar-children" id="children-log">
-                    <a href="#导出日志步骤">导出日志步骤</a>
-                    <a href="#启用截图模式">启用截图模式</a>
-                </div>
+                <!-- ===== 资源预设配置（独立链接，标红） ===== -->
+                <a href="#资源预设配置" style="display:block; padding:6px 12px; border-radius:8px; font-weight:600; color:#c53030; background:#fff5f5; border:1px solid #e53e3e; transition:background 0.15s; text-align:center;">
+                    ⚠️ 资源预设配置（必选）
+                </a>
 
                 <!-- ===== 可折叠父级：双人对决 ===== -->
                 <div class="sidebar-folder" id="folder-duel" onclick="toggleFolder('folder-duel')">
                     <span>⚔️ 双人对决</span>
-                    <span class="arrow" id="arrow-duel">▶</span>
+                    <span class="arrow" id="arrow-duel">▼</span>
                 </div>
-                <div class="sidebar-children" id="children-duel">
-                    <a href="#悬浮窗遮挡">悬浮窗遮挡识别区域</a>
-                    <!-- 🆕 新增：后台保活 -->
-                    <a href="#后台保活">不要打开后台保活</a>
+                <div class="sidebar-children open" id="children-duel">
+                    <a href="#悬浮窗遮挡">🪟 悬浮窗遮挡</a>
+                    <a href="#后台保活">🔋 后台保活</a>
                 </div>
 
-                <!-- ===== 其他分类（预留） ===== -->
-                <a href="#" class="sidebar-link" style="color:var(--text-color-3); cursor:default;">更多问题敬请期待...</a>
+                <!-- ===== 可折叠父级：最后手段 ===== -->
+                <div class="sidebar-folder" id="folder-last" onclick="toggleFolder('folder-last')">
+                    <span>🆘 最后手段</span>
+                    <span class="arrow" id="arrow-last">▼</span>
+                </div>
+                <div class="sidebar-children open" id="children-last">
+                    <a href="#最后手段">📄 导出日志完整流程</a>
+                </div>
 
             </nav>
             <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--divider-light); font-size:0.85rem; color:var(--text-color-3);">
@@ -460,168 +629,206 @@
                     收集使用过程中遇到的常见问题及解决方案
                 </span>
 
-                <!-- ===== 目录 ===== -->
-                <h2 id="table-of-contents">
-                    <a href="#table-of-contents" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-                    Table of Contents
-                </h2>
-                <div class="rp-toc-container">
+                <!-- ==========================================================
+                🔴 资源预设配置警告（放在最前面）
+                ========================================================== -->
+                <div class="preset-warning" id="资源预设配置">
+                    <div class="preset-title">
+                        ⚠️ 资源预设配置
+                        <span class="badge">必须选对！</span>
+                    </div>
+                    <p style="margin-top:4px; color:var(--text-color-1); font-weight:500;">
+                        <span class="highlight">双人对决/开始登录/无尽神器测序列等功能依赖正确的渠道服配置</span>，请在 MaaPvz 设置中仔细选择与你游戏版本匹配的渠道服。
+                    </p>
                     <ul>
-                        <li>
-                            <a href="#日志导出">📋 日志导出</a>
-                            <ul>
-                                <li><a href="#导出日志步骤">导出日志步骤</a></li>
-                                <li><a href="#启用截图模式">启用截图模式</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#双人对决">⚔️ 双人对决</a>
-                            <ul>
-                                <li><a href="#悬浮窗遮挡">悬浮窗遮挡识别区域</a></li>
-                                <!-- 🆕 新增：后台保活 -->
-                                <li><a href="#后台保活">不要打开后台保活</a></li>
-                            </ul>
-                        </li>
+                        <li><span class="highlight">❌ 选错配置 → 双人对决 / 开始登录无法正常使用</span></li>
+                        <li>支持渠道服：官服、B服、华为、小米、4399、应用宝、vivo、OPPO、九游、联想、荣耀、360、百度、7723、taptap、好游快报</li>
+                        <li><span class="highlight">⚠️ 不会查包名就不要用「自定义包名」！</span> 除非你确切知道自己的游戏包名是什么，否则请选择对应的已知渠道服。</li>
                     </ul>
-                </div>
-
-                <!-- ==========================================================
-                📝 日志导出分类
-                ========================================================== -->
-                <h2 id="日志导出">
-                    <a href="#日志导出" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-                    📋 日志导出
-                </h2>
-
-                <!-- ==========================================================
-                📝 子问题：导出日志步骤
-                ========================================================== -->
-                <h3 id="导出日志步骤">
-                    <a href="#导出日志步骤" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-                    导出日志步骤
-                </h3>
-
-                <p>当遇到脚本运行异常或 Bug 时，导出日志是反馈问题的重要途径。请按以下步骤操作：</p>
-
-                <h4>第一步：打开日志导出界面</h4>
-                <img src="images/导出日志第一步.png" alt="导出日志第一步" />
-                <p style="font-size:0.85rem; color:var(--text-color-3); text-align:center; margin-top:-0.5rem;">▲ 点击“导出日志”按钮</p>
-
-                <h4>第二步：选择保存位置并导出</h4>
-                <img src="images/导出日志第二步.png" alt="导出日志第二步" />
-                <p style="font-size:0.85rem; color:var(--text-color-3); text-align:center; margin-top:-0.5rem;">▲ 选择保存路径，点击“保存”即可导出日志文件</p>
-
-                <div class="rp-callout rp-callout--tip">
-                    <div class="rp-callout__title">💡 提示</div>
-                    <div class="rp-callout__content">
-                        <p>导出的日志文件（一般为 <code>.zip</code>格式）包含程序运行的详细记录，请将其提供给开发人员以便快速定位问题。</p>
+                    <div class="highlight-box">
+                        <strong>💡 不确定自己是什么渠道？</strong>
+                        <span style="color:var(--text-color-2);">去游戏登录界面看 logo / 启动页标，或在群内截图询问。</span>
                     </div>
                 </div>
 
                 <!-- ==========================================================
-                📝 子问题：启用截图模式
+                📑 快速目录
                 ========================================================== -->
-                <h3 id="启用截图模式">
-                    <a href="#启用截图模式" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-                    启用截图模式
-                </h3>
-
-                <p><strong>截图模式</strong> 是为了更精细地获取日志信息而设计的辅助功能。在遇到难以复现的 Bug 时，开启截图模式可以捕获更多的运行细节。</p>
-
-                <img src="images/如何启用截图模式.png" alt="如何启用截图模式" />
-                <p style="font-size:0.85rem; color:var(--text-color-3); text-align:center; margin-top:-0.5rem;">▲ 在设置中开启“截图模式”</p>
-
-                <h4>使用场景</h4>
-                <ul>
-                    <li><strong>疑难 Bug 定位</strong>：当常规日志不足以定位问题时，截图模式可提供额外的视觉信息。</li>
-                    <li><strong>界面识别异常</strong>：当脚本提示识别失败时，截图模式可以帮助开发人员了解当时的屏幕状态。</li>
-                    <li><strong>功能测试验证</strong>：开发人员可通过截图模式验证特定功能的执行情况。</li>
-                </ul>
-
-                <div class="rp-callout rp-callout--warning">
-                    <div class="rp-callout__title">⚠️ 注意事项</div>
-                    <div class="rp-callout__content">
-                        <ul>
-                            <li>截图模式会<strong>占用更多存储空间</strong>，建议仅在排查问题时临时开启。</li>
-                            <li>开启截图模式后，程序运行速度可能<strong>略有下降</strong>，属于正常现象。</li>
-                            <li>导出日志时，截图会一并打包，请<strong>注意隐私信息</strong>（如账号等）。</li>
-                        </ul>
-                    </div>
+                <div class="quick-toc">
+                    <a href="#悬浮窗遮挡">🪟 悬浮窗遮挡</a>
+                    <span class="sep">·</span>
+                    <a href="#后台保活">🔋 后台保活</a>
+                    <span class="sep">·</span>
+                    <a href="#最后手段" style="color:#c53030; font-weight:600;">🆘 最后手段</a>
                 </div>
 
-
                 <!-- ==========================================================
-                📝 双人对决分类
+                ⚔️ 双人对决 分类
                 ========================================================== -->
-                <h2 id="双人对决">
-                    <a href="#双人对决" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                <div class="faq-category" id="双人对决">
                     ⚔️ 双人对决
-                </h2>
+                </div>
 
                 <!-- ==========================================================
-                📝 问题：悬浮窗遮挡识别区域
+                📝 问题1：悬浮窗遮挡（原内容）
                 ========================================================== -->
-                <h3 id="悬浮窗遮挡">
-                    <a href="#悬浮窗遮挡" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-                    悬浮窗遮挡识别区域
-                </h3>
-
-                <div class="rp-callout rp-callout--warning">
-                    <div class="rp-callout__title">⚠️ 问题描述</div>
-                    <div class="rp-callout__content">
-                        <p>在运行 <strong>双人对决</strong> 任务时，模拟器的悬浮窗（如操作录制悬浮球、游戏加速器悬浮窗等）可能会遮挡游戏界面的关键识别区域，导致脚本无法正确识别当前状态，从而造成任务执行失败或卡死。</p>
+                <div class="faq-item" id="悬浮窗遮挡">
+                    <div class="faq-q">
+                        <span class="q-icon">🪟</span>
+                        悬浮窗遮挡识别区域怎么办？
+                    </div>
+                    <div class="faq-a">
+                        <div class="rp-callout rp-callout--warning" style="margin-top:0;">
+                            <div class="rp-callout__title">⚠️ 问题描述</div>
+                            <div class="rp-callout__content">
+                                <p>在运行 <strong>双人对决</strong> 任务时，模拟器的悬浮窗（如操作录制悬浮球、游戏加速器悬浮窗等）可能会遮挡游戏界面的关键识别区域，导致脚本无法正确识别当前状态，从而造成任务执行失败或卡死。</p>
+                            </div>
+                        </div>
+                        <img src="images/识别区域被悬浮窗挡住的情况.png" alt="悬浮窗挡住识别区域示例图" />
+                        <div class="img-caption">▲ 如图所示，悬浮窗遮挡了识别区域</div>
+                        <p><strong>✅ 解决方案：</strong></p>
+                        <ol>
+                            <li><strong>找到悬浮窗</strong>：检查模拟器屏幕上是否有任何悬浮图标（如操作录制、加速器、游戏工具箱等）。</li>
+                            <li><strong>拖动悬浮窗</strong>：长按悬浮窗，将其拖拽到屏幕的 <strong>边缘或角落位置</strong>，确保不遮挡游戏界面的核心区域。</li>
+                            <li><strong>临时关闭悬浮窗</strong>：如果拖拽后仍然影响识别，可以尝试 <strong>暂时关闭悬浮窗</strong>（通常在悬浮窗上右键或双击可关闭）。</li>
+                            <li><strong>重新运行任务</strong>：调整完毕后，重新启动双人对决任务，观察是否恢复正常。</li>
+                        </ol>
+                        <div class="rp-callout rp-callout--tip" style="margin-top:12px;">
+                            <div class="rp-callout__title">💡 建议</div>
+                            <div class="rp-callout__content">
+                                <p>为了获得最佳体验，建议在运行 <strong>双人对决</strong> 及其他自动化任务时，<strong>提前将所有悬浮窗移动到屏幕边缘</strong>，或在使用脚本期间 <strong>暂时关闭不必要的悬浮工具</strong>。</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 插入图片 -->
-                <img src="images/识别区域被悬浮窗挡住的情况.png" alt="悬浮窗挡住识别区域示例图" />
-
-                <p style="font-size:0.85rem; color:var(--text-color-3); text-align:center; margin-top:-0.5rem;">▲ 如图所示，悬浮窗遮挡了识别区域</p>
-
-                <h4>✅ 解决方案</h4>
-                <ol>
-                    <li><strong>找到悬浮窗</strong>：检查模拟器屏幕上是否有任何悬浮图标（如操作录制、加速器、游戏工具箱等）。</li>
-                    <li><strong>拖动悬浮窗</strong>：长按悬浮窗，将其拖拽到屏幕的 <strong>边缘或角落位置</strong>，确保不遮挡游戏界面的核心区域。</li>
-                    <li><strong>临时关闭悬浮窗</strong>：如果拖拽后仍然影响识别，可以尝试 <strong>暂时关闭悬浮窗</strong>（通常在悬浮窗上右键或双击可关闭）。</li>
-                    <li><strong>重新运行任务</strong>：调整完毕后，重新启动双人对决任务，观察是否恢复正常。</li>
-                </ol>
-
-                <div class="rp-callout rp-callout--tip">
-                    <div class="rp-callout__title">💡 建议</div>
-                    <div class="rp-callout__content">
-                        <p>为了获得最佳体验，建议在运行 <strong>双人对决</strong> 及其他自动化任务时，<strong>提前将所有悬浮窗移动到屏幕边缘</strong>，或在使用脚本期间 <strong>暂时关闭不必要的悬浮工具</strong>。</p>
-                    </div>
-                </div>
-
-                <!-- 🆕 ==========================================================
-                📝 新增：不要打开后台保活
+                <!-- ==========================================================
+                📝 问题2：后台保活（原内容）
                 ========================================================== -->
-                <h3 id="后台保活">
-                    <a href="#后台保活" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
-                    不要打开后台保活
-                </h3>
-
-                <div class="rp-callout rp-callout--warning">
-                    <div class="rp-callout__title">⚠️ 问题描述</div>
-                    <div class="rp-callout__content">
-                        <p>在运行 <strong>双人对决</strong> 任务时，如果开启了模拟器的 <strong>后台保活</strong> 功能，可能会导致游戏进程在后台被系统强制重启，从而中断自动化任务，造成脚本异常。</p>
+                <div class="faq-item" id="后台保活">
+                    <div class="faq-q">
+                        <span class="q-icon">🔋</span>
+                        为什么不要打开后台保活？
+                    </div>
+                    <div class="faq-a">
+                        <div class="rp-callout rp-callout--warning" style="margin-top:0;">
+                            <div class="rp-callout__title">⚠️ 问题描述</div>
+                            <div class="rp-callout__content">
+                                <p>在运行 <strong>双人对决</strong> 任务时，如果开启了模拟器的 <strong>后台保活</strong> 功能，可能会导致游戏进程在后台被系统强制重启，从而中断自动化任务，造成脚本异常。</p>
+                            </div>
+                        </div>
+                        <img src="images/不要打开后台保活.png" alt="不要打开后台保活设置示例" />
+                        <div class="img-caption">▲ 后台保活设置界面（示例）</div>
+                        <p><strong>✅ 解决方案：</strong></p>
+                        <ol>
+                            <li><strong>关闭后台保活</strong>：进入模拟器的设置或游戏加速器设置，找到 <strong>后台保活</strong> 类似选项，将其 <strong>关闭</strong>。</li>
+                            <li><strong>重启模拟器</strong>：关闭设置后，建议重启模拟器以确保设置生效。</li>
+                            <li><strong>重新运行任务</strong>：重启后，再次启动双人对决任务，观察是否恢复正常。</li>
+                        </ol>
+                        <div class="rp-callout rp-callout--tip" style="margin-top:12px;">
+                            <div class="rp-callout__title">💡 建议</div>
+                            <div class="rp-callout__content">
+                                <p>为了确保自动化任务稳定运行，建议在运行 <strong>双人对决</strong> 及其他长时间任务时，<strong>关闭所有可能干扰游戏进程的优化功能</strong>，包括后台保活、省电模式等。</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <img src="images/不要打开后台保活.png" alt="不要打开后台保活设置示例" />
-                <p style="font-size:0.85rem; color:var(--text-color-3); text-align:center; margin-top:-0.5rem;">▲ 后台保活设置界面（示例）</p>
+                <!-- ==========================================================
+                🆘 最后手段（包含：导出日志 + 截图模式）
+                ========================================================== -->
+                <div class="faq-item faq-last" id="最后手段">
+                    <div class="faq-q">
+                        <span class="q-icon">🆘</span>
+                        以上都试了还是不行，怎么办？（导出日志完整流程）
+                    </div>
+                    <div class="faq-a">
 
-                <h4>✅ 解决方案</h4>
-                <ol>
-                    <li><strong>关闭后台保活</strong>：进入模拟器的设置或游戏加速器设置，找到 <strong>后台保活</strong>类似选项，将其 <strong>关闭</strong>。</li>
-                    <li><strong>重启模拟器</strong>：关闭设置后，建议重启模拟器以确保设置生效。</li>
-                    <li><strong>重新运行任务</strong>：重启后，再次启动双人对决任务，观察是否恢复正常。</li>
-                </ol>
+                        <p>到这一步，最有用的不是继续猜，而是 <strong>把日志带出来</strong>。</p>
 
-                <div class="rp-callout rp-callout--tip">
-                    <div class="rp-callout__title">💡 建议</div>
-                    <div class="rp-callout__content">
-                        <p>为了确保自动化任务稳定运行，建议在运行 <strong>双人对决</strong> 及其他长时间任务时，<strong>关闭所有可能干扰游戏进程的优化功能</strong>，包括后台保活、省电模式等。</p>
+                        <hr style="margin:1rem 0; border-color:var(--divider-light);" />
+
+                        <h4 style="margin-top:0.5rem; margin-bottom:0.5rem;">📄 如何导出日志？</h4>
+                        <p>当遇到脚本运行异常或 Bug 时，导出日志是反馈问题的重要途径。请按以下步骤操作：</p>
+                        <ol>
+                            <li><strong>打开日志导出界面</strong>：点击 MaaPvz 主界面的“导出日志”按钮。</li>
+                            <li><strong>选择保存位置并导出</strong>：选择保存路径，点击“保存”即可导出日志文件。</li>
+                        </ol>
+                        <img src="images/导出日志第一步.png" alt="导出日志第一步" />
+                        <div class="img-caption">▲ 点击“导出日志”按钮</div>
+                        <img src="images/导出日志第二步.png" alt="导出日志第二步" />
+                        <div class="img-caption">▲ 选择保存路径，点击“保存”即可导出日志文件</div>
+
+                        <div class="rp-callout rp-callout--tip" style="margin-top:12px;">
+                            <div class="rp-callout__title">💡 提示</div>
+                            <div class="rp-callout__content">
+                                <p>导出的日志文件（一般为 <code>.zip</code> 格式）包含程序运行的详细记录，请将其提供给开发人员以便快速定位问题。</p>
+                            </div>
+                        </div>
+
+                        <hr style="margin:1.5rem 0; border-color:var(--divider-light);" />
+
+                        <h4 style="margin-top:0.5rem; margin-bottom:0.5rem;">📷 如何启用截图模式？有什么作用？</h4>
+                        <p><strong>截图模式</strong> 是为了更精细地获取日志信息而设计的辅助功能。在遇到难以复现的 Bug 时，开启截图模式可以捕获更多的运行细节。</p>
+
+                        <img src="images/如何启用截图模式.png" alt="如何启用截图模式" />
+                        <div class="img-caption">▲ 在设置中开启“截图模式”</div>
+
+                        <p><strong>使用场景：</strong></p>
+                        <ul>
+                            <li><strong>疑难 Bug 定位</strong>：当常规日志不足以定位问题时，截图模式可提供额外的视觉信息。</li>
+                            <li><strong>界面识别异常</strong>：当脚本提示识别失败时，截图模式可以帮助开发人员了解当时的屏幕状态。</li>
+                            <li><strong>功能测试验证</strong>：开发人员可通过截图模式验证特定功能的执行情况。</li>
+                        </ul>
+
+                        <div class="rp-callout rp-callout--warning" style="margin-top:12px;">
+                            <div class="rp-callout__title">⚠️ 注意事项</div>
+                            <div class="rp-callout__content">
+                                <ul>
+                                    <li>截图模式会<strong>占用更多存储空间</strong>，建议仅在排查问题时临时开启。</li>
+                                    <li>开启截图模式后，程序运行速度可能<strong>略有下降</strong>，属于正常现象。</li>
+                                    <li>导出日志时，截图会一并打包，请<strong>注意隐私信息</strong>（如账号等）。</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <hr style="margin:1.5rem 0; border-color:var(--divider-light);" />
+
+                        <h4 style="margin-top:0.5rem; margin-bottom:0.5rem;">✅ 导出日志标准姿势（总结）</h4>
+                        <ol>
+                            <li>打开设置里的 <strong>调试模式</strong></li>
+                            <li><strong>复现一次问题</strong>（对，要再来一遍）</li>
+                            <li>在设置里 <strong>导出日志压缩包</strong></li>
+                            <li>带着你的 <strong>现象描述</strong> 一起发到群里 <strong>1074855131 / 1092878305</strong></li>
+                        </ol>
+
+                        <div class="rp-callout rp-callout--danger" style="margin-top:12px;">
+                            <div class="rp-callout__title">⚠️ 为什么一定要开调试模式？</div>
+                            <div class="rp-callout__content">
+                                <p>因为不开的话日志信息太少，看了也白看。</p>
+                            </div>
+                        </div>
+
+                        <div class="rp-callout rp-callout--warning" style="margin-top:12px;">
+                            <div class="rp-callout__title">⏰ 什么时候导出日志最好？</div>
+                            <div class="rp-callout__content">
+                                <p><strong>问题刚出现时马上导。</strong> 拖太久日志可能会被后面的内容覆盖掉，到时候想查就查不到了。</p>
+                            </div>
+                        </div>
+
+                        <div class="rp-callout rp-callout--tip" style="margin-top:12px;">
+                            <div class="rp-callout__title">💡 截图模式辅助</div>
+                            <div class="rp-callout__content">
+                                <p>如果问题涉及界面识别异常，可以先在设置中开启 <strong>截图模式</strong>，然后再复现问题并导出日志。截图会一并打包在日志中，帮助开发人员更直观地了解问题现场。</p>
+                                <p style="margin-top:6px;">📌 截图模式会占用更多存储空间，建议仅在排查问题时临时开启。</p>
+                            </div>
+                        </div>
+
+                        <p style="margin-top:16px;"><strong>📢 反馈渠道：</strong></p>
+                        <ul>
+                            <li>聊天群：<strong>669689256</strong></li>
+                            <li>开发群：<strong>1092806752</strong></li>
+                        </ul>
                     </div>
                 </div>
 
@@ -631,7 +838,7 @@
             <footer class="rp-doc-footer">
                 <div class="rp-doc-footer__edit">
                     <div class="rp-last-updated">
-                        <p>最后更新： <span>2026-08-12</span></p>
+                        <p>最后更新： <span>2026-09-02</span></p>
                     </div>
                     <a href="#" style="color:var(--brand-color); font-weight:500; font-size:0.9rem;">
                         ✎ 编辑此页
@@ -674,7 +881,7 @@
 
         // 默认展开所有分类
         document.addEventListener('DOMContentLoaded', function() {
-            ['log', 'duel'].forEach(id => {
+            ['duel', 'last'].forEach(id => {
                 const children = document.getElementById('children-' + id);
                 const arrow = document.getElementById('arrow-' + id);
                 if (children && arrow) {
