@@ -569,6 +569,7 @@
                     </div>
                     <div class="sidebar-children open" id="children-custom" style="padding-left:4px;">
                         <a href="#前期-卡槽种植">卡槽种植（卡1~8）</a>
+                        <a href="#前期-球果切换形态">球果切换形态</a>
                         <a href="#前期-守卫菇">守卫菇</a>
                         <a href="#前期-铲子">铲子（前/后）</a>
                         <a href="#前期-喂豆">喂豆（小关/Boss）</a>
@@ -636,6 +637,7 @@
                                 <li><a href="#前期布阵">🌱 前期布阵（custom）</a>
                                     <ul>
                                         <li><a href="#前期-卡槽种植">卡槽种植（卡1~8）</a></li>
+                                        <li><a href="#前期-球果切换形态">球果切换形态</a></li>
                                         <li><a href="#前期-守卫菇">守卫菇</a></li>
                                         <li><a href="#前期-铲子">铲子（前/后）</a></li>
                                         <li><a href="#前期-喂豆">喂豆（小关/Boss）</a></li>
@@ -676,11 +678,6 @@
                     <li><strong>选卡逻辑</strong>：优先桑葚、毒藤、大哥，其余全选橙色植物。</li>
                 </ul>
                 <img src="images/原大_卡槽.png" alt="原大卡槽" style="max-width:600px;">
-                <!-- ===== 西部阵容（新增） ===== -->
-<h3>西部阵容</h3>
-<p>本阵容适用于西部主题的无尽关卡，卡槽配置如下：</p>
-<img src="images/原大_西部卡槽.png" alt="原大桑葚西部阵容" style="max-width:600px;">
-<p><strong>使用说明：</strong> 与标准阵容相同，只需将卡槽替换为西部植物即可。</p>
 
                 <h2 id="心塔无尽">
                     <a href="#心塔无尽" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
@@ -735,16 +732,32 @@
                     <a href="#前期-卡槽种植" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     卡槽种植（卡1~8）
                 </h4>
-                <p>为每个卡槽（1~8）设置种植位置，每个卡槽最多可配置 <strong>10 个</strong> 种植点位。</p>
+                <p>为每个卡槽（1~8）设置种植位置。<strong>卡1、卡2</strong> 最多可配置 <strong>25 个</strong> 种植点位，<strong>卡3~8</strong> 最多可配置 <strong>10 个</strong> 种植点位。</p>
 
                 <div class="config-grid">
                     <div class="item"><span class="key">配置项</span><span class="value"><code>卡1种植</code> ~ <code>卡8种植</code></span></div>
                     <div class="item"><span class="key">类型</span><span class="value">开关（嵌套坐标输入）</span></div>
-                    <div class="item"><span class="key">最大次数</span><span class="value">每卡槽 10 次</span></div>
+                    <div class="item"><span class="key">最大次数</span><span class="value">卡1、卡2：25 次；卡3~8：10 次</span></div>
                     <div class="item"><span class="key">坐标格式</span><span class="value"><code>列-行</code>（如 <code>5-3</code>）</span></div>
                 </div>
 
                 <p><strong>使用建议</strong>：按卡槽顺序依次布置，建议先布核心输出植物，再布辅助植物。坐标从 <code>1-1</code>（左上角）到 <code>9-5</code>（右下角）。</p>
+
+                <!-- 球果切换形态 -->
+                <h4 id="前期-球果切换形态">
+                    <a href="#前期-球果切换形态" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    球果切换形态（前期）
+                </h4>
+                <p>在前期布阵时，可让球果切换至指定形态。</p>
+                <div class="config-grid">
+                    <div class="item"><span class="key">开关</span><span class="value"><code>frame_wj_custom_球果切换形态</code></span></div>
+                    <div class="item"><span class="key">形态选择</span><span class="value"><code>frame_wj_custom_球果位置</code>（恐龙/幽灵马/水母）</span></div>
+                </div>
+                <ul>
+                    <li><strong>恐龙形态</strong>：点击3次切换</li>
+                    <li><strong>幽灵马形态</strong>：点击2次切换</li>
+                    <li><strong>水母形态</strong>：点击1次切换</li>
+                </ul>
 
                 <!-- 守卫菇 -->
                 <h4 id="前期-守卫菇">
@@ -820,10 +833,10 @@
                 <p>每关结算后自动补种上一关损失的植物，保障阵型完整性。</p>
                 <div class="config-grid">
                     <div class="item"><span class="key">开关</span><span class="value"><code>是否需要补植物</code></span></div>
-                    <div class="item"><span class="key">补种卡槽</span><span class="value"><code>卡槽2_补植物</code> ~ <code>卡槽8_补植物</code></span></div>
-                    <div class="item"><span class="key">每卡槽次数</span><span class="value">最多 8 个位置</span></div>
+                    <div class="item"><span class="key">补种卡槽</span><span class="value"><code>frame_卡槽2_补植物</code> ~ <code>frame_卡槽8_补植物</code></span></div>
+                    <div class="item"><span class="key">每卡槽次数</span><span class="value"><strong>卡2、卡3</strong> 最多 15 个位置，<strong>卡4~8</strong> 最多 5 个位置</span></div>
                 </div>
-                <p>补植物只针对卡槽2~8，因为卡槽1通常为能量花等辅助植物，不需要补种。</p>
+                <p>补植物只针对卡槽2~8，因为卡槽1通常为能量花等辅助植物，不需要补种。注意：卡槽2和卡3有更多补种位置，适合核心输出植物。</p>
 
                 <!-- 铲除 -->
                 <h4 id="后期-铲除">
@@ -846,10 +859,10 @@
                 <div class="config-grid">
                     <div class="item"><span class="key">小关喂豆开关</span><span class="value"><code>小关是否喂豆</code></span></div>
                     <div class="item"><span class="key">小关喂豆位置</span><span class="value"><code>小关喂豆位置</code> + 坐标</span></div>
-                    <div class="item"><span class="key">小关喂豆间隔</span><span class="value"><code>小关喂豆间隔</code>（4~100 秒）</span></div>
+                    <div class="item"><span class="key">小关喂豆间隔</span><span class="value">输入总时长（秒），将动态调整所有划飞弹的滑动次数（默认4秒）</span></div>
                     <div class="item"><span class="key">Boss喂豆开关</span><span class="value"><code>fw_boss关是否需要喂豆</code></span></div>
                     <div class="item"><span class="key">Boss喂豆位置</span><span class="value"><code>fw_boss关喂豆位置</code> + 坐标</span></div>
-                    <div class="item"><span class="key">Boss喂豆间隔</span><span class="value"><code>fw_boss关喂豆间隔</code>（默认 4 秒）</span></div>
+                    <div class="item"><span class="key">Boss喂豆间隔</span><span class="value"><code>fw_boss关喂豆间隔</code>（默认 4 秒，单位毫秒）</span></div>
                 </div>
 
                 <!-- 喂豆球果 -->
@@ -951,6 +964,7 @@
                         <tr><td><strong>Boss加速</strong></td><td><code>fw_boss关是否加速</code></td><td>进入Boss关后自动点击加速键</td></tr>
                         <tr><td><strong>补给智能选取</strong></td><td><code>fw_boss_补给智能选取</code></td><td>自动按优先级选取补给（神器→全部植物→橙色→蓝色→紫色）</td></tr>
                         <tr><td><strong>相机神器</strong></td><td><code>fw_boss_是否开相机神器</code></td><td>Boss关自动使用相机神器复原植物</td></tr>
+                        <tr><td><strong>开启点波</strong></td><td><code>是否开启点波</code></td><td>自动点击下一波按钮，加速出怪</td></tr>
                         <tr><td><strong>识别能量花</strong></td><td><code>识别能量花卡槽位置</code></td><td>能量花可放在任意卡槽（需与 <code>是否抛花</code> 配合）</td></tr>
                         <tr><td><strong>识别魔甘</strong></td><td><code>识别魔甘卡槽位置</code></td><td>魔甘植物可放在任意卡槽（需与魔甘开关配合）</td></tr>
                         <tr><td><strong>识别三叶草</strong></td><td><code>识别三叶草卡槽位置</code></td><td>三叶草可放在任意卡槽（需与魔甘开关配合）</td></tr>
