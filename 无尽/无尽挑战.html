@@ -512,6 +512,32 @@
                 margin-left: auto;
             }
         }
+
+        /* ===== 图片组（并排展示） ===== */
+        .img-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 1rem 0 1.5rem 0;
+        }
+        .img-group .img-item {
+            flex: 1 1 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .img-group .img-item p {
+            text-align: center;
+            font-weight: 600;
+            margin: 0 0 4px 0;
+        }
+        .img-group .img-item img {
+            width: 100%;
+            margin: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--divider-light);
+            border-radius: var(--radius);
+        }
     </style>
 </head>
 
@@ -677,7 +703,16 @@
                     <li><strong>Boss关喂豆</strong>：一直喂豆直到结算，位置 <code>(5-3)</code>。</li>
                     <li><strong>选卡逻辑</strong>：优先桑葚、毒藤、大哥，其余全选橙色植物。</li>
                 </ul>
-                <img src="images/原大_卡槽.png" alt="原大卡槽" style="max-width:600px;">
+                <div class="img-group">
+                    <div class="img-item">
+                        <p>普通地图卡槽</p>
+                        <img src="images/原大_卡槽.png" alt="原大卡槽" />
+                    </div>
+                    <div class="img-item">
+                        <p>西部地图卡槽（若在西部无尽中使用，需按此配置）</p>
+                        <img src="images/原大_西部卡槽.png" alt="原大西部卡槽" />
+                    </div>
+                </div>
 
                 <h2 id="心塔无尽">
                     <a href="#心塔无尽" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
