@@ -617,6 +617,34 @@
             color: #fff;
             border-color: var(--brand-color);
         }
+
+        /* ===== 自定义悬浮提示（大字号） ===== */
+        .hover-tip {
+            position: relative;
+        }
+        .hover-tip::after {
+            content: attr(data-tip);
+            position: absolute;
+            left: 50%;
+            bottom: calc(100% + 10px);
+            transform: translateX(-50%);
+            background: #242424;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s, transform 0.2s;
+            z-index: 80;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+        }
+        .hover-tip:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-2px);
+        }
     </style>
 </head>
 
@@ -666,6 +694,7 @@
                     <span class="arrow" id="arrow-newbie">▶</span>
                 </div>
                 <div class="sidebar-children" id="children-newbie">
+                    <a href="#开始登录">开始登录</a>
                     <a href="#签到">签到</a>
                     <a href="#免广告卡">免广告卡</a>
                     <a href="#植物探险">植物探险</a>
@@ -727,6 +756,7 @@
                         <li>
                             <a href="#主要功能">主要功能</a>
                             <ul>
+                                <li><a href="#开始登录">开始登录</a></li>
                                 <li><a href="#签到">签到</a></li>
                                 <li><a href="#免广告卡">免广告卡</a></li>
                                 <li><a href="#植物探险">植物探险</a></li>
@@ -790,6 +820,52 @@
                     主要功能
                 </h2>
 
+                <!-- 开始登录 -->
+                <h3 id="开始登录">
+                    <a href="#开始登录" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    开始登录
+                </h3>
+                <p>请务必设置好你的 <strong>资源预设配置</strong> 中的 <strong>渠道服</strong> 选项，重构之后，<strong>自定义包名</strong> 将在该任务中配置。</p>
+
+                <h4>存档覆盖进度</h4>
+                <p>选择登录时要使用的存档进度：</p>
+                <ul>
+                    <li><strong>云端进度</strong>：使用云端存档覆盖当前进度。</li>
+                    <li><strong>本地进度</strong>：使用本地存档覆盖当前进度。</li>
+                    <li><strong>最新进度</strong>（NEW）：自动使用最新的存档进度。</li>
+                </ul>
+
+                <h4>自定义包名</h4>
+                <p>自定义包名现在与 <strong>资源预设配置</strong> 不再冲突，需要在 <strong>开始登录</strong> 任务内进行设置。</p>
+                <div class="rp-callout rp-callout--warning">
+                    <div class="rp-callout__title">⚠️ 注意事项</div>
+                    <div class="rp-callout__content">
+                        <p>通常用于共存免绑包，请知道如何查询包名后使用，包名并非软件名字，也不是你的用户名。</p>
+                    </div>
+                </div>
+
+                <p>
+                    <span style="display:inline-block; padding:6px 16px; border-radius:var(--radius-small); background:rgba(0,0,0,0.05); border:1px dashed rgba(0,0,0,0.18); color:#9a9a9a; font-size:0.9rem; letter-spacing:0.08em; cursor:help; user-select:none;" title="默认关闭，用户有需求才开启，随时可能下架这个功能，因为这个功能“剥夺了用户***的能力”">神秘的功能隐藏着过去发生了什么</span>
+                </p>
+
+                <h4>绑定设备</h4>
+                <ul>
+                    <li>开启后会在登录时自动绑定设备，可以一直开启，没有绑定设备按钮就不绑定设备。</li>
+                </ul>
+
+                <h4>关闭悬浮窗</h4>
+                <ul>
+                    <li>开启后会尝试寻找并关闭悬浮窗；若找不到，会直接点击登录。</li>
+                    <li>目前只适配了（截至 10.16）：<strong>4399 / 华为</strong>。</li>
+                </ul>
+                <div class="rp-callout rp-callout--warning">
+                    <div class="rp-callout__title">⚠️ 稳定性说明</div>
+                    <div class="rp-callout__content">
+                        <p>该功能不算特别稳定，需要多次调试。它专门提供给 <strong>悬浮窗每次登录都会强制弹出且无法隐藏</strong> 的用户，如果你有更好的优化方案，欢迎反馈！</p>
+                        <p>如果这里没有适配你的悬浮球，你也可以参考：<a href="悬浮窗/获取悬浮窗控件ID.html" style="font-weight:600; color:var(--brand-color);">👉 如何获取悬浮窗的 UI 控件 ID →</a></p>
+                    </div>
+                </div>
+
                 <!-- 签到 -->
                 <h3 id="签到">
                     <a href="#签到" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
@@ -804,12 +880,17 @@
                     <a href="#免广告卡" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     免广告卡
                 </h3>
-                <p>免广告卡功能，可以自行开关，包含以下三项功能：</p>
+                <p>免广告卡功能，可以自行开关，包含以下五项功能：</p>
                 <ul>
                     <li><strong>免费50钻</strong>：自动领取每日免费50钻石（需拥有免广告卡）。</li>
                     <li><strong>潘妮秘宝</strong>：自动完成潘妮秘宝相关操作，支持选择 <strong>普通宝箱</strong> 或 <strong>装扮碎片宝箱</strong>，并可设置使用免广告卡的次数（默认1次）。</li>
                     <li><strong>超Z钥匙</strong>：自动领取超Z联赛钥匙奖励。</li>
+                    <li><strong>装扮转基因</strong>（NEW）：使用免广告卡进行装扮转基因，可设置 <strong>转基因次数</strong>（支持 1~2 次，默认 2 次）。</li>
+                    <li><strong>红水晶</strong>（NEW）：使用免广告卡领取红水晶，可设置 <strong>领取次数</strong>（支持 1 或 3 次，默认 3 次）。</li>
                 </ul>
+                <div class="hover-tip" style="margin:1.5rem 0; padding:16px 20px; border:1px dashed var(--brand-color); border-radius:var(--radius); background:var(--brand-color-tint); color:var(--brand-color-dark); font-weight:600; text-align:center; cursor:help; user-select:none;" data-tip="谢谢，暂时没有吃牢饭的想法">
+                    为什么不做自动看广告领取奖励？
+                </div>
 
                 <!-- 植物探险 -->
                 <h3 id="植物探险">
@@ -972,6 +1053,13 @@
                     <a href="#无尽测定向序列" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     无尽测定向序列
                 </h4>
+                <div class="rp-callout rp-callout--danger">
+                    <div class="rp-callout__title">⛔ 已废弃</div>
+                    <div class="rp-callout__content">
+                        <p>该功能在当前版本中已废弃，以下说明仅作存档保留。</p>
+                        <p><strong>再见了定向进化，也许我会想念你。</strong></p>
+                    </div>
+                </div>
                 <p><strong>使用步骤：</strong></p>
                 <ol>
                     <li>在游戏内进入 <strong>植物 → 编队</strong>，将想要进化的植物放入 <strong>编队 6</strong>（必须编满）。</li>
@@ -991,6 +1079,13 @@
                     <a href="#无尽截图" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     无尽截图获取模型数据
                 </h4>
+                <div class="rp-callout rp-callout--danger">
+                    <div class="rp-callout__title">⛔ 已废弃</div>
+                    <div class="rp-callout__content">
+                        <p>由于使用 YOLO 识别僵尸重开刷新僵尸的方式并不可靠，僵尸会被完全挡住，我们决定废弃此功能，等待以后拓维做适配（例如可以在选卡界面查看僵尸详情），我们再进行适配。</p>
+                        <p><strong>不要说"读内存就能解决"——逆向破解软件是我们项目的红线！！！</strong></p>
+                    </div>
+                </div>
                 <p>在无尽准备界面开启，用于获取模型数据。</p>
                 <ul>
                     <li><strong>截图名称</strong>：自定义截图名称，将作为文件夹名和文件名前缀。</li>
@@ -1064,6 +1159,7 @@
                 <ul>
                     <li><strong>用途</strong>：自动代理地宫1的无尽模式，主要用于刷币。</li>
                     <li><strong>操作</strong>：直接开启任务即可，脚本会自动完成。</li>
+                    <li style="color:#c53030;"><strong>最低配置要求</strong>：购买机枪射手。</li>
                     <li><strong>注意</strong>：若 buff 买得不全，刷取速度可能会偏慢。</li>
                     <li><strong>注意</strong>：不建议给向日葵携带超装，会导致阳光拾取不到。</li>
                 </ul>
@@ -1146,7 +1242,7 @@
                 <div style="background:var(--bg-color-soft); padding:20px; border-radius:var(--radius); text-align:center;">
                     <h4 style="margin-bottom:12px; color:var(--text-color-2); font-weight:500;">👇 感谢以下贡献者</h4>
                     <a href="https://github.com/Maa-Assistant-PVZ-The-best/MAAPVZ/graphs/contributors" target="_blank" style="border-bottom:none;">
-                        <img src="https://github.com/Maa-Assistant-PVZ-The-best/MAAPVZ/contributors.svg?size=64" alt="贡献者头像" style="max-width:100%; border-radius:var(--radius-small);" />
+                        <img src="https://contrib.rocks/image?repo=Maa-Assistant-PVZ-The-best/MAAPVZ" alt="贡献者头像" style="max-width:100%; border-radius:var(--radius-small);" onerror="this.parentElement.parentElement.style.display='none'" />
                     </a>
                 </div>
 
@@ -1165,7 +1261,7 @@
             <footer class="rp-doc-footer">
                 <div class="rp-doc-footer__edit">
                     <div class="rp-last-updated">
-                        <p>最后更新： <span>2026-08-09 00:00</span></p>
+                        <p>最后更新： <span>2026-10-17 20:12</span></p>
                     </div>
                     <a href="#" style="color:var(--brand-color); font-weight:500; font-size:0.9rem;">
                         ✎ 编辑此页
