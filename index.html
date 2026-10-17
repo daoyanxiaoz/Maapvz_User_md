@@ -641,7 +641,7 @@
             z-index: 80;
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
         }
-        .hover-tip:hover::after {
+        .hover-tip.show::after {
             opacity: 1;
             transform: translateX(-50%) translateY(-2px);
         }
@@ -888,8 +888,8 @@
                     <li><strong>装扮转基因</strong>（NEW）：使用免广告卡进行装扮转基因，可设置 <strong>转基因次数</strong>（支持 1~2 次，默认 2 次）。</li>
                     <li><strong>红水晶</strong>（NEW）：使用免广告卡领取红水晶，可设置 <strong>领取次数</strong>（支持 1 或 3 次，默认 3 次）。</li>
                 </ul>
-                <div class="hover-tip" style="margin:1.5rem 0; padding:16px 20px; border:1px dashed var(--brand-color); border-radius:var(--radius); background:var(--brand-color-tint); color:var(--brand-color-dark); font-weight:600; text-align:center; cursor:help; user-select:none;" data-tip="谢谢，暂时没有吃牢饭的想法">
-                    为什么不做自动看广告领取奖励？
+                <div class="hover-tip" style="margin:1.5rem 0; padding:16px 20px; border:1px dashed var(--brand-color); border-radius:var(--radius); background:var(--brand-color-tint); color:var(--brand-color-dark); font-weight:600; text-align:center; cursor:pointer; user-select:none;" data-tip="谢谢，暂时没有吃牢饭的想法" onclick="this.classList.toggle('show')">
+                    为什么不做自动看广告领取奖励？<span style="color:var(--brand-color); border-bottom:1px dashed var(--brand-color);">（点我）</span>
                 </div>
 
                 <!-- 植物探险 -->
