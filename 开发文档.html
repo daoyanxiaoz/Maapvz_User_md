@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>开发文档 — MaaPvz</title>
+    <meta name="description" content="MaaPvz 开发文档中心：开发规范与开发文档" />
+    <meta name="author" content="MaaPvz 文档团队" />
+    <link rel="icon" href="https://daoyanxiaoz.github.io/Endless_Visualization_Configuration/images/PVZAA_small.png" />
+    <style>
+        /* ===== 主题变量（草木绿）===== */
+        :root {
+            --brand-color: #6E9A7A;
+            --brand-color-light: #95BFA0;
+            --brand-color-dark: #4E7A5A;
+            --brand-color-tint: rgba(110, 154, 122, 0.16);
+            --bg-color: #ffffff;
+            --bg-color-soft: #f4f7f6;
+            --bg-color-mute: #e8eeec;
+            --text-color-1: #242424;
+            --text-color-2: rgba(0, 0, 0, 0.7);
+            --text-color-3: rgba(60, 60, 60, 0.33);
+            --divider-light: rgba(0, 0, 0, 0.12);
+            --font-family-base: "Inter var experimental", "Inter var", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            --radius-large: 1.5rem;
+            --nav-height: 64px;
+        }
+
+        /* ===== 基础重置 ===== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border-style: solid;
+            border-width: 0;
+        }
+        html {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        body {
+            font-family: var(--font-family-base);
+            color: var(--text-color-1);
+            background: linear-gradient(180deg, #f5faf7 0%, #dce8e0 100%);
+            min-height: 100vh;
+            min-width: 320px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        a {
+            color: var(--brand-color-dark);
+            text-decoration: none;
+            transition: color 0.25s;
+        }
+        a:hover {
+            color: var(--brand-color);
+        }
+
+        /* ===== 导航栏 ===== */
+        .rp-nav {
+            height: var(--nav-height);
+            border-bottom: 1px solid var(--divider-light);
+            background: var(--bg-color);
+            padding: 0 20px;
+            position: sticky;
+            top: 0;
+            z-index: 60;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .rp-nav__title__link {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            gap: 8px;
+        }
+        .rp-nav__title__link:hover {
+            border-bottom: none;
+        }
+        .rp-nav__right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .rp-nav__right a:hover {
+            border-bottom: none;
+        }
+
+        /* ===== 英雄区 ===== */
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--brand-color-tint) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            background: linear-gradient(120deg, var(--brand-color-dark), var(--brand-color) 60%, var(--brand-color-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+        .hero p {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            color: var(--text-color-2);
+            position: relative;
+        }
+
+        /* ===== 章节卡片 ===== */
+        .chapters {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 2rem 2rem 5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .chapter-card {
+            display: flex;
+            align-items: center;
+            gap: 2.2rem;
+            padding: 2.4rem 2.6rem;
+            border-radius: var(--radius-large);
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--divider-light);
+            box-shadow: 0 4px 20px rgba(78, 122, 90, 0.10);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .chapter-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: linear-gradient(180deg, var(--brand-color), var(--brand-color-light));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        a.chapter-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 36px rgba(78, 122, 90, 0.20);
+            border-color: var(--brand-color-light);
+            color: inherit;
+        }
+        a.chapter-card:hover::before {
+            opacity: 1;
+        }
+        .chapter-num {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            background: linear-gradient(160deg, var(--brand-color-dark), var(--brand-color-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            flex-shrink: 0;
+            min-width: 5.5rem;
+            text-align: center;
+        }
+        .chapter-body {
+            flex: 1;
+        }
+        .chapter-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .chapter-desc {
+            margin-top: 0.5rem;
+            color: var(--text-color-2);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .chapter-arrow {
+            font-size: 1.6rem;
+            color: var(--brand-color);
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+        a.chapter-card:hover .chapter-arrow {
+            transform: translateX(6px);
+        }
+        .badge-soon {
+            background: var(--bg-color-mute);
+            color: var(--text-color-2);
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.15rem 0.7rem;
+            border-radius: 12px;
+            letter-spacing: 1px;
+        }
+        .chapter-card--disabled {
+            border-style: dashed;
+            cursor: not-allowed;
+            background: rgba(255, 255, 255, 0.45);
+        }
+        .chapter-card--disabled .chapter-num {
+            background: linear-gradient(160deg, var(--text-color-3), var(--text-color-3));
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+        .chapter-card--disabled .chapter-arrow {
+            color: var(--text-color-3);
+        }
+
+        /* ===== 页脚 ===== */
+        .page-footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-color-3);
+            font-size: 0.85rem;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 640px) {
+            .hero {
+                padding: 4rem 1.2rem 2rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .chapters {
+                padding: 1.2rem 1.2rem 3rem;
+            }
+            .chapter-card {
+                gap: 1.2rem;
+                padding: 1.6rem 1.4rem;
+            }
+            .chapter-num {
+                font-size: 2.6rem;
+                min-width: 3.5rem;
+            }
+            .chapter-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 导航栏 ===== -->
+    <header class="rp-nav">
+        <div class="rp-nav__left">
+            <div class="rp-nav__title">
+                <a href="index.html" class="rp-nav__title__link">
+                    <img src="index_iamges/PVZAA.png" alt="MaaPvz Logo" style="height:32px; width:auto;" />
+                    <span style="font-size:1.2rem; font-weight:600;">MaaPvz 用户文档</span>
+                </a>
+            </div>
+        </div>
+        <div class="rp-nav__right">
+            <a href="index.html" style="font-weight:500; color:var(--text-color-1);">← 返回主页</a>
+            <a href="https://github.com/Maa-Assistant-PVZ-The-best/MAAPVZ" style="font-weight:500; color:var(--text-color-1);" target="_blank">GitHub ↗</a>
+        </div>
+    </header>
+
+    <!-- ===== 英雄区 ===== -->
+    <section class="hero">
+        <h1>🛠️ MaaPvz 开发文档</h1>
+        <p>写给想参与二次开发的你 —— 选一个章节开始</p>
+    </section>
+
+    <!-- ===== 章节卡片 ===== -->
+    <main class="chapters">
+
+        <!-- 章节 1：开发规范 -->
+        <a href="开发文档/开发规范.html" class="chapter-card">
+            <div class="chapter-num">01</div>
+            <div class="chapter-body">
+                <div class="chapter-title">开发规范</div>
+                <div class="chapter-desc">Pipeline 命名规范 · 文件位置规范 · Custom 使用方式——写 pipe / 配作业集 / 写 Custom 之前，先读这里，少踩坑。</div>
+            </div>
+            <div class="chapter-arrow">→</div>
+        </a>
+
+        <!-- 章节 2：开发文档 -->
+        <a href="开发文档/开发文档.html" class="chapter-card">
+            <div class="chapter-num">02</div>
+            <div class="chapter-body">
+                <div class="chapter-title">开发文档</div>
+                <div class="chapter-desc">文档怎么做：两层各管一摊（AGENTS / 规范），别写串。附开发环境快速上手指南。</div>
+            </div>
+            <div class="chapter-arrow">→</div>
+        </a>
+
+    </main>
+
+    <!-- ===== 页脚 ===== -->
+    <footer class="page-footer">
+        <p>最后更新：2026-10-25 · MaaPvz 文档团队</p>
+    </footer>
+
+</body>
+</html>
