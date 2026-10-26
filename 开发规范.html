@@ -422,6 +422,8 @@
                 <a href="#落点清单" class="sidebar-sub">2.2 新增功能落点清单</a>
                 <a href="#永不入库" class="sidebar-sub">2.3 永不入库的位置</a>
                 <a href="#custom使用" class="sidebar-link" style="margin-top:8px;">三、Custom 使用方式</a>
+                <a href="#现役清单" class="sidebar-sub">3.1 什么情况建议复用</a>
+                <a href="#退役清单" class="sidebar-sub">3.2 不要用的 Custom</a>
                 <a href="#刻意不写" class="sidebar-link" style="margin-top:8px;">附：刻意不写的内容</a>
             </nav>
             <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--divider-light); font-size:0.85rem; color:var(--text-color-3);">
@@ -474,6 +476,36 @@
                         </ul>
                     </div>
                 </div>
+                <p>能当回跳目标的节点，可以把 <code>jumpback</code> 写进节点名里（<code>模块_jumpback_动作</code>），例如：</p>
+                <pre><code>"点击登录_jumpback_关闭广告": {
+    "recognition": "Custom",
+    "enabled": false,
+    //调试期间会注释，如果你看到我给他注释了还发版了肯定是我脑子笨了忘掉了，请你一定要提醒我ToT
+    //默认关闭，用户有需求才能开启，随时可能下架这个功能 ……我讨厌这群投广告的，投广告的有一个算一个全都扫码
+    "custom_recognition": "get_ui",
+    "custom_recognition_param": {
+        "keyword": "close"
+    },
+    "action": "Click"
+},
+"点击登录_jumpback_绑定设备": {
+    "recognition": "OCR",
+    "expected": [
+        "确定",
+        "绑定设备"
+    ],
+    "order_by": "Expected", // 按 expected 列表顺序排序
+    "index": 0, // 取排序后的第一个结果
+    "roi": [
+        251,
+        412,
+        521,
+        164
+    ],
+    // "action": "Click",
+    "action": "StopTask",
+    "focus": "请先绑定设备"
+},</code></pre>
 
                 <h3 id="特殊家族">1.2 特殊节点家族（看到这类名字就知道它的角色）</h3>
                 <table>
@@ -521,7 +553,7 @@
                     <li>MAA 加载时把<strong>所有 pipeline JSON 合并成一张全局节点表</strong>（没有 import 概念）：A 文件的节点想跳 B 文件的节点，<code>next</code> 里直接写对方裸名即可。</li>
                     <li>因此节点名<strong>全库唯一</strong>：同名节点后加载的文件会顶掉先加载的（加载顺序是文件枚举序，不可依赖）——别起重名。</li>
                 </ul>
-                <p><strong>人话</strong>：同一个字段不能同名，更建议在写节点名字之前多加前缀；如果你在重构，也可以在有冲突的字段前面加个 <code>ref</code>。</p>
+                <p><strong>人话</strong>：同一个字段不能同名，更建议在写节点名字之前多加前缀；如果你在重构，也可以在有冲突的字段<strong>前面或者后面</strong>加个 <code>ref</code>。</p>
                 <div class="rp-callout rp-callout--tip">
                     <div class="rp-callout__title">💡 <code>_ref</code> 重构标记约定</div>
                     <div class="rp-callout__content">
@@ -588,7 +620,7 @@
                         <tr><th>位置</th><th>放什么</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><code>assets/resource/pipeline/&lt;功能&gt;/</code></td><td>流程节点（JSONC），按功能分目录、编号前缀分阶段</td></tr>
+                        <tr><td><code>assets/resource/pipeline/&lt;功能（文件夹）&gt;/&lt;功能（文件）&gt;.json</code></td><td>流程节点（JSONC），按功能分目录、编号前缀分阶段</td></tr>
                         <tr><td><code>assets/resource/image/&lt;功能目录&gt;/</code></td><td>图片模板（识别用截图）；按功能建目录——比如做了「开始登录」，它要用的图集基本就放在新建的 <code>开始登录/</code> 文件夹里；除非有<strong>通用字段</strong>需要修改，那是 <code>General/</code> 管的（存放很多功能通用的截图字段）</td></tr>
                         <tr><td><code>assets/resource/task/&lt;功能&gt;.json</code></td><td>该功能的 <strong>option 定义</strong>（case 列表 + pipeline_override）；没有选项的功能不需要这个文件</td></tr>
                         <tr><td><code>assets/interface.json</code></td><td>任务注册区：GUI 任务清单（name / entry / option）</td></tr>
@@ -630,12 +662,21 @@
                     <a href="#custom使用" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     三、Custom 使用方式
                 </h2>
-                <div class="rp-callout rp-callout--info">
-                    <div class="rp-callout__title">🚧 开发中</div>
-                    <div class="rp-callout__content">
-                        <p>Custom 使用方式正在重写中，敬请期待。</p>
-                    </div>
-                </div>
+
+                <h3 id="现役清单">3.1 两个主力 Custom：什么情况建议复用</h3>
+                <ul>
+                    <li><strong><code>BatchSwipe</code>（组合动作）</strong>：适配局内操作用的——种植物、喂豆什么的都用在这里面。</li>
+                    <li><strong><code>SelectPlants</code>（选取植物）</strong>：字面意思；同时也支持编队选择，以及无尽局外选卡（不常用）。</li>
+                </ul>
+
+                <h3 id="退役清单">3.2 不要用的 Custom</h3>
+                <p>以下都已废弃或待删，<strong>写新 pipe 禁止再引用</strong>：</p>
+                <ul>
+                    <li><code>OffsetClick_y</code> / <code>OffsetClick_x</code> / <code>ResetAllOffsets</code> —— 旧偏移点击逻辑，还有旧任务在用，任务重构完即删；选卡用 <code>SelectPlants</code>、种植用 <code>BatchSwipe</code> 替代。</li>
+                    <li><code>ResetOffset</code>、<code>ExpressionRecognition</code>、<code>returnOCRReco</code>、<code>my_reco_222</code>、<code>PlantMatch</code> —— 纯死代码（pipe/task/interface/agent 四处核实零引用）。</li>
+                    <li><code>ClickAndCount</code>、<code>ResetPlantCount</code>、<code>ResetCounts</code>、<code>TakeCountScreenshot</code> —— 定向测序列已关停，随旧件一起删（pipe 集中地 <code>mini_tools/custom_Detection_Order.json</code> 一并删）。</li>
+                </ul>
+                <p>这些在 agent 代码与对应 pipe 文件头都加了 <code>⚠️ 待删</code> 横幅注释（带 <code>〔退役清单 2026-10-25〕</code> 尾标），全库 grep <code>待删</code> 即可列出全部待删件，删除时逐个销号。</p>
 
                 <!-- ==========================================================
                 附：本篇刻意不写的内容
