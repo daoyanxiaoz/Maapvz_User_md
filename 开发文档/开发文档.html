@@ -389,8 +389,10 @@
                 <a href="#调试" class="sidebar-sub">2.8 进行调试</a>
                 <a href="#常见问题" class="sidebar-sub">2.9 常见问题</a>
                 <a href="#custom使用" class="sidebar-link" style="margin-top:8px;">三、Custom 使用</a>
+                <a href="#最新进度" class="sidebar-sub">💡 以仓库最新进度为准</a>
                 <a href="#组合动作" class="sidebar-sub">组合动作 BatchSwipe</a>
                 <a href="#选择植物" class="sidebar-sub">选择植物 SelectPlants</a>
+                <a href="#跑完就回来" class="sidebar-sub">run_and_back</a>
             </nav>
             <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--divider-light); font-size:0.85rem; color:var(--text-color-3);">
                 v1.0 · 2026-10-26
@@ -622,6 +624,19 @@ pip install -r requirements.txt</code></pre>
                     三、Custom 使用：选择植物 与 组合动作
                 </h2>
 
+                <div class="rp-callout rp-callout--tip" id="最新进度">
+                    <div class="rp-callout__title">💡 以仓库最新进度为准</div>
+                    <div class="rp-callout__content">
+                        <p>本页只教常用写法。鼠头下次维护开发文档都不知道是啥时候了——具体操作请以仓库里这几个文件的头部注释为准（完整语法、参数全集、边界行为、实测结论都在那里）：</p>
+                        <ul>
+                            <li>组合动作 BatchSwipe：<a href="https://github.com/Maa-Assistant-PVZ-The-best/MAAPVZ/blob/main/agent/actions/batch_swipe.py" target="_blank"><code>agent/actions/batch_swipe.py</code></a></li>
+                            <li>选择植物 SelectPlants：<a href="https://github.com/Maa-Assistant-PVZ-The-best/MAAPVZ/blob/main/agent/select_plant/custom_select_plant.py" target="_blank"><code>agent/select_plant/custom_select_plant.py</code></a></li>
+                            <li>跑完就回来 run_and_back：<a href="https://github.com/Maa-Assistant-PVZ-The-best/MAAPVZ/blob/main/agent/actions/run_and_back.py" target="_blank"><code>agent/actions/run_and_back.py</code></a></li>
+                        </ul>
+                        <p><strong>页面与代码不一致时，信代码。</strong></p>
+                    </div>
+                </div>
+
                 <div class="rp-callout rp-callout--info">
                     <div class="rp-callout__title">ℹ️ 分工边界</div>
                     <div class="rp-callout__content">
@@ -714,16 +729,6 @@ pip install -r requirements.txt</code></pre>
                     </tbody>
                 </table>
 
-                <div class="rp-callout rp-callout--tip">
-                    <div class="rp-callout__title">💡 以仓库最新进度为准</div>
-                    <div class="rp-callout__content">
-                        <p>本页只教常用写法。鼠头下次维护开发文档都不知道是啥时候了——具体操作请以仓库里这两个文件的头部注释为准（完整语法、参数全集、边界行为、实测结论都在那里）：</p>
-                        <p>· 组合动作 BatchSwipe：<a href="https://github.com/Maa-Assistant-PVZ-The-best/MAAPVZ/blob/main/agent/actions/batch_swipe.py" target="_blank" style="font-weight:600; color:var(--brand-color);">agent/actions/batch_swipe.py</a><br />
-                        · 选择植物 SelectPlants：<a href="https://github.com/Maa-Assistant-PVZ-The-best/MAAPVZ/blob/main/agent/select_plant/custom_select_plant.py" target="_blank" style="font-weight:600; color:var(--brand-color);">agent/select_plant/custom_select_plant.py</a></p>
-                        <p>页面与代码不一致时，信代码。</p>
-                    </div>
-                </div>
-
                 <h3 id="选择植物">
                     <a href="#选择植物" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
                     选择植物 SelectPlants —— 目标要滚动着找的植物选择
@@ -783,6 +788,32 @@ pip install -r requirements.txt</code></pre>
                         <p>OCR 读错的写法登记进代码里的 <code>PLANT_NAME_ALIASES</code> 别名白名单（有时会出现识别错误的情况，一些植物的字体识别成繁体）。核对失败的日志会打出期间 OCR 读到过的所有文本，照那份清单加别名。</p>
                     </div>
                 </div>
+
+                <h3 id="跑完就回来">
+                    <a href="#跑完就回来" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    run_and_back —— 起跑一段子链，跑完回本节点
+                </h3>
+                <p>接线 = 一个 Custom 节点（文件在 <code>agent/actions/run_and_back.py</code>，注册走 <code>actions/__init__.py</code>）：</p>
+                <pre><code>"某节点": {
+    "action": "Custom",
+    "custom_action": "run_and_back",
+    "custom_action_param": {
+        "run": "起始节点",        // 必填：从这里起跑子链
+        "back": "结束节点",       // 可选：执行完它就结束本 action（子跑期间它的 next 临时清空）
+        "pipe_over": {            // 可选：整个 pipe 片段，按同名节点覆盖其内部字段
+            "某节点": {"next": [...], "recognition": {...}}
+        }
+    },
+    "next": ["回弹后要继续的节点"]
+}</code></pre>
+                <ul>
+                    <li>底层就是 <code>context.run_task(run, pipeline_override)</code> 同步子跑；子链结束后回本节点，流程继续走它的 <code>next</code>；</li>
+                    <li><code>back</code> 的 <code>next</code> 清空优先级最高——<code>pipe_over</code> 里若给 back 设了 next 会被接管并记日志；</li>
+                    <li><strong>pipe_over 与 back 的断链都只在子跑期间生效</strong>（run_task 的覆盖是一次性的，跑完自动还原——不会撞上快照铁律）；</li>
+                    <li><code>back</code> 不在链上时检测不了，子链会跑到自然结束；</li>
+                    <li>缺 <code>run</code> 直接 return False + 日志；日志前缀 <code>[run_and_back]</code> 走 stderr；</li>
+                    <li>回弹语义 = <strong>回本节点的 next 继续</strong>，不是重跑本节点；想循环就把本节点 next 指回自己。</li>
+                </ul>
 
             </div>
 

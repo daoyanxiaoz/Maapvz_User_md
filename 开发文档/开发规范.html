@@ -664,10 +664,32 @@
                     三、Custom 使用方式
                 </h2>
 
-                <h3 id="现役清单">3.1 两个主力 Custom：什么情况建议复用</h3>
+                <h3 id="现役清单">3.1 主力 Custom：什么情况建议复用</h3>
                 <ul>
                     <li><strong><code>BatchSwipe</code>（组合动作）</strong>：适配局内操作用的——种植物、喂豆什么的都用在这里面。</li>
                     <li><strong><code>SelectPlants</code>（选取植物）</strong>：字面意思；同时也支持编队选择，以及无尽局外选卡（不常用）。</li>
+                    <li><strong><code>run_and_back</code>（跑完就回来）</strong>：从指定节点起跑一段子链，跑完回本节点继续走它的 <code>next</code>。</li>
+                </ul>
+                <p><strong><code>run_and_back</code> 用法示例</strong>（文件在 <code>agent/actions/run_and_back.py</code>，注册走 <code>actions/__init__.py</code>）：</p>
+                <pre><code>"某节点": {
+    "action": "Custom",
+    "custom_action": "run_and_back",
+    "custom_action_param": {
+        "run": "起始节点",        // 必填：从这里起跑子链
+        "back": "结束节点",       // 可选：执行完它就结束本 action（子跑期间它的 next 临时清空）
+        "pipe_over": {            // 可选：整个 pipe 片段，按同名节点覆盖其内部字段
+            "某节点": {"next": [...], "recognition": {...}}
+        }
+    },
+    "next": ["回弹后要继续的节点"]
+}</code></pre>
+                <ul>
+                    <li>底层就是 <code>context.run_task(run, pipeline_override)</code> 同步子跑；子链结束后回本节点，流程继续走它的 <code>next</code>；</li>
+                    <li><code>back</code> 的 <code>next</code> 清空优先级最高——<code>pipe_over</code> 里若给 back 设了 next 会被接管并记日志；</li>
+                    <li><strong>pipe_over 与 back 的断链都只在子跑期间生效</strong>（run_task 的覆盖是一次性的，跑完自动还原——不会撞上快照铁律）；</li>
+                    <li><code>back</code> 不在链上时检测不了，子链会跑到自然结束；</li>
+                    <li>缺 <code>run</code> 直接 return False + 日志；日志前缀 <code>[run_and_back]</code> 走 stderr；</li>
+                    <li>回弹语义 = <strong>回本节点的 next 继续</strong>，不是重跑本节点；想循环就把本节点 next 指回自己。</li>
                 </ul>
 
                 <h3 id="退役清单">3.2 不要用的 Custom</h3>
