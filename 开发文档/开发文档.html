@@ -374,7 +374,10 @@
                 📖 开发文档
             </div>
             <nav style="display:flex; flex-direction:column; gap:3px;">
-                <a href="#文档分层" class="sidebar-link">一、文档分层</a>
+                <a href="#序章" class="sidebar-link">序章：项目结构 &amp; 画饼墙</a>
+                <a href="#项目结构" class="sidebar-sub">项目结构</a>
+                <a href="#画饼墙" class="sidebar-sub">画饼墙</a>
+                <a href="#文档分层" class="sidebar-link" style="margin-top:8px;">一、文档分层</a>
                 <a href="#快速上手" class="sidebar-link" style="margin-top:8px;">二、快速上手</a>
                 <a href="#环境配置" class="sidebar-sub">2.1 开发环境配置</a>
                 <a href="#python安装" class="sidebar-sub">2.2 Python 安装详情</a>
@@ -405,6 +408,56 @@
                 <span style="font-size:0.95rem; color:var(--text-color-3); font-style:italic; display:block; margin-top:-0.5rem; margin-bottom:1.5rem;">
                     📖 写给维护文档的人：内容在哪产、往哪落、什么时候必须更新
                 </span>
+
+                <!-- ==========================================================
+                序章
+                ========================================================== -->
+                <h2 id="序章">
+                    <a href="#序章" class="rp-header-anchor" style="color:var(--brand-color); margin-right:6px; opacity:0.6; border-bottom:none;">#</a>
+                    序章：项目结构 &amp; 画饼墙
+                </h2>
+
+                <h3 id="项目结构">项目结构</h3>
+                <p>新功能不知道往哪放时照这棵树对号入座；<code>.venv/</code>、<code>node_modules/</code>、<code>deps/</code>、<code>maapvz_pkg_*/</code>、<code>_tmplog*/</code> 这类环境与打包产物<strong>永不入库、不要手改</strong>，树里不列。</p>
+                <details style="margin:8px 0 16px; border:1px solid var(--divider-light); border-radius:8px; padding:10px 14px; background:var(--bg-color-soft);">
+                    <summary style="cursor:pointer; font-weight:600; color:var(--brand-color);">📁 项目结构（点击展开）</summary>
+                    <pre style="margin-top:10px;"><code>.github/                      # GitHub 相关配置（工作流等）
+.vscode/                      # VSCode 编辑器配置
+agent/                        # Agent 模块（自定义动作/识别）
+    actions/                  #   自定义动作（BatchSwipe 等）
+    select_plant/             #   SelectPlants 选卡 + 植物中英文对照表
+    jobset/                   #   作业集运行时 + 自检门禁（selfcheck/check_graph 等）
+    assets/resource/coords.json  # 坐标表（BatchSwipe DSL 的键名来源）
+    main.py                   #   主入口（custom 必须在这里 import 才会注册）
+assets/                       # 资源文件
+    resource/
+        pipeline/             #   全部任务流程节点（JSON，合并成一张全局节点表）
+        image/                #   模板图（含植物卡面 plant_ref_card/ 等）
+        model/ocr/            #   OCR 模型
+game_assist_tools/
+    endless_setup/            #   作业集编辑器（网页端；架构文档 HANDOFF.md 在里面）
+docs/                         # 文档与图片
+tools/                        # 工具脚本
+.pre-commit-config.yaml       # 预提交钩子配置
+.prettierrc                   # 代码格式化配置
+AGENTS.md                     # 协作铁律精简版（AI/人都要读）
+画饼墙.md                     # 画饼墙本体
+check_resource.py             # 资源完整性检查（门禁之一）
+interface.json                # 任务与选项注册（GUI 里能看到哪些任务由它决定）
+package.json                  # Node.js 项目配置（编辑器前端）
+requirements.txt              # Python 依赖列表
+README.md                     # 项目说明</code></pre>
+                </details>
+
+                <h3 id="画饼墙">画饼墙</h3>
+                <div class="rp-callout rp-callout--info">
+                    <div class="rp-callout__title">🫓 画饼墙</div>
+                    <div class="rp-callout__content">
+                        <p>记录开发者<strong>想做、但目前没时间实现或没想法实现</strong>的功能。你可以留下自己的想法并备注开发者名字——前提是<strong>这个功能未来你一定会去接手</strong>。目的是让别的开发者看到「哇，居然有人有和我一样的想法！」从而寻找同好协作制作。</p>
+                        <p>内容本体在仓库，本页只做引导：
+                        <a href="https://github.com/Maa-Assistant-PVZ-The-best/MAAPVZ/blob/main/画饼墙.md" target="_blank" style="font-weight:600; color:var(--brand-color);">画饼墙.md（MAAPVZ 仓库）</a></p>
+                    </div>
+                </div>
 
                 <!-- ==========================================================
                 一、文档分层
